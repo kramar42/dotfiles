@@ -3,9 +3,6 @@
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/") t)
 
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
-
 (package-initialize)
 
 (when (not package-archive-contents)
@@ -14,6 +11,8 @@
 (defvar my-packages '(
                       ; emacs mode for interacting with the Git
                       magit
+                      ; install color themes
+                      color-theme
                       ; ido-style fuzzy matching
                       smex
                       ; writable grep buffer
@@ -40,7 +39,7 @@
                       ; show flymake messages in minibuffer
                       flymake-cursor
                       ; hightline nested parens
-		      rainbow-delimeters
+		      rainbow-delimiters
                       ; auto-completion for emacs
                       auto-complete
                       ; template engine

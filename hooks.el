@@ -1,3 +1,5 @@
+
+; ido goto symbol
 (defun ido-goto-symbol ()
   "Will update the imenu index and then use ido to select a
    symbol to navigate to"
@@ -33,29 +35,14 @@
 
 (global-set-key (kbd "C-t") 'ido-goto-symbol)
 
-
-;; Немного настроим выравнивание отступов под себя
-;; Более подробно о кастомизации этого дела можно почитать
-;;   в сорцах SLIME, а именно
-;;     в %путь_к_slime%/contrib/slime-cl-indent.el
-(define-common-lisp-style "my-indent-style"
-  "My custom indent style."
-  (:inherit "modern")
-  (:variables
-    (lisp-loop-indent-subclauses t))    
-  (:indentation
-    (if (4 2 2))
-    (define (&lambda 2))
-    (with-gensyms ((&whole 4 &rest 1) &body))
-    (once-only (as with-gensyms))))
-
-(setq common-lisp-style-default "my-indent-style")
+; slime hooks
 (add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
 (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
 
 (add-hook 'comint-output-filter-functions
             'comint-strip-ctrl-m)
 
+; paredit
 (add-hook 'emacs-lisp-mode-hook       (lambda () (paredit-mode +1)))
 (add-hook 'lisp-mode-hook             (lambda () (paredit-mode +1)))
 (add-hook 'lisp-interaction-mode-hook (lambda () (paredit-mode +1)))

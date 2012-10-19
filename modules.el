@@ -15,7 +15,7 @@
 (require 'org-install)
 
 ; lisp dev
-;(add-to-list 'load-path "~/.emacs.d/elpa/slime/")
+(add-to-list 'load-path "~/.emacs.d/elpa/slime/")
 (require 'slime)
 (require 'slime-autoloads)
 

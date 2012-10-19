@@ -9,21 +9,20 @@
 (setq display-buffer-function 'popwin:display-buffer)
 
 ; windows number
-(autoload 'window-number-meta-mode t)
-(window-number-mode 1)
+(autoload 'window-number-meta-mode "window-number" "" t)
+;(window-number-mode 1)
 (window-number-meta-mode 1)
 
 ; desktop mode
 (desktop-save-mode 1)
 
 ; paredit
-(autoload 'paredit-mode t)
+(autoload 'paredit-mode "paredit" "" t)
 
 ; rainbow mode
 (global-rainbow-delimiters-mode)
 
 ; auto-complete
-(ac-config-default)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
 
 ; ido mode
@@ -58,7 +57,6 @@
 
 ; Color theme
 (require 'color-theme)
-(color-theme-initialize)
 (color-theme-subtle-hacker)
 ; bharadwaj-slate classic gnome2 gray30 green-kingsajz
 ; jedit-grey robin-hood shaman snow subtle-hacker vim-colors
@@ -92,3 +90,5 @@
 ; Smooth scrool
 (setq scroll-step 1
       scroll-conservatively 10000)
+
+(server-start)
