@@ -1,18 +1,17 @@
 ; disable pop-ups
-(require 'popwin)
+(autoload 'popwin "popwin" "" t)
 
 ; save emacs sessions
-(require 'desktop)
+(autoload 'desktop "desktop" "" t)
 
 ; rainbow parens
-(require 'rainbow-delimiters)
+(autoload 'rainbow-delimiters "rainbow" "" t)
 
 ; auto-complete mode
 (require 'auto-complete)
-;(require 'auto-complete-config)
 
 ; org mode
-(require 'org-install)
+(autoload 'org-install "org-install" "" t)
 
 ; lisp dev
 (add-to-list 'load-path "~/.emacs.d/elpa/slime/")
@@ -24,3 +23,7 @@
 
 ; ido menu
 (require 'imenu)
+
+; auto-compile
+(add-to-list 'load-path "~/.emacs.d/elpa/")
+(require 'auto-async-byte-compile)

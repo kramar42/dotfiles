@@ -46,3 +46,6 @@
 (add-hook 'emacs-lisp-mode-hook       (lambda () (paredit-mode +1)))
 (add-hook 'lisp-mode-hook             (lambda () (paredit-mode +1)))
 (add-hook 'lisp-interaction-mode-hook (lambda () (paredit-mode +1)))
+
+; auto-compile
+(add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)

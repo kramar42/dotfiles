@@ -22,8 +22,18 @@
 ; rainbow mode
 (global-rainbow-delimiters-mode)
 
+; auto-compile
+(setq auto-async-byte-compile-exclude-files-regexp "/junk/")
+
 ; auto-complete
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+;; dirty fix for having AC everywhere
+(define-globalized-minor-mode real-global-auto-complete-mode
+  auto-complete-mode (lambda ()
+                       (if (not (minibufferp (current-buffer)))
+                         (auto-complete-mode 1))
+                       ))
+(real-global-auto-complete-mode t)
 
 ; ido mode
 (ido-mode t)
@@ -65,7 +75,6 @@
 ; Font setup
 (set-face-attribute 'default nil :font "Liberation Mono-10")
 
-
 ;; Emacs Behavior
 ; History
 (setq history-length 1000)
@@ -90,5 +99,3 @@
 ; Smooth scrool
 (setq scroll-step 1
       scroll-conservatively 10000)
-
-(server-start)
