@@ -10,7 +10,6 @@
 
 ; windows number
 (autoload 'window-number-meta-mode "window-number" "" t)
-;(window-number-mode 1)
 (window-number-meta-mode 1)
 
 ; desktop mode
@@ -42,9 +41,10 @@
 
 ; ORG mode
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+; TO CHANGE
 (setq org-agenda-files (list "~/Dropbox/orgs/*.org"))
 
-; Slime
+; SLIME
 (setq-default indent-tabs-mode nil)
 (setq inferior-lisp-program "sbcl")
 (setq slime-net-coding-system 'utf-8-unix)
@@ -53,6 +53,7 @@
                slime-fuzzy
                slime-fancy-inspector
                slime-indentation))
+
 
 ; Это включает алгоритмы выравнивания лиспового кода из SLIME,
 ; в противоположность стандартным из Emacs

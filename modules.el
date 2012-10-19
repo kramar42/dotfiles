@@ -14,7 +14,6 @@
 (autoload 'org-install "org-install" "" t)
 
 ; lisp dev
-(add-to-list 'load-path "~/.emacs.d/elpa/slime/")
 (require 'slime)
 (require 'slime-autoloads)
 

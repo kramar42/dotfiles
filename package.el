@@ -13,6 +13,9 @@
                       color-theme
                       ; ido-style fuzzy matching
                       smex
+                      ; slime
+                      ; installed through apt-get
+                      ac-slime
                       ; writable grep buffer
                       wgrep
                       ; pop up window manager
