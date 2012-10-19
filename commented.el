@@ -25,3 +25,8 @@
 ;; whitespace
 (setq whitespace-line-column 80)
 
+;; PATH
+(setq *PATH* (shell-command-to-string "source $HOME/.bashrc && printf $PATH"))
+(if (not (getenv "TERM_PROGRAM"))
+       (setenv "PATH" *PATH*))
+(setq exec-path (append exec-path (split-string *PATH* ":")))

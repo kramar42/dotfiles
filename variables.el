@@ -1,4 +1,10 @@
 ;; Modules setup
+; magit
+(autoload 'magit-status "magit" nil t)
+
+; flymake
+(eval-after-load 'flymake '(require 'flymake-cursor))
+
 ; popwin
 (setq display-buffer-function 'popwin:display-buffer)
 
@@ -16,10 +22,18 @@
 ; rainbow mode
 (global-rainbow-delimiters-mode)
 
+; auto-complete
+(ac-config-default)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+
 ; ido mode
 (ido-mode t)
 (setq ido-enable-flex-matching t)
 (setq ido-use-filename-at-point 'guess)
+
+; ORG mode
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(setq org-agenda-files (list "~/Dropbox/orgs/*.org"))
 
 ; Slime
 (setq-default indent-tabs-mode nil)
@@ -30,6 +44,10 @@
                slime-fuzzy
                slime-fancy-inspector
                slime-indentation))
+
+; Это включает алгоритмы выравнивания лиспового кода из SLIME,
+; в противоположность стандартным из Emacs
+(setq lisp-indent-function 'common-lisp-indent-function)
 
 
 ;; Appearance
