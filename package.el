@@ -15,11 +15,9 @@
                       smex
                       ; slime
                       ; installed through apt-get
-                      ac-slime
+                      ; ac-slime
                       ; writable grep buffer
                       wgrep
-                      ; pop up window manager
-                      popwin
                       ; select window by number
                       window-number
                       ; faster emacs startup
@@ -28,8 +26,6 @@
                       desktop
                       ; regexp evaluation tool
                       regex-tool
-                      ; mode for diting parenheses
-                      paredit
                       ; minor mode for spell checking
                       speck
                       ; universal on-the-fly syntax checker
@@ -39,8 +35,6 @@
                       flymake-jslint
                       ; show flymake messages in minibuffer
                       flymake-cursor
-                      ; hightline nested parens
-		      rainbow-delimiters
                       ; auto-completion for emacs
                       auto-complete
                       ; template engine

@@ -32,8 +32,7 @@
 ;; Compiling shortcut
 (global-set-key [\C-f9] 'compile)
 
-;; Настроим хоткеи для автодополнения и выравнивания отступов
-(define-key slime-mode-map (kbd "TAB")
-  'slime-indent-and-complete-symbol)
-(define-key slime-mode-map (kbd "C-c TAB")
-  'slime-complete-symbol)
+; (define-key slime-mode-map (kbd "TAB")
+;  'slime-indent-and-complete-symbol)
+; (define-key slime-mode-map (kbd "C-c TAB")
+;  'slime-complete-symbol)

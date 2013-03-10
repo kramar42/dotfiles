@@ -5,21 +5,12 @@
 ; flymake
 (eval-after-load 'flymake '(require 'flymake-cursor))
 
-; popwin
-(setq display-buffer-function 'popwin:display-buffer)
-
 ; windows number
 (autoload 'window-number-meta-mode "window-number" "" t)
 (window-number-meta-mode 1)
 
 ; desktop mode
 (desktop-save-mode 1)
-
-; paredit
-(autoload 'paredit-mode "paredit" "" t)
-
-; rainbow mode
-(global-rainbow-delimiters-mode)
 
 ; auto-compile
 (setq auto-async-byte-compile-exclude-files-regexp "/junk/")
@@ -45,19 +36,16 @@
 (setq org-agenda-files (list "~/Dropbox/orgs/*.org"))
 
 ; SLIME
-(setq-default indent-tabs-mode nil)
-(setq inferior-lisp-program "sbcl")
-(setq slime-net-coding-system 'utf-8-unix)
+; (setq-default indent-tabs-mode nil)
+; (setq inferior-lisp-program "sbcl")
+; (setq slime-net-coding-system 'utf-8-unix)
 
-(slime-setup '(slime-repl
-               slime-fuzzy
-               slime-fancy-inspector
-               slime-indentation))
+; (slime-setup '(slime-repl
+;               slime-fuzzy
+;               slime-fancy-inspector
+;               slime-indentation))
 
-
-; Это включает алгоритмы выравнивания лиспового кода из SLIME,
-; в противоположность стандартным из Emacs
-(setq lisp-indent-function 'common-lisp-indent-function)
+; (setq lisp-indent-function 'common-lisp-indent-function)
 
 
 ;; Appearance
@@ -84,7 +72,7 @@
 (setq current-language-environment "UTF-8")
 (setq default-input-method "russian-computer")
 
-; Disavel autosave
+; Disabel autosave
 (setq auto-save-default nil)
 (setq backup-inhibited t)
 

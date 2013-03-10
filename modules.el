@@ -1,11 +1,5 @@
-; disable pop-ups
-(autoload 'popwin "popwin" "" t)
-
 ; save emacs sessions
 (autoload 'desktop "desktop" "" t)
-
-; rainbow parens
-(autoload 'rainbow-delimiters "rainbow" "" t)
 
 ; auto-complete mode
 (require 'auto-complete)
@@ -14,8 +8,8 @@
 (autoload 'org-install "org-install" "" t)
 
 ; lisp dev
-(require 'slime)
-(require 'slime-autoloads)
+; (require 'slime)
+; (require 'slime-autoloads)
 
 ; interactively do
 (require 'ido)

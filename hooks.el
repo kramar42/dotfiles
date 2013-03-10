@@ -36,16 +36,11 @@
 (global-set-key (kbd "C-t") 'ido-goto-symbol)
 
 ; slime hooks
-(add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
-(add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
+;(add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
+;(add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
 
 (add-hook 'comint-output-filter-functions
             'comint-strip-ctrl-m)
-
-; paredit
-(add-hook 'emacs-lisp-mode-hook       (lambda () (paredit-mode +1)))
-(add-hook 'lisp-mode-hook             (lambda () (paredit-mode +1)))
-(add-hook 'lisp-interaction-mode-hook (lambda () (paredit-mode +1)))
 
 ; auto-compile
 (add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
