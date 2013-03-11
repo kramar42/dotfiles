@@ -8,18 +8,13 @@
 
 (defvar my-packages '(
                       ; emacs mode for interacting with the Git
-                      magit
+		      magit
                       ; install color themes
                       color-theme
-                      ; ido-style fuzzy matching
+                      ; M-x ido-style fuzzy matching
                       smex
-                      ; slime
-                      ; installed through apt-get
-                      ; ac-slime
-                      ; writable grep buffer
-                      wgrep
-                      ; select window by number
-                      window-number
+		      ; Pop-Up window manager
+		      popwin
                       ; faster emacs startup
                       elisp-cache
                       ; save partial status of emacs
@@ -28,18 +23,24 @@
                       regex-tool
                       ; minor mode for spell checking
                       speck
-                      ; universal on-the-fly syntax checker
-                      flymake
-                      flymake-shell
-                      flymake-php
-                      flymake-jslint
-                      ; show flymake messages in minibuffer
-                      flymake-cursor
+		      ; writable grep buffer
+		      wgrep
                       ; auto-completion for emacs
                       auto-complete
+		      ; jump to window by number
+		      window-number
+		      		      
+                      ; universal on-the-fly syntax checker
+                      ;flymake
+                      ; show flymake messages in minibuffer
+                      ;flymake-cursor
+                      ; slime
+                      ; installed through apt-get
+                      ;ac-slime
+
                       ; template engine
-                      yasnippet)
-  "A list of packages to ensure are installed at launch.")
+                      ;yasnippet)
+) "A list of packages to ensure are installed at launch.")
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))

@@ -7,10 +7,6 @@
 ; org mode
 (autoload 'org-install "org-install" "" t)
 
-; lisp dev
-; (require 'slime)
-; (require 'slime-autoloads)
-
 ; interactively do
 (require 'ido)
 
@@ -20,3 +16,7 @@
 ; auto-compile
 (add-to-list 'load-path "~/.emacs.d/elpa/")
 (require 'auto-async-byte-compile)
+
+; popwin
+(require 'popwin)
+(setq display-buffer-function 'popwin:display-buffer)
