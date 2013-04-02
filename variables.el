@@ -62,7 +62,8 @@
 ; whateverytouwant white-on-gray
 
 ; Font setup
-(set-face-attribute 'default nil :font "Liberation Mono-10")
+(set-default-font "DejaVu Sans Mono")
+(set-face-attribute 'default nil :height 100)
 
 ;; Emacs Behavior
 ; History
@@ -88,3 +89,11 @@
 ; Smooth scrool
 (setq scroll-step 1
       scroll-conservatively 10000)
+
+; Better C-w behaviour
+(defun unix-werase-or-kill (arg)
+  (interactive "*p")
+  (if (and transient-mark-mode
+	   mark-active)
+      (kill-region (region-beginning) (region-end))
+    (backward-kill-word arg)))

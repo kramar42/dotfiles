@@ -10,8 +10,9 @@
 (global-set-key [f4] 'kmacro-end-or-call-macro)
 
 ;; Use backward-kill-word instead of Backspace
-(global-set-key "\C-w" 'backward-kill-word)
-(global-set-key "\C-x\C-k" 'kill-region)
+(global-set-key "\C-w" 'unix-werase-or-kill)
+;(global-set-key "\C-w" 'backward-kill-word)
+;(global-set-key "\C-x\C-k" 'kill-region)
 
 ;; Shortcuts for switching buffers
 (global-set-key [?\C-,] 'previous-buffer)

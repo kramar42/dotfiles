@@ -11,10 +11,11 @@
 		      magit
                       ; install color themes
                       color-theme
+		      color-theme-solarized
                       ; M-x ido-style fuzzy matching
                       smex
 		      ; Pop-Up window manager
-		      popwin
+		      ;popwin
                       ; faster emacs startup
                       elisp-cache
                       ; save partial status of emacs
@@ -29,17 +30,8 @@
                       auto-complete
 		      ; jump to window by number
 		      window-number
-		      		      
-                      ; universal on-the-fly syntax checker
-                      ;flymake
-                      ; show flymake messages in minibuffer
-                      ;flymake-cursor
-                      ; slime
-                      ; installed through apt-get
-                      ;ac-slime
-
                       ; template engine
-                      ;yasnippet)
+		      yasnippet)
 ) "A list of packages to ensure are installed at launch.")
 
 (dolist (p my-packages)
