@@ -1,4 +1,4 @@
-(load "package")
+(require 'package)
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (package-initialize)
@@ -15,7 +15,7 @@
                       ; M-x ido-style fuzzy matching
                       smex
 		      ; Pop-Up window manager
-		      ;popwin
+		      popwin
                       ; faster emacs startup
                       elisp-cache
                       ; save partial status of emacs
@@ -29,9 +29,9 @@
                       ; auto-completion for emacs
                       auto-complete
 		      ; jump to window by number
-		      window-number
+		      ; window-number
                       ; template engine
-		      yasnippet)
+		      ; yasnippet
 ) "A list of packages to ensure are installed at launch.")
 
 (dolist (p my-packages)

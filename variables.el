@@ -56,14 +56,15 @@
 
 ; Color theme
 (require 'color-theme)
-(color-theme-subtle-hacker)
+(load-theme 'solarized-light t)
+;(color-theme-solarized)
 ; bharadwaj-slate classic gnome2 gray30 green-kingsajz
 ; jedit-grey robin-hood shaman snow subtle-hacker vim-colors
 ; whateverytouwant white-on-gray
 
 ; Font setup
-(set-default-font "DejaVu Sans Mono")
-(set-face-attribute 'default nil :height 100)
+;(set-default-font "DejaVu Sans Mono")
+(set-face-attribute 'default nil :height 120)
 
 ;; Emacs Behavior
 ; History
