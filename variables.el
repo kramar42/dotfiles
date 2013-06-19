@@ -6,8 +6,8 @@
 (eval-after-load 'flymake '(require 'flymake-cursor))
 
 ; windows number
-(autoload 'window-number-meta-mode "window-number" "" t)
-(window-number-meta-mode 1)
+;(autoload 'window-number-meta-mode "window-number" "" t)
+;(window-number-meta-mode 1)
 
 ; desktop mode
 (desktop-save-mode 1)
