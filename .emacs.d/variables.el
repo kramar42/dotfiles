@@ -32,32 +32,23 @@
 
 ; ORG mode
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-; TO CHANGE
-(setq org-agenda-files (list "~/Dropbox/orgs/*.org"))
 
 ; SLIME
-; (setq-default indent-tabs-mode nil)
-; (setq inferior-lisp-program "sbcl")
-; (setq slime-net-coding-system 'utf-8-unix)
-
-; (slime-setup '(slime-repl
-;               slime-fuzzy
-;               slime-fancy-inspector
-;               slime-indentation))
-
-; (setq lisp-indent-function 'common-lisp-indent-function)
+(setq-default indent-tabs-mode nil)
+(setq inferior-lisp-program "sbcl")
+(setq slime-net-coding-system 'utf-8-unix)
+(slime-setup)
+(setq lisp-indent-function 'common-lisp-indent-function)
 
 
 ;; Appearance
 ; Disable GUI
-(menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
 ; Color theme
 (require 'color-theme)
-(load-theme 'solarized-light t)
-;(color-theme-solarized)
+(load-theme 'solarized-dark t)
 ; bharadwaj-slate classic gnome2 gray30 green-kingsajz
 ; jedit-grey robin-hood shaman snow subtle-hacker vim-colors
 ; whateverytouwant white-on-gray
@@ -85,7 +76,7 @@
 (setq require-final-newline t)
 
 ; Set bell to visible
-(setq visible-bell nil)
+(setq visible-bell t)
 
 ; Smooth scrool
 (setq scroll-step 1

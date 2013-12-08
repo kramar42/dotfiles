@@ -18,10 +18,10 @@
 
 ;; Bookmarks
 (global-set-key [f5] 'bookmark-set)
-(global-set-key [f6] 'bookmark-njump)
+(global-set-key [f6] 'bookmark-jump)
 
 ;; Org shortcuts
-(global-set-key (kbd "C-x a") 'org-cicle-agenda-files)
+;(global-set-key (kbd "C-x a") 'org-cicle-agenda-files)
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-ca" 'org-agenda)
@@ -31,7 +31,7 @@
 ;; Compiling shortcut
 (global-set-key [\C-f9] 'compile)
 
-; (define-key slime-mode-map (kbd "TAB")
-;  'slime-indent-and-complete-symbol)
-; (define-key slime-mode-map (kbd "C-c TAB")
-;  'slime-complete-symbol)
+(define-key slime-mode-map (kbd "TAB")
+  'slime-indent-and-complete-symbol)
+(define-key slime-mode-map (kbd "C-c TAB")
+  'slime-complete-symbol)

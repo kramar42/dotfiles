@@ -9,6 +9,7 @@
 (defvar my-packages '(
                       ; emacs mode for interacting with the Git
 		      magit
+                      slime
                       ; install color themes
                       color-theme
 		      color-theme-solarized
@@ -29,7 +30,7 @@
                       ; auto-completion for emacs
                       auto-complete
 		      ; jump to window by number
-		      ; window-number
+		      window-number
                       ; template engine
 		      ; yasnippet
 ) "A list of packages to ensure are installed at launch.")

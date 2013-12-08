@@ -4,6 +4,8 @@
 ; auto-complete mode
 (require 'auto-complete)
 
+(require 'slime)
+
 ; org mode
 (autoload 'org-install "org-install" "" t)
 
@@ -15,7 +17,6 @@
 
 ; auto-compile
 (add-to-list 'load-path "~/.emacs.d/elpa/")
-(require 'auto-async-byte-compile)
 
 ; popwin
 (require 'popwin)
