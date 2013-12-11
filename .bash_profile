@@ -47,6 +47,8 @@ export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 # bash aliases
 alias ..='c ..'
 
+alias e='emacsclient -n'
+
 alias l='ls -GFh'
 alias ll='l -l'
 
