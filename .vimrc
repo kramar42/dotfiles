@@ -1,26 +1,18 @@
 "-----vundle---------------------{{{
-set nocompatible        " be iMproved
 filetype off            " required by vundle
-
 set rtp+=~/.vim/bundle/vundle/  " setup vundle dir
 call vundle#rc()        " call vundle init
 
 Bundle 'gmarik/vundle'
-Bundle 'vim-scripts/L9'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'vim-scripts/FuzzyFinder'
-Bundle 'vim-scripts/xoria256.vim'
+Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tomasr/molokai'
-Bundle 'jceb/vim-orgmode'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'vim-scripts/paredit.vim'
-Bundle 'mattn/gist-vim'
-Bundle 'mattn/webapi-vim'
+Bundle 'vim-scripts/xoria256.vim'
 "--------------------------------}}}"
 "-----general------------{{{
+set nocompatible        " be iMproved
 filetype plugin indent on
 set backspace=indent,eol,start
 
@@ -40,7 +32,6 @@ set complete=.,w,b,u,U  " better complete options to speed it up
 set nobackup
 set noswapfile
 set nowritebackup
-set directory=/tmp//
 "------------------------}}}
 "-----editing------------{{{
 "-----search-------------
@@ -95,9 +86,7 @@ set t_Co=256                " 256 terminal colors
 set wildmenu                " command-line completion menu
 set guioptions=acef         " autoselect,console dialogs,graphical tabs
                             " don't fork(),right-hand scrollbar
-set cpoptions+=             " set "$" as period in CHANGE command
-set background=dark
-colorscheme solarized
+colorscheme molokai
 set laststatus=2            " last windows always have status line
 set guicursor+=a:blinkon0   " disable cursor blinking
 
@@ -107,15 +96,24 @@ set ruler                   " ruler on
 "-----key-mapping----------------------{{{
 let mapleader=","
 
+nnoremap <leader>w :w<CR>
+nnoremap <leader>m :make<CR>
+nnoremap <leader>cn :cn<CR>
+nnoremap <leader>cp :cp<CR>
+nnoremap <leader>k :bn<CR>:bd#<CR>
+nnoremap <leader>x :x<CR>
+
 "-----swap ; and : --------------------
 nnoremap ; :
 nnoremap : ;
+
+vnoremap ; :
+vnoremap : ;
 
 "-----work with buffers----------------
 nnoremap <silent> <C-o> :b#<CR>
 nnoremap <silent> <C-n> :bn<CR>
 nnoremap <silent> <C-p> :bp<CR>
-nnoremap <silent> <leader>c :bn<CR>:bd#<CR>
 
 "-----work with windows----------------
 nnoremap <C-H> <C-W>h
@@ -145,11 +143,14 @@ nnoremap <F9> :%s/\s\+$//e<CR>
 set autoread
 set autowrite
 
+"-----autoreload .vimrc-
+autocmd! bufwritepost .vimrc source %
+
 "-----gist--------------
 let g:gist_get_multiplefile=1
 
 "-----color column------
-highlight ColorColumn ctermbg=magenta ctermfg=magenta
+highlight ColorColumn ctermbg=3 ctermfg=9
 call matchadd('ColorColumn', '\%81v', 100)
 
 "-----rainbow_parentheses--
@@ -163,3 +164,4 @@ autocmd BufRead *.py set makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stde
 autocmd BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 autocmd BufRead *.py nnoremap <leader>r :!python %<CR>
 "----------------------}}}
+

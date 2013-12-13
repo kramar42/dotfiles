@@ -17,23 +17,23 @@ shopt -s cmdhist
 shopt -s autocd
 # special function
 c() {
-  cd "$@" && ls -GF
+    cd "$@" && ls -GF
 }
 
 up() {
-  dir=""
-  if [ -z "$1" ]; then
-    dir=..
-  elif [[ $1 =~ ^[0-9]+$ ]]; then
-    x=0
-    while [ $x -lt ${1:-1} ]; do
-      dir=${dir}../
-      x=$(($x+1))
-    done
-  else
-    dir=${PWD%/$1/*}/$1
-  fi
-  c "$dir";
+    dir=""
+    if [ -z "$1" ]; then
+        dir=..
+    elif [[ $1 =~ ^[0-9]+$ ]]; then
+        x=0
+        while [ $x -lt ${1:-1} ]; do
+            dir=${dir}../
+            x=$(($x+1))
+        done
+    else
+        dir=${PWD%/$1/*}/$1
+    fi
+    c "$dir";
 }
 
 # export PS1
@@ -48,6 +48,7 @@ export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 alias ..='c ..'
 
 alias e='emacsclient -n'
+alias v='mvim --remote-silent'
 
 alias l='ls -GFh'
 alias ll='l -l'
@@ -56,6 +57,8 @@ alias df='df -H'
 alias du='du -ch'
 
 alias ga='git add'
+alias gm='git mv'
+alias gr='git rm'
 alias gl='git log'
 alias gd='git diff'
 alias gs='git status'
@@ -72,17 +75,15 @@ alias bi='brew install'
 alias bup='brew update'
 alias bu='brew upgrade'
 
-alias v='mvim --remote-silent'
-
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 
 # bash completion
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
-  . $(brew --prefix)/etc/bash_completion
+    . $(brew --prefix)/etc/bash_completion
 fi
 
 if [ -f ~/Sync/dev/personal/gists/6095984/yo-completion.sh ]; then
-  . ~/Sync/dev/personal/gists/6095984/yo-completion.sh
+    . ~/Sync/dev/personal/gists/6095984/yo-completion.sh
 fi
 
 if [ -f $(brew --prefix root)/libexec/thisroot.sh ]; then
