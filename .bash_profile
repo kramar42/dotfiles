@@ -50,6 +50,9 @@ alias ..='c ..'
 alias e='emacsclient -n'
 alias v='mvim --remote-silent'
 
+alias q='rlwrap q'
+alias j='/Applications/j701/bin/jconsole'
+
 alias l='ls -GFh'
 alias ll='l -l'
 
