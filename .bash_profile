@@ -43,7 +43,7 @@ PS1='\n[\e[0;94m\]\W\[\e[0m\]]\[\e[0;33m\] $(vcprompt -f "%b:%r") \[\e[1;91m\]$(
 export GREP_OPTIONS="--color=auto"
 export CDPATH=.:$HOME:$HOME/Sync
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
-export QHOME="/usr/local/Cellar/q"
+export QHOME="/usr/local/lib/q"
 
 # bash aliases
 alias ..='c ..'
