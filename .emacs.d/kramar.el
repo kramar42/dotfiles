@@ -9,6 +9,9 @@
 (highlight-current-line-on t)
 (set-face-background 'highlight-current-line-face "#333")
 
+(require 'rainbow-delimiters)
+(global-rainbow-delimiters-mode)
+
 ;(load-file "~/.emacs.d/modules.el")
 ;(load-file "~/.emacs.d/variables.el")
 ;(load-file "~/.emacs.d/keybindings.el")

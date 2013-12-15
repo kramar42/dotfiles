@@ -15,6 +15,7 @@
 (setq mouse-wheel-follow-mouse nil)
 (setq compilation-read-command nil)
 (show-paren-mode 1)
+(setq show-paren-delay 0)
 (define-key global-map (kbd "RET") 'newline-and-indent)
 (global-set-key (kbd "C-,") 'previous-buffer)
 (global-set-key (kbd "C-.") 'next-buffer)
@@ -38,7 +39,10 @@
   (package-initialize)
   (when (not package-archive-contents)
     (package-refresh-contents))
-  (dolist (p '(color-theme column-marker highlight-current-line))
+  (dolist (p '(color-theme
+			   column-marker
+			   highlight-current-line
+			   rainbow-delimiters))
     (when (not (package-installed-p p))
       (package-install p))))
 
