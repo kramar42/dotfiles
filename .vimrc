@@ -102,6 +102,7 @@ nnoremap <leader>cn :cn<CR>
 nnoremap <leader>cp :cp<CR>
 nnoremap <leader>k :bn<CR>:bd#<CR>
 nnoremap <leader>x :x<CR>
+nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 
 "-----swap ; and : --------------------
 nnoremap ; :
