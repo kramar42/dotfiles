@@ -1,16 +1,31 @@
+(require 'evil-leader)
+(global-evil-leader-mode)
+(evil-leader/set-leader ",")
+(evil-leader/set-key
+ "e" 'find-file
+ "b" 'switch-to-buffer
+ "k" 'kill-buffer
+ "," 'previous-buffer
+ "." 'next-buffer)
+(evil-leader/set-key-for-mode 'emacs-lisp-mode "b" 'byte-compile-file)
+
+(require 'evil)
+(evil-mode 1)
+(define-key evil-normal-state-map (kbd "C-.") 'next-buffer)
+
 (require 'color-theme)
 (color-theme-initialize)
-(color-theme-hober)
+(color-theme-charcoal-black)
+(setq evil-default-cursor t)
+(set-cursor-color "#c1cdc1")
 
 (require 'column-marker)
 (column-marker-3 80)
 
-(require 'highlight-current-line)
-(highlight-current-line-on t)
-(set-face-background 'highlight-current-line-face "#333")
-
 (require 'rainbow-delimiters)
 (global-rainbow-delimiters-mode)
+
+(require 'w3m)
 
 ;(load-file "~/.emacs.d/modules.el")
 ;(load-file "~/.emacs.d/variables.el")

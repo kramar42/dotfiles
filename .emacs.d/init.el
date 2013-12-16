@@ -14,8 +14,6 @@
 (setq auto-window-vscroll nil)
 (setq mouse-wheel-follow-mouse nil)
 (setq compilation-read-command nil)
-(show-paren-mode 1)
-(setq show-paren-delay 0)
 (define-key global-map (kbd "RET") 'newline-and-indent)
 (global-set-key (kbd "C-,") 'previous-buffer)
 (global-set-key (kbd "C-.") 'next-buffer)
@@ -24,8 +22,8 @@
 (global-set-key (kbd "C-x c") 'compile)
 (iswitchb-mode 1)
 (electric-pair-mode 1)
-(recentf-mode 1)
 (setq column-number-mode t)
+(setq w3m-command "/usr/local/bin/w3m")
 (set-face-attribute 'default nil :font "Monaco" :height 110)
 (setq iswitchb-buffer-ignore '("^ " "*Completions*" "*Shell Command Output*"
 							   "*Messages*" "Async Shell Command"))
@@ -41,8 +39,10 @@
     (package-refresh-contents))
   (dolist (p '(color-theme
 			   column-marker
-			   highlight-current-line
-			   rainbow-delimiters))
+			   rainbow-delimiters
+			   w3m
+			   evil
+			   evil-leader))
     (when (not (package-installed-p p))
       (package-install p))))
 
