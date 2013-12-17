@@ -4,7 +4,7 @@
 (blink-cursor-mode -1)
 (setq backup-inhibited t)
 (setq auto-save-default nil)
-(setq indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 (setq default-tab-width 4)
 (setq c-default-style "linux"
       c-basic-offset 4)
