@@ -97,6 +97,7 @@ set ruler                   " ruler on
 let mapleader=","
 
 nnoremap <leader>w :w<CR>
+nnoremap <leader>e :e 
 nnoremap <leader>m :make<CR>
 nnoremap <leader>cn :cn<CR>
 nnoremap <leader>cp :cp<CR>

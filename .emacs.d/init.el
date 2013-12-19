@@ -8,9 +8,13 @@
 (setq default-tab-width 4)
 (setq c-default-style "linux"
       c-basic-offset 4)
-(setq scroll-step 1)
-(setq scroll-conservatively 10000)
+(setq scroll-step 1
+      scroll-conservatively 10000)
+(setq require-final-newline t)
+(setq current-language-environment "UTF-8")
+(setq default-input-method "russian-computer")
 (setq ring-bell-function 'ignore)
+(setq history-length 1000)
 (setq auto-window-vscroll nil)
 (setq mouse-wheel-follow-mouse nil)
 (setq compilation-read-command nil)
@@ -27,6 +31,22 @@
 (set-face-attribute 'default nil :font "Monaco" :height 110)
 (setq iswitchb-buffer-ignore '("^ " "*Completions*" "*Shell Command Output*"
 							   "*Messages*" "Async Shell Command"))
+(global-set-key [f2] 'kmacro-call-macro)
+(global-set-key [f3] 'kmacro-start-macro-or-insert-counter)
+(global-set-key [f4] 'kmacro-end-or-call-macro)
+
+(global-set-key [f5] 'bookmark-set)
+(global-set-key [f6] 'bookmark-jump)
+(global-set-key [\C-f9] 'compile)
+
+; (todo 'org-mode)
+; (global-set-key (kbd "C-x a") 'org-cicle-agenda-files)
+; (global-set-key "\C-cl" 'org-store-link)
+; (global-set-key "\C-cc" 'org-capture)
+; (global-set-key "\C-ca" 'org-agenda)
+; (global-set-key "\C-cb" 'org-iswitchb)
+; (setq org-log-done t)
+
 (server-start)
 
 (when (>= emacs-major-version 24)
@@ -42,7 +62,9 @@
 			   rainbow-delimiters
 			   w3m
 			   evil
-			   evil-leader))
+			   evil-leader
+               popwin
+               auto-async-byte-compile))
     (when (not (package-installed-p p))
       (package-install p))))
 

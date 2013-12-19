@@ -7,15 +7,17 @@
  "k" 'kill-buffer
  "," 'previous-buffer
  "." 'next-buffer)
-(evil-leader/set-key-for-mode 'emacs-lisp-mode "b" 'byte-compile-file)
+; (evil-leader/set-key-for-mode 'emacs-lisp-mode "b" 'byte-compile-file)
 
 (require 'evil)
 (evil-mode 1)
-(define-key evil-normal-state-map (kbd "C-.") 'next-buffer)
 
 (require 'color-theme)
 (color-theme-initialize)
 (color-theme-charcoal-black)
+; bharadwaj-slate classic gnome2 gray30 green-kingsajz
+; jedit-grey robin-hood shaman snow subtle-hacker vim-colors
+; whateverytouwant white-on-gray
 (setq evil-default-cursor t)
 (set-cursor-color "#c1cdc1")
 
@@ -27,7 +29,23 @@
 
 (require 'w3m)
 
-;(load-file "~/.emacs.d/modules.el")
-;(load-file "~/.emacs.d/variables.el")
-;(load-file "~/.emacs.d/keybindings.el")
-;(load-file "~/.emacs.d/hooks.el")
+(require 'ido)
+(ido-mode t)
+(setq ido-enable-flex-matching t)
+(setq ido-use-filename-at-point 'guess)
+
+(require 'imenu)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
+(require 'popwin)
+(popwin-mode 1)
+
+(require 'desktop)
+(desktop-save-mode 1)
+(desktop-read)
+
+(require 'auto-async-byte-compile)
+(setq auto-async-byte-compile-exclude-files-regexp "/junk/")
+(add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
+
+; (todo '(flymake magit))
