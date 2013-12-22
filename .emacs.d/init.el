@@ -39,13 +39,16 @@
 (global-set-key [f6] 'bookmark-jump)
 (global-set-key [\C-f9] 'compile)
 
-; (todo 'org-mode)
-; (global-set-key (kbd "C-x a") 'org-cicle-agenda-files)
-; (global-set-key "\C-cl" 'org-store-link)
-; (global-set-key "\C-cc" 'org-capture)
-; (global-set-key "\C-ca" 'org-agenda)
-; (global-set-key "\C-cb" 'org-iswitchb)
-; (setq org-log-done t)
+(setq org-log-done 'time)
+(setq org-directory "~/Dropbox/orgs")
+(setq org-mobile-inbox-for-pull "~/Dropbox/orgs/flagged.org")
+(setq org-mobile-directory "~/Dropbox/apps/orgs")
+
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+(global-set-key "\C-xa" 'org-cicle-agenda-files)
 
 (server-start)
 
@@ -58,6 +61,7 @@
   (when (not package-archive-contents)
     (package-refresh-contents))
   (dolist (p '(color-theme
+               color-theme-monokai
 			   column-marker
 			   rainbow-delimiters
 			   w3m
@@ -69,3 +73,4 @@
       (package-install p))))
 
 (add-hook 'after-init-hook (lambda () (load-file "~/.emacs.d/kramar.el")))
+
