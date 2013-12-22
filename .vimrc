@@ -98,11 +98,14 @@ let mapleader=","
 
 nnoremap <leader>w :w<CR>
 nnoremap <leader>e :e 
+nnoremap <leader>b :b 
 nnoremap <leader>m :make<CR>
 nnoremap <leader>cn :cn<CR>
 nnoremap <leader>cp :cp<CR>
 nnoremap <leader>k :bn<CR>:bd#<CR>
 nnoremap <leader>x :x<CR>
+nnoremap <leader>, :bp<CR>
+nnoremap <leader>. :bn<CR>
 nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 
 "-----swap ; and : --------------------
