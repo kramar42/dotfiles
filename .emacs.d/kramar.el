@@ -14,10 +14,10 @@
 
 (require 'color-theme)
 (color-theme-initialize)
-(color-theme-charcoal-black)
+(color-theme-monokai)
 ; bharadwaj-slate classic gnome2 gray30 green-kingsajz
 ; jedit-grey robin-hood shaman snow subtle-hacker vim-colors
-; whateverytouwant white-on-gray
+; whateverytouwant white-on-gray charcoal-black
 (setq evil-default-cursor t)
 (set-cursor-color "#c1cdc1")
 
