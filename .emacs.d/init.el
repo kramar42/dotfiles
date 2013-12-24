@@ -33,6 +33,7 @@
 							   "*Messages*" "Async Shell Command"))
 
 ;; TODO: test
+(require 'cl)
 (mapcar*
  (lambda (r e) ; R and E are matching Russian and English keysyms
    ; iterate over modifiers
