@@ -31,6 +31,26 @@
 (set-face-attribute 'default nil :font "Monaco" :height 110)
 (setq iswitchb-buffer-ignore '("^ " "*Completions*" "*Shell Command Output*"
 							   "*Messages*" "Async Shell Command"))
+
+;; TODO: test
+(mapcar*
+ (lambda (r e) ; R and E are matching Russian and English keysyms
+   ; iterate over modifiers
+   (mapc (lambda (mod)
+    (define-key input-decode-map
+      (vector (list mod r)) (vector (list mod e))))
+  '(control meta super hyper))
+   ; finally, if Russian key maps nowhere, remap it to the English key without
+   ; any modifiers
+   (define-key local-function-key-map (vector r) (vector e)))
+   "йцукенгшщзхъфывапролджэячсмитьбю"
+   "qwertyuiop[]asdfghjkl;'zxcvbnm,.")
+
+;; clean up display information
+(setq display-time-24hr-format t)
+(setq display-time-day-and-date t)
+(display-time)
+
 (global-set-key [f2] 'kmacro-call-macro)
 (global-set-key [f3] 'kmacro-start-macro-or-insert-counter)
 (global-set-key [f4] 'kmacro-end-or-call-macro)
