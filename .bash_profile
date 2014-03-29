@@ -37,7 +37,7 @@ up() {
 }
 
 # export PS1
-PS1='[\e[0;94m\]\W\[\e[0m\]]\[\e[0;33m\] $(vcprompt -f "%b:%r") \[\e[1;91m\]$(vcprompt -f "%m%u") \[\e[0;32m\]\$ \[\e[0m\]'
+PS1='[\e[0;94m\]\W\[\e[0m\]]\[\e[1;91m\] $(vcprompt -f "%m%u ")\[\e[0;32m\]\$ \[\e[0m\]'
 
 # grep colorize
 export GREP_OPTIONS="--color=auto"
