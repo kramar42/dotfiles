@@ -28,9 +28,10 @@
 (electric-pair-mode 1)
 (setq column-number-mode t)
 (setq w3m-command "/usr/local/bin/w3m")
-(set-face-attribute 'default nil :font "Monaco" :height 110)
+;; (set-face-attribute 'default nil :font "Monaco" :height 110)
 (setq iswitchb-buffer-ignore '("^ " "*Completions*" "*Shell Command Output*"
 							   "*Messages*" "Async Shell Command"))
+(setq mac-command-modifier 'control)
 
 ;; TODO: test
 (require 'cl)
@@ -86,12 +87,13 @@
 			   column-marker
 			   rainbow-delimiters
 			   w3m
-			   evil
-			   evil-leader
                popwin
+               4clojure
+               clojure-mode
+               cider
+               paredit
                auto-async-byte-compile))
     (when (not (package-installed-p p))
       (package-install p))))
 
 (add-hook 'after-init-hook (lambda () (load-file "~/.emacs.d/kramar.el")))
-

@@ -1,6 +1,8 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+export PATH=$PATH:/usr/texbin:/usr/local/bin
+
 # don't put duplicate lines in the history
 export HISTCONTROL=ignoreboth:erasedups
 # append to the history file, don't overwrite it
@@ -37,7 +39,7 @@ up() {
 }
 
 # export PS1
-PS1='[\e[0;94m\]\W\[\e[0m\]]\[\e[1;91m\] $(vcprompt -f "%m%u ")\[\e[0;32m\]\$ \[\e[0m\]'
+PS1='[\W] \$ '
 
 # grep colorize
 export GREP_OPTIONS="--color=auto"
@@ -100,4 +102,3 @@ tty -s && stty werase ^- 2>/dev/null
 
 unset DYLD_LIBRARY_PATH
 export GOPATH=~/.gocode
-

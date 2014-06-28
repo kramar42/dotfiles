@@ -1,24 +1,9 @@
-(require 'evil-leader)
-(global-evil-leader-mode)
-(evil-leader/set-leader ",")
-(evil-leader/set-key
- "e" 'find-file
- "b" 'switch-to-buffer
- "k" 'kill-buffer
- "," 'previous-buffer
- "." 'next-buffer)
-; (evil-leader/set-key-for-mode 'emacs-lisp-mode "b" 'byte-compile-file)
-
-(require 'evil)
-(evil-mode 1)
-
 (require 'color-theme)
 (color-theme-initialize)
 (color-theme-monokai)
 ; bharadwaj-slate classic gnome2 gray30 green-kingsajz
 ; jedit-grey robin-hood shaman snow subtle-hacker vim-colors
 ; whateverytouwant white-on-gray charcoal-black
-(setq evil-default-cursor t)
 (set-cursor-color "#c1cdc1")
 
 (require 'column-marker)
@@ -26,8 +11,6 @@
 
 (require 'rainbow-delimiters)
 (global-rainbow-delimiters-mode)
-
-(require 'w3m)
 
 (require 'ido)
 (ido-mode t)
@@ -48,4 +31,25 @@
 (setq auto-async-byte-compile-exclude-files-regexp "/junk/")
 (add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
 
-; (todo '(flymake magit))
+(require '4clojure)
+
+(require 'paredit)
+(defun turn-on-paredit () (paredit-mode 1))
+(add-hook 'clojure-mode-hook 'turn-on-paredit)
+(add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
+
+(require 'cider)
+(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+(setq nrepl-hide-special-buffers t)
+(setq cider-repl-tab-command 'indent-for-tab-command)
+(setq cider-repl-pop-to-buffer-on-connect nil)
+(setq cider-popup-stacktraces nil)
+(setq cider-auto-select-error-buffer t)
+(setq cider-stacktrace-fill-column 80)
+(setq cider-prompt-save-file-on-load nil)
+(set cider-repl-result-prefix " => ")
+(set cider-interactive-eval-result-prefix " => ")
+(setq cider-repl-use-clojure-font-lock t)
+(setq cider-repl-wrap-history t)
+(add-hook 'cider-repl-mode-hook 'paredit-mode)
+(add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)

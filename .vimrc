@@ -3,19 +3,31 @@ filetype off            " required by vundle
 set rtp+=~/.vim/bundle/vundle/  " setup vundle dir
 call vundle#rc()        " call vundle init
 
-Bundle 'altercation/vim-colors-solarized'
 Bundle 'gmarik/vundle'
-Bundle 'kien/rainbow_parentheses.vim'
+
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
+
 Bundle 'tomasr/molokai'
-Bundle 'vim-scripts/paredit.vim'
 Bundle 'vim-scripts/xoria256.vim'
+Bundle 'altercation/vim-colors-solarized'
+
+Bundle 'kien/rainbow_parentheses.vim'
+Bundle 'vim-scripts/paredit.vim'
+Bundle 'guns/vim-clojure-static'
+Bundle 'tpope/vim-leiningen'
+Bundle 'tpope/vim-fireplace'
+
+Bundle 'scrooloose/syntastic'
+
+Bundle 'LaTeX-Box-Team/LaTeX-Box'
+Bundle 'hsitz/VimOrganizer'
 "------------------------}}}"
 "-----general------------{{{
 set nocompatible        " be iMproved
 filetype plugin indent on
 set backspace=indent,eol,start
+set shell=bash
 
 "-----encoding-----------
 set encoding=utf8
@@ -66,8 +78,8 @@ set scrolloff=2         " 2 lines above and below of cursor
 set scrolljump=1        " jump by one line
 
 "-----wrapping-----------
-set nowrap
-set textwidth=0         " don't wrap lines by default
+set wrap
+set linebreak
 "------------------------}}}
 "-----visual-------------{{{
 syntax on
@@ -90,11 +102,11 @@ set guioptions=acef     " autoselect,console dialogs,graphical tabs
 
 if has('gui_running')
     let g:solarized_termcolors=256
-    colorscheme solarized
     set background=light
+    colorscheme solarized
 else
     set background=dark
-    colorscheme xoria256
+    colorscheme molokai
 endif
 set laststatus=2        " last windows always have status line
 set guicursor+=a:blinkon0
@@ -117,6 +129,8 @@ nnoremap <leader>x  :x<CR>
 nnoremap <leader>,  :bp<CR>
 nnoremap <leader>.  :bn<CR>
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+nnoremap <leader>l  :Latexmk<CR>
+nnoremap <leader>n  :set number!<CR><Esc>
 
 "-----swap ; and : ------
 nnoremap ; :
@@ -129,6 +143,10 @@ vnoremap : ;
 nnoremap <silent> <C-o> :b#<CR>
 nnoremap <silent> <C-n> :bn<CR>
 nnoremap <silent> <C-p> :bp<CR>
+
+"-----work with wrapped lines
+nnoremap <silent> j gj
+nnoremap <silent> k gk
 
 "-----work with windows--
 nnoremap <C-H> <C-W>h
@@ -175,4 +193,30 @@ au Syntax * RainbowParenthesesLoadBraces
 autocmd BufRead *.py set makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
 autocmd BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 autocmd BufRead *.py nnoremap <leader>r :!python %<CR>
+
+"-----clojure------------
+autocmd BufRead *.clj nnoremap <leader>r :%Eval<CR>
+
+"-----latex--------------
+autocmd BufRead *.tex nnoremap <leader>r :Latexmk<CR>
+"let g:LatexBox_latexmk_preview_continuously=1
+"let g:LatexBox_latexmk_async=1
+"-----org-mode-----------
+let g:ft_ignore_pat = '\.org'
+au! BufRead,BufWrite,BufWritePost,BufNewFile *.org 
+au BufEnter *.org            call org#SetOrgFileType()
+command! OrgCapture :call org#CaptureBuffer()
+command! OrgCaptureFile :call org#OpenCaptureFile()
+
+"------markdown----------
+function! MarkdownLevel()
+    let h = matchstr(getline(v:lnum), '^#\+')
+    if empty(h)
+        return "="
+    else
+        return ">" . len(h)
+    endif
+endfunction
+au BufEnter *.md setlocal foldexpr=MarkdownLevel()  
+au BufEnter *.md setlocal foldmethod=expr
 "------------------------}}}
