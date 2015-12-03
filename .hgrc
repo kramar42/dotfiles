@@ -1,0 +1,14 @@
+[ui]
+username = Oleksii Kramarenko <okramarenko@intropro.com>
+
+[extensions]
+shelve =
+hgext.gpg =
+color =
+
+[gpg]
+key=4918809F
+
+[alias]
+pushb = push -r `hg branch`
+

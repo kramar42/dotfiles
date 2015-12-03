@@ -1,27 +1,56 @@
 "-----vundle-------------{{{
-filetype off            " required by vundle
-set rtp+=~/.vim/bundle/vundle/  " setup vundle dir
-call vundle#rc()        " call vundle init
+call plug#begin('~/.vim/plugged')
 
-Bundle 'gmarik/vundle'
+" smart comment
+Plug 'scrooloose/nerdcommenter'
 
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/nerdtree'
+" faster grep
+Plug 'rking/ag.vim'
 
-Bundle 'tomasr/molokai'
-Bundle 'vim-scripts/xoria256.vim'
-Bundle 'altercation/vim-colors-solarized'
+" colorschemes
+Plug 'tomasr/molokai'
+Plug 'vim-scripts/xoria256.vim'
+Plug 'altercation/vim-colors-solarized'
 
-Bundle 'kien/rainbow_parentheses.vim'
-Bundle 'vim-scripts/paredit.vim'
-Bundle 'guns/vim-clojure-static'
-Bundle 'tpope/vim-leiningen'
-Bundle 'tpope/vim-fireplace'
+" chech syntax on the fly
+Plug 'scrooloose/syntastic'
 
-Bundle 'scrooloose/syntastic'
+" superb auto-complete
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 
-Bundle 'LaTeX-Box-Team/LaTeX-Box'
-Bundle 'hsitz/VimOrganizer'
+" fuzzy searche everywhere
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+" lisp related
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'vim-scripts/paredit.vim', { 'for': 'clojure' }
+Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
+Plug 'tpope/vim-leiningen', { 'for': 'clojure' }
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+
+" haskell
+Plug 'Shougo/vimproc.vim', { 'for': 'haskell' }
+Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
+Plug 'majutsushi/tagbar', { 'for': 'haskell' }
+
+" latex integration
+Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for': 'latex' }
+
+" other lang support
+Plug 'vim-scripts/groovy.vim', { 'for': 'groovy' }
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+
+" other stuff
+Plug 'kana/vim-textobj-user'
+Plug 'tpope/vim-classpath'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'jpalardy/vim-slime'
+
+call plug#end()
+
 "------------------------}}}"
 "-----general------------{{{
 set nocompatible        " be iMproved
@@ -38,13 +67,25 @@ set hidden              " put in bg without problems
 set history=256         " number of things to remember in history
 set nostartofline       " don't go to the start of the line after some commands
 set timeoutlen=250      " time to wait after ESC
-set clipboard+=unnamed  " yanks go on clipboard instead
+set ttyfast
+
+set clipboard=unnamed   " yanks go on clipboard instead
 set complete=.,w,b,u,U  " better complete options to speed it up
 
-"-----disable-trash-files
-set nobackup
-set noswapfile
-set nowritebackup
+set binary
+set noeol
+" Centralize backups, swapfiles and undo history
+set backupdir=~/.vim/backups
+set directory=~/.vim/swaps
+set undodir=~/.vim/undo
+
+" Show “invisible” characters
+set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
+set list
+
+set mouse=a
+set noesckeys
+
 "------------------------}}}
 "-----editing------------{{{
 "-----search-------------
@@ -78,7 +119,7 @@ set scrolloff=2         " 2 lines above and below of cursor
 set scrolljump=1        " jump by one line
 
 "-----wrapping-----------
-set wrap
+set nowrap
 set linebreak
 "------------------------}}}
 "-----visual-------------{{{
@@ -89,6 +130,10 @@ set showmatch           " show matching brackets
 set matchtime=2         " bracket blinking
 set noshowcmd           " don't show current command
 set noshowmode          " we have an app for that
+
+" Don’t show the intro message when starting Vim
+set shortmess=atI
+set grepprg=ag
 
 "-----disable-bells------
 set noerrorbells visualbell t_vb=
@@ -102,11 +147,11 @@ set guioptions=acef     " autoselect,console dialogs,graphical tabs
 
 if has('gui_running')
     let g:solarized_termcolors=256
-    set background=light
+    set background=dark
     colorscheme solarized
 else
     set background=dark
-    colorscheme molokai
+    colorscheme xoria256
 endif
 set laststatus=2        " last windows always have status line
 set guicursor+=a:blinkon0
@@ -119,8 +164,8 @@ let mapleader=","
 
 nnoremap <leader>w  :w<CR>
 nnoremap <leader>q  :q<CR>
-nnoremap <leader>e  :e 
-nnoremap <leader>b  :b 
+nnoremap <leader>e  :Files<CR>
+nnoremap <leader>b  :Buffers<CR>
 nnoremap <leader>m  :make<CR>
 nnoremap <leader>cn :cn<CR>
 nnoremap <leader>cp :cp<CR>
@@ -129,8 +174,10 @@ nnoremap <leader>x  :x<CR>
 nnoremap <leader>,  :bp<CR>
 nnoremap <leader>.  :bn<CR>
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
-nnoremap <leader>l  :Latexmk<CR>
+nnoremap <leader>l  :Lines<CR>
 nnoremap <leader>n  :set number!<CR><Esc>
+" Save a file as root (,W)
+noremap <leader>W :w !sudo tee % > /dev/null<CR>
 
 "-----swap ; and : ------
 nnoremap ; :
@@ -154,18 +201,19 @@ nnoremap <C-J> <C-W>j
 nnoremap <C-K> <C-W>k
 nnoremap <C-L> <C-W>l
 
-"-----use global buffer--
-vmap <C-C> <esc> "+yi
-imap <C-V> <esc> "+gPi
+nnoremap <C-e> 3<C-e>
+nnoremap <C-y> 3<C-y>
 
-nnoremap <silent> <Esc><Esc> :nohlsearch<CR><Esc>
+" Inserts the path of the currently edited file into a command
+" Command mode: Ctrl+P
+cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
+
+nnoremap <CR> :nohlsearch<CR>/<BS>
 
 noremap H ^
 noremap L $
 
 "-----plugins shortcuts--
-nnoremap <C-t> :NERDTreeToggle<CR>
-
 "-----trail whitespaces--
 nnoremap <F9> :%s/\s\+$//e<CR>
 
@@ -189,24 +237,36 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
+"-----syntastic----------
+map <silent> <Leader>h :Errors<CR>
+map <Leader>s :SyntasticToggleMode<CR>
+
+let g:syntastic_auto_loc_list=1
+
+"-----json highlighting--
+au BufNewFile,BufRead *.json set ft=javascript
+
 "-----python-------------
 autocmd BufRead *.py set makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
 autocmd BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 autocmd BufRead *.py nnoremap <leader>r :!python %<CR>
 
+" make Python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
+au FileType python set softtabstop=4 tabstop=4 shiftwidth=4 textwidth=79
+
+" make Python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
+au FileType erlang set softtabstop=4 tabstop=4 shiftwidth=4 textwidth=79
+
 "-----clojure------------
 autocmd BufRead *.clj nnoremap <leader>r :%Eval<CR>
+
+"-----groovy-------------
+autocmd BufRead *.groovy nnoremap <leader>r :!groovy %<CR>
 
 "-----latex--------------
 autocmd BufRead *.tex nnoremap <leader>r :Latexmk<CR>
 "let g:LatexBox_latexmk_preview_continuously=1
 "let g:LatexBox_latexmk_async=1
-"-----org-mode-----------
-let g:ft_ignore_pat = '\.org'
-au! BufRead,BufWrite,BufWritePost,BufNewFile *.org 
-au BufEnter *.org            call org#SetOrgFileType()
-command! OrgCapture :call org#CaptureBuffer()
-command! OrgCaptureFile :call org#OpenCaptureFile()
 
 "------markdown----------
 function! MarkdownLevel()
