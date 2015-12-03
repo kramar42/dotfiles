@@ -1,23 +1,29 @@
-# If not running interactively, don't do anything
-[ -z "$PS1" ] && return
+export EDITOR='vim'
 
-export PATH=$PATH:/usr/texbin:/usr/local/bin
+export PATH=/usr/local/sbin:usr/texbin:/usr/local/bin:$HOME/Library/Haskell/bin:$PATH
+eval "$(thefuck --alias)"
 
-# don't put duplicate lines in the history
+export LESS_TERMCAP_md="${yellow}"
+export MANPAGER='less -X'
+
+#export JAVA_HOME=$(/usr/libexec/java_home)
+
+export LANG='en_US.UTF-8'
+export LC_ALL='en_US.UTF-8'
+
+export HISTSIZE='32768'
+export HISTFILESIZE="${HISTSIZE}"
 export HISTCONTROL=ignoreboth:erasedups
-# append to the history file, don't overwrite it
 shopt -s histappend
-# check the window size after each command and, if necessary, update the
-# values of LINES and COLUMNS.
 shopt -s checkwinsize
-# correct minor errors in the spelling of a directory component in a cd command
 shopt -s cdspell
-# save all lines of a multiple-line command in the same history entry (allows
-# easy re-editing of multi-line commands)
 shopt -s cmdhist
-# don't need to print cd every time
 shopt -s autocd
-# special function
+
+for option in autocd globstar; do
+    shopt -s "$option" 2> /dev/null;
+done
+
 c() {
     cd "$@" && ls -GF
 }
@@ -38,23 +44,50 @@ up() {
     c "$dir";
 }
 
-# export PS1
-PS1='[\W] \$ '
+hash git &>/dev/null;
+if [ $? -eq 0 ]; then
+    function diff() {
+        git diff --no-index --color-words "$@";
+    }
+fi
 
-# grep colorize
-export GREP_OPTIONS="--color=auto"
-export CDPATH=.:$HOME:$HOME/Sync
+function o() {
+    if [ $# -eq 0 ]; then
+        open .;
+    else
+        open "$@";
+    fi;
+}
+
+function tre() {
+    tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
+}
+
+function fs() {
+    if du -b /dev/null > /dev/null 2>&1; then
+        local arg=-sbh;
+    else
+        local arg=-sh;
+    fi
+    if [[ -n "$@" ]]; then
+        du $arg -- "$@";
+    else
+        du $arg .[^.]* *;
+    fi;
+}
+
+export PS1='   \h:\W \$ '
+export SUDO_PS1='   \h:\W \$ '
+
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 export QHOME="/usr/local/lib/q"
 
-# bash aliases
 alias ..='c ..'
 
 alias e='emacsclient -n'
-alias v='mvim --remote-silent'
+alias v='nvim'
 
 alias q='rlwrap q'
-alias j='/Applications/j701/bin/jconsole'
 
 alias l='ls -GFh'
 alias ll='l -l'
@@ -62,43 +95,14 @@ alias ll='l -l'
 alias df='df -H'
 alias du='du -ch'
 
-alias ga='git add'
-alias gm='git mv'
-alias gr='git rm'
-alias gl='git log'
-alias gd='git diff'
-alias gs='git status'
-alias gc='git commit'
-alias gsh='git push'
-alias gll='git pull'
+alias hgp='hg push -r `hg branch`'
 
-alias o='open'
-alias wget='wget -c'
+alias work='cd /Volumes/work/cm-workspace'
 
-alias bl='brew list'
-alias bs='brew search'
-alias bi='brew install'
-alias bup='brew update'
-alias bu='brew upgrade'
-
-alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
-
-# bash completion
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-    . $(brew --prefix)/etc/bash_completion
+if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
+     complete -o default -o nospace -F _git g;
 fi
 
-if [ -f ~/Sync/dev/personal/gists/6095984/yo-completion.sh ]; then
-    . ~/Sync/dev/personal/gists/6095984/yo-completion.sh
-fi
-
-if [ -f $(brew --prefix root)/libexec/thisroot.sh ]; then
-    . $(brew --prefix root)/libexec/thisroot.sh
-fi
-
-
-# this is for delete words by ^W
 tty -s && stty werase ^- 2>/dev/null
 
-unset DYLD_LIBRARY_PATH
-export GOPATH=~/.gocode
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
