@@ -1,6 +1,6 @@
 (require 'color-theme)
 (color-theme-initialize)
-(color-theme-monokai)
+(color-theme-charcoal-black)
 ; bharadwaj-slate classic gnome2 gray30 green-kingsajz
 ; jedit-grey robin-hood shaman snow subtle-hacker vim-colors
 ; whateverytouwant white-on-gray charcoal-black
@@ -10,7 +10,7 @@
 (column-marker-3 80)
 
 (require 'rainbow-delimiters)
-(global-rainbow-delimiters-mode)
+;(add-hook 'prog-mode-hook 'rainbow-delimeters-mode)
 
 (require 'ido)
 (ido-mode t)
@@ -18,25 +18,19 @@
 (setq ido-use-filename-at-point 'guess)
 
 (require 'imenu)
-(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 (require 'popwin)
 (popwin-mode 1)
 
 (require 'desktop)
-(desktop-save-mode 1)
-(desktop-read)
 
 (require 'auto-async-byte-compile)
 (setq auto-async-byte-compile-exclude-files-regexp "/junk/")
 (add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
 
-(require '4clojure)
-
 (require 'paredit)
 (defun turn-on-paredit () (paredit-mode 1))
 (add-hook 'clojure-mode-hook 'turn-on-paredit)
-(add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
 
 (require 'cider)
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
@@ -47,9 +41,24 @@
 (setq cider-auto-select-error-buffer t)
 (setq cider-stacktrace-fill-column 80)
 (setq cider-prompt-save-file-on-load nil)
-(set cider-repl-result-prefix " => ")
-(set cider-interactive-eval-result-prefix " => ")
+(setq cider-repl-result-prefix " => ")
+(setq cider-interactive-eval-result-prefix " => ")
 (setq cider-repl-use-clojure-font-lock t)
 (setq cider-repl-wrap-history t)
 (add-hook 'cider-repl-mode-hook 'paredit-mode)
 (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
+
+(require 'evil)
+(evil-mode 1)
+
+(global-evil-leader-mode)
+(evil-leader/set-leader ",")
+
+(evil-leader/set-key
+ "e" 'find-file
+ "b" 'ibuffer
+ "w" 'save-buffer
+ "x" 'execute-extended-command
+ "d" 'cider-pprint-eval-defun-at-point
+ "r" 'cider-load-buffer
+ )

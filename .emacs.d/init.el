@@ -1,9 +1,5 @@
-(add-to-list 'load-path "~/.emacs.d/")
-(toggle-scroll-bar -1)
-(tool-bar-mode -1)
 (blink-cursor-mode -1)
-(setq backup-inhibited t)
-(setq auto-save-default nil)
+(tool-bar-mode -1)
 (setq-default indent-tabs-mode nil)
 (setq default-tab-width 4)
 (setq c-default-style "linux"
@@ -19,81 +15,42 @@
 (setq mouse-wheel-follow-mouse nil)
 (setq compilation-read-command nil)
 (define-key global-map (kbd "RET") 'newline-and-indent)
-(global-set-key (kbd "C-,") 'previous-buffer)
-(global-set-key (kbd "C-.") 'next-buffer)
-(global-set-key (kbd "C-x t") 'delete-trailing-whitespace)
-(global-set-key (kbd "C-x g") 'goto-line)
-(global-set-key (kbd "C-x c") 'compile)
-(iswitchb-mode 1)
-(electric-pair-mode 1)
+(setq inhibit-startup-echo-area-message "kramar")
+(setq inhibit-startup-message t)
+(defalias 'yes-or-no-p 'y-or-n-p)
+;(add-to-list 'exec-path "/usr/local/bin")
+
+
 (setq column-number-mode t)
-(setq w3m-command "/usr/local/bin/w3m")
 ;; (set-face-attribute 'default nil :font "Monaco" :height 110)
 (setq iswitchb-buffer-ignore '("^ " "*Completions*" "*Shell Command Output*"
-							   "*Messages*" "Async Shell Command"))
+                               "*Messages*" "Async Shell Command"))
 (setq mac-command-modifier 'control)
-
-;; TODO: test
-(require 'cl)
-(mapcar*
- (lambda (r e) ; R and E are matching Russian and English keysyms
-   ; iterate over modifiers
-   (mapc (lambda (mod)
-    (define-key input-decode-map
-      (vector (list mod r)) (vector (list mod e))))
-  '(control meta super hyper))
-   ; finally, if Russian key maps nowhere, remap it to the English key without
-   ; any modifiers
-   (define-key local-function-key-map (vector r) (vector e)))
-   "йцукенгшщзхъфывапролджэячсмитьбю"
-   "qwertyuiop[]asdfghjkl;'zxcvbnm,.")
-
-;; clean up display information
-(setq display-time-24hr-format t)
-(setq display-time-day-and-date t)
-(display-time)
-
-(global-set-key [f2] 'kmacro-call-macro)
-(global-set-key [f3] 'kmacro-start-macro-or-insert-counter)
-(global-set-key [f4] 'kmacro-end-or-call-macro)
-
-(global-set-key [f5] 'bookmark-set)
-(global-set-key [f6] 'bookmark-jump)
-(global-set-key [\C-f9] 'compile)
-
-(setq org-log-done 'time)
-(setq org-directory "~/Dropbox/orgs")
-(setq org-mobile-inbox-for-pull "~/Dropbox/orgs/flagged.org")
-(setq org-mobile-directory "~/Dropbox/apps/orgs")
-
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-cc" 'org-capture)
-(global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cb" 'org-iswitchb)
-(global-set-key "\C-xa" 'org-cicle-agenda-files)
 
 (server-start)
 
 (when (>= emacs-major-version 24)
   (require 'package)
   (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                           ("marmalade" . "http://marmalade-repo.org/packages/")
-                           ("melpa" . "http://melpa.milkbox.net/packages/")))
+                           ("marmalade" . "http://marmalade-repo.org/packages/")))
   (package-initialize)
   (when (not package-archive-contents)
     (package-refresh-contents))
   (dolist (p '(color-theme
                color-theme-monokai
-			   column-marker
-			   rainbow-delimiters
-			   w3m
+               column-marker
+               rainbow-delimiters
+               w3m
                popwin
                4clojure
                clojure-mode
                cider
                paredit
+               evil
+               evil-leader
                auto-async-byte-compile))
     (when (not (package-installed-p p))
       (package-install p))))
 
 (add-hook 'after-init-hook (lambda () (load-file "~/.emacs.d/kramar.el")))
+
