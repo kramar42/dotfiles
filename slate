@@ -36,11 +36,8 @@ bind pad6 ${righthalf}
 bind pad7 ${leftmost}
 bind pad8 push top bar-resize:screenSizeY/2
 bind pad9 ${rightmost}
-bind padEnter grid padding:5 ${mon-laptop}:6,2 ${mon-samsung}:8,3
 bind pad+ throw next
 bind pad. focus behind
-bind pad* layout 2monitors
-bind pad/ layout 1monitor
 
 # ======================================
 # The HYPER key
@@ -48,7 +45,7 @@ bind pad/ layout 1monitor
 
 alias hyper cmd;shift
 
-bind x:${hyper} grid padding:4 ${mon-laptop}:6,4 ${mon-samsung}:8,3
+bind x:${hyper} grid 6,4
 
 # Location bindings
 bind e:${hyper} ${lefthalf}
@@ -68,7 +65,7 @@ bind down:${hyper}     focus down
 
 # App bindings
 bind g:${hyper} focus 'Google Chrome'
-bind c:${hyper} focus 'Firefox'
+bind c:${hyper} focus 'FirefoxDeveloperEdition'
 bind h:${hyper} focus 'Emacs'
 bind n:${hyper} focus 'SourceTree'
 bind f:${hyper} focus 'Spotify'
