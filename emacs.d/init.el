@@ -15,6 +15,7 @@
                color-theme-solarized
                rainbow-delimiters
                popwin
+               magit
                cider
                clojure-mode
                paredit

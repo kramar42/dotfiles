@@ -19,10 +19,9 @@
  '(helm-ff-prefix ((t nil)))
  '(helm-header ((t nil)))
  '(helm-header-line-left-margin ((t nil)))
- '(helm-match ((t (:foreground "#d33682"))))
- '(helm-selection ((t (:foreground "#eee8d5"))))
+ '(helm-match ((t (:foreground "#d002b36" :background "#d33682"))))
+ '(helm-selection ((t (:background "#073642" :foreground "#93a1a1"))))
  '(helm-source-header ((t (:background "#002b36" :foreground "white" :weight bold)))))
-
 
 (require 'popwin)
 (popwin-mode 1)

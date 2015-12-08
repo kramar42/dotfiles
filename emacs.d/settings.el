@@ -47,6 +47,35 @@
 ;; remap C-x to C-t
 (global-set-key "\C-t" ctl-x-map)
 (global-set-key "\C-x" 'transpose-char)
+(global-set-key "\C-w" 'unix-werase-or-kill)
+
+(defun next-code-buffer ()
+  (interactive)
+  (let (( bread-crumb (buffer-name) ))
+    (next-buffer)
+    (while
+        (and
+         (string-match-p "^\*" (buffer-name))
+         (not ( equal bread-crumb (buffer-name) )) )
+      (next-buffer))))
+(global-set-key [?\C-.] 'next-code-buffer)
+
+(defun prev-code-buffer ()
+  (interactive)
+  (let (( bread-crumb (buffer-name) ))
+    (previous-buffer)
+    (while
+        (and
+         (string-match-p "^\*" (buffer-name))
+         (not ( equal bread-crumb (buffer-name) )) )
+      (previous-buffer))))
+(global-set-key [?\C-,] 'prev-code-buffer)
+
+(global-set-key "\M-k" 'kill-this-buffer)
+
+(defadvice save-buffers-kill-emacs (around no-query-kill-emacs activate)
+  "Prevent annoying \"Active processes exist\" query when you quit Emacs."
+  (flet ((process-list ())) ad-do-it))
 
 ;; ease access
 (define-key ctl-x-map "\C-u" 'find-file)
@@ -60,3 +89,11 @@
 ;; (set-face-attribute 'default nil :font "Monaco" :height 110)
 ;(setq iswitchb-buffer-ignore '("^ " "*Completions*" "*Shell Command Output*"
 ;                               "*Messages*" "Async Shell Command"))
+
+; Better C-w behaviour
+(defun unix-werase-or-kill (arg)
+  (interactive "*p")
+  (if (and transient-mark-mode
+	   mark-active)
+      (kill-region (region-beginning) (region-end))
+    (backward-kill-word arg)))
