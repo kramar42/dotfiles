@@ -1,15 +1,36 @@
-(require 'color-theme)
-(color-theme-solarized-dark)
+(load-theme 'solarized-dark t)
 (set-cursor-color "#c1cdc1")
 
 (require 'helm-config)
+(helm-mode 1)
+(setq helm-mode-fuzzy-match t)
+(setq helm-completion-in-region-fuzzy-match t)
+(helm-autoresize-mode 1)
 
-;; investigate
-;(require 'column-marker)
-;(column-marker-3 80)
+(custom-set-faces
+ '(helm-candidate-number ((t (:background "#002b36"))))
+ '(helm-ff-directory ((t (:foreground "#2aa198"))))
+ '(helm-ff-dotted-directory ((t (:foreground "gray30"))))
+ '(helm-ff-dotted-symlink-directory ((t (:foreground "gray30"))))
+ '(helm-ff-executable ((t (:foreground "#859900"))))
+ '(helm-ff-file ((t (:foreground "#657b83"))))
+ '(helm-ff-prefix ((t nil)))
+ '(helm-header ((t nil)))
+ '(helm-header-line-left-margin ((t nil)))
+ '(helm-match ((t (:foreground "#d33682"))))
+ '(helm-selection ((t (:foreground "#eee8d5"))))
+ '(helm-source-header ((t (:background "#002b36" :foreground "white" :weight bold)))))
+
+
+(require 'popwin)
+(popwin-mode 1)
+
+(require 'whitespace)
+(setq whitespace-style '(face empty tabs lines-tail trailing))
+(global-whitespace-mode t)
 
 (require 'rainbow-delimiters)
-(global-rainbow-delimiters-mode)
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
 ;(require 'ido)
 ;(ido-mode t)
@@ -18,14 +39,11 @@
 
 ;(require 'imenu)
 
-;(require 'popwin)
-;(popwin-mode 1)
-
 ;(require 'desktop)
 
-;(require 'auto-async-byte-compile)
-;(setq auto-async-byte-compile-exclude-files-regexp "/junk/")
-;(add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
+(require 'auto-async-byte-compile)
+(setq auto-async-byte-compile-exclude-files-regexp "/junk/")
+(add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
 
 ;(require 'paredit)
 ;(defun turn-on-paredit () (paredit-mode 1))
@@ -46,3 +64,6 @@
 ;(setq cider-repl-wrap-history t)
 
 ;(add-hook 'cider-repl-mode-hook 'paredit-mode)
+
+;; global autocomplete
+(add-hook 'after-init-hook 'global-company-mode)

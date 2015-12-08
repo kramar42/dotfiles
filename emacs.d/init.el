@@ -12,7 +12,7 @@
   (dolist (p '(
                color-theme
                color-theme-monokai
-               color-theme-sanityinc-solarized
+               color-theme-solarized
                rainbow-delimiters
                popwin
                cider
@@ -26,5 +26,7 @@
     (when (not (package-installed-p p))
       (package-install p))))
 
+;; don't spam warnings from packages
+(setq ad-redefinition-action 'accept)
 (load "~/.emacs.d/packages.el")
 (load "~/.emacs.d/settings.el")

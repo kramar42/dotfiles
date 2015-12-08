@@ -7,6 +7,8 @@
     (setq exec-path (split-string path-from-shell path-separator))))
 (when window-system (set-exec-path-from-shell-PATH))
 
+
+;; fullscreen
 (custom-set-variables
  '(initial-frame-alist (quote ((fullscreen . maximized)))))
 
@@ -48,10 +50,7 @@
 
 ;; ease access
 (define-key ctl-x-map "\C-u" 'find-file)
-;(define-key ctl-x-map "\C-b" 'helm-buffers-list)
-;(define-key ctl-x-map "b"    'helm-switch-to-buffers)
-(helm-mode 1)
-(helm-autoresize-mode 1)
+(define-key ctl-x-map "\C-t" 'switch-to-buffer)
 
 (setq inhibit-startup-echo-area-message "")
 (setq inhibit-startup-message t)
@@ -61,9 +60,3 @@
 ;; (set-face-attribute 'default nil :font "Monaco" :height 110)
 ;(setq iswitchb-buffer-ignore '("^ " "*Completions*" "*Shell Command Output*"
 ;                               "*Messages*" "Async Shell Command"))
-;(setq mac-command-modifier 'control)
-
-(add-hook 'after-init-hook 'global-company-mode)
-
-(require 'popwin)
-(popwin-mode 1)
