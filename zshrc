@@ -36,6 +36,17 @@ alias hgp='hg push -r `hg branch`'
 alias work='cd /Volumes/work/cm-workspace'
 eval "$(thefuck --alias)"
 
+alias upgrade='softwareupdate --install --all;
+               brew update && brew upgrade --all;
+               brew cleanup; brew doctor;
+               brew cask cleanup;
+               npm update -g;'
+
+alias graph="git log --all --color --graph --pretty=format:'%Cred%h%Cgreen(%cr) -%C(yellow)%d%Creset %s %C(bold blue)<%an>' --abbrev-commit"
+alias g='git'
+
+fpath=(/usr/local/share/zsh-completions $fpath)
+
 function o() {
     if [ $# -eq 0 ]; then
         open .;
