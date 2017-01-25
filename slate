@@ -20,6 +20,8 @@ alias showNormalHint hint AOEUIDHTNSYXFBPKGMCW
 alias full          move screenOriginX;screenOriginY                  screenSizeX;screenSizeY
 alias lefthalf      move screenOriginX;screenOriginY                  screenSizeX/2;screenSizeY
 alias righthalf     move screenOriginX+screenSizeX/2;screenOriginY    screenSizeX/2;screenSizeY
+alias top           move screenOriginX;screenOriginY                  screenSizeX;screenSizeY/2
+alias bottom        move screenOriginX;screenOriginY+screenSizeY/2    screenSizeX;screenSizeY/2
 alias rightmost     move screenOriginX+screenSizeX*0.4;screenOriginY  screenSizeX*0.6;screenSizeY
 alias rightless     move screenOriginX+screenSizeX*0.6;screenOriginY  screenSizeX*0.4;screenSizeY
 alias leftmost      move screenOriginX;screenOriginY                  screenSizeX*0.6;screenSizeY
@@ -52,6 +54,8 @@ bind e:${hyper} ${lefthalf}
 bind i:${hyper} ${full}
 bind u:${hyper} ${righthalf}
 bind -:${hyper} throw next
+#bind p:${hyper} ${bottom}
+#bind .:${hyper} ${top}
 
 # Resize Bindings
 #bind r:${hyper} ${leftmost}
@@ -65,12 +69,12 @@ bind down:${hyper}     focus down
 
 # App bindings
 bind g:${hyper} focus 'Google Chrome'
-bind c:${hyper} focus 'FirefoxDeveloperEdition'
-bind h:${hyper} focus 'Emacs'
-bind n:${hyper} focus 'SourceTree'
+#bind c:${hyper} focus 'FirefoxDeveloperEdition'
+bind h:${hyper} focus 'Sublime Text'
+#bind h:${hyper} focus 'SourceTree'
 bind f:${hyper} focus 'Spotify'
 bind m:${hyper} focus 'Mail'
 bind d:${hyper} focus 'IntelliJ IDEA'
 bind s:${hyper} focus 'Skype'
-bind r:${hyper} focus 'Telegram'
-bind l:${hyper} focus 'Messages'
+bind l:${hyper} focus 'Telegram'
+#bind l:${hyper} focus 'Messages'

@@ -1,5 +1,3 @@
-(server-start)
-
 (when (>= emacs-major-version 24)
   (require 'package)
   (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -23,6 +21,7 @@
                company
                auto-async-byte-compile
                helm
+               linum-relative
                ))
     (when (not (package-installed-p p))
       (package-install p))))

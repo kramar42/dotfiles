@@ -15,13 +15,6 @@ Plug 'altercation/vim-colors-solarized'
 " chech syntax on the fly
 Plug 'scrooloose/syntastic'
 
-" superb auto-complete
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
-
-" fuzzy searche everywhere
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-
 " lisp related
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'vim-scripts/paredit.vim', { 'for': 'clojure' }
@@ -48,6 +41,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'jpalardy/vim-slime'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 
 call plug#end()
 
@@ -69,7 +63,8 @@ set nostartofline       " don't go to the start of the line after some commands
 set timeoutlen=250      " time to wait after ESC
 set ttyfast
 
-set clipboard=unnamed   " yanks go on clipboard instead
+"set clipboard^=unnamed   " yanks go on clipboard instead
+"set unnamedplus^=unnamed
 set complete=.,w,b,u,U  " better complete options to speed it up
 
 set binary
@@ -144,6 +139,7 @@ set t_Co=256            " 256 terminal colors
 set wildmenu            " command-line completion menu
 set guioptions=acef     " autoselect,console dialogs,graphical tabs
                         " don't fork(),right-hand scrollbar
+set shortmess=a
 
 if has('gui_running')
     let g:solarized_termcolors=256
@@ -160,24 +156,24 @@ set guicursor+=a:blinkon0
 set ruler               " ruler on
 "------------------------}}}
 "-----key-mapping--------{{{
-let mapleader=","
+let mapleader="\<space>"
 
 nnoremap <leader>w  :w<CR>
-nnoremap <leader>q  :q<CR>
+nnoremap <leader>q  :qall!<CR>
 nnoremap <leader>e  :Files<CR>
 nnoremap <leader>b  :Buffers<CR>
 nnoremap <leader>m  :make<CR>
 nnoremap <leader>cn :cn<CR>
 nnoremap <leader>cp :cp<CR>
 nnoremap <leader>k  :bn<CR>:bd#<CR>
-nnoremap <leader>x  :x<CR>
-nnoremap <leader>,  :bp<CR>
-nnoremap <leader>.  :bn<CR>
+nnoremap <leader>x  :xa<CR>
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 nnoremap <leader>l  :Lines<CR>
-nnoremap <leader>n  :set number!<CR><Esc>
+"nnoremap <leader>n  :set number!<CR><Esc>
 " Save a file as root (,W)
 noremap <leader>W :w !sudo tee % > /dev/null<CR>
+
+nnoremap n nzz
 
 "-----swap ; and : ------
 nnoremap ; :
@@ -196,10 +192,10 @@ nnoremap <silent> j gj
 nnoremap <silent> k gk
 
 "-----work with windows--
-nnoremap <C-H> <C-W>h
-nnoremap <C-J> <C-W>j
-nnoremap <C-K> <C-W>k
-nnoremap <C-L> <C-W>l
+nnoremap <leader>h <C-W>j
+nnoremap <leader>t <C-W>k
+nnoremap <leader>d <C-W>h
+nnoremap <leader>n <C-W>l
 
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
@@ -212,6 +208,35 @@ nnoremap <CR> :nohlsearch<CR>/<BS>
 
 noremap H ^
 noremap L $
+"------diff--------------
+noremap ]] ]n
+noremap [[ [n
+
+noremap <silent> <leader>2 :diffget 2<CR> :diffupdate<CR>
+noremap <silent> <leader>3 :diffget 3<CR> :diffupdate<CR>
+noremap <silent> <leader>4 :diffget 4<CR> :diffupdate<CR>
+noremap <silent> <leader>u :diffput<CR> :diffupdate<CR>
+
+let s:hidden_all = 0
+function! ToggleHiddenAll()
+    if s:hidden_all  == 0
+        let s:hidden_all = 1
+        set noshowmode
+        set noruler
+        set laststatus=0
+        set noshowcmd
+        set nolist
+    else
+        let s:hidden_all = 0
+        set showmode
+        set ruler
+        set laststatus=2
+        set showcmd
+        set list
+    endif
+endfunction
+
+"nnoremap <silent> <leader>t :call ToggleHiddenAll()<CR>
 
 "-----plugins shortcuts--
 "-----trail whitespaces--
@@ -238,8 +263,8 @@ au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
 "-----syntastic----------
-map <silent> <Leader>h :Errors<CR>
-map <Leader>s :SyntasticToggleMode<CR>
+"map <silent> <Leader>h :Errors<CR>
+"map <Leader>s :SyntasticToggleMode<CR>
 
 let g:syntastic_auto_loc_list=1
 
@@ -262,6 +287,9 @@ autocmd BufRead *.clj nnoremap <leader>r :%Eval<CR>
 
 "-----groovy-------------
 autocmd BufRead *.groovy nnoremap <leader>r :!groovy %<CR>
+
+"-----php----------------
+autocmd BufRead *.php nnoremap <leader>r :!php %<CR>
 
 "-----latex--------------
 autocmd BufRead *.tex nnoremap <leader>r :Latexmk<CR>

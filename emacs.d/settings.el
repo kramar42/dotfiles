@@ -15,7 +15,6 @@
 ;; visual settings
 (blink-cursor-mode -1)
 (tool-bar-mode -1)
-(scroll-bar-mode -1)
 
 ;; don't indent using tabs
 (setq-default indent-tabs-mode nil)
@@ -35,6 +34,7 @@
 (setq ring-bell-function 'ignore)
 
 ;; history & backups
+(setq backup-directory-alist `(("." . "~/.emacs.d/.saves")))
 ;(setq history-length 1000)
 
 ;(setq auto-window-vscroll nil)
@@ -73,10 +73,6 @@
 
 (global-set-key "\M-k" 'kill-this-buffer)
 
-(defadvice save-buffers-kill-emacs (around no-query-kill-emacs activate)
-  "Prevent annoying \"Active processes exist\" query when you quit Emacs."
-  (flet ((process-list ())) ad-do-it))
-
 ;; ease access
 (define-key ctl-x-map "\C-u" 'find-file)
 (define-key ctl-x-map "\C-t" 'switch-to-buffer)
@@ -97,3 +93,18 @@
 	   mark-active)
       (kill-region (region-beginning) (region-end))
     (backward-kill-word arg)))
+
+(defun revert-buffer-no-confirm ()
+  "Revert buffer without confirmation."
+  (interactive)
+  (revert-buffer t t))
+(define-key ctl-x-map "\C-a" 'revert-buffer-no-confirm)
+
+(if window-system
+    (progn
+      (server-start)
+      (scroll-bar-mode -1)
+      (load-theme 'solarized t)
+      (set-frame-parameter nil 'background-mode 'dark)
+      (enable-theme 'solarized)
+      (set-cursor-color "#c1cdc1")))

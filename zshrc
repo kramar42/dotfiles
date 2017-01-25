@@ -14,6 +14,9 @@ export LC_ALL='en_US.UTF-8'
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 export QHOME="/usr/local/lib/q"
 
+export HOMEBREW_GITHUB_API_TOKEN=b58c1c1ed918178b3fb7a6efff56f9b4d2e1f999
+export JAVA_HOME=$(/usr/libexec/java_home)
+
 plugins=(git mercurial)
 
 alias -s hs=vim
@@ -22,6 +25,7 @@ alias repl='rlwrap repl'
 
 alias e='emacsclient -n'
 alias v='vim'
+alias m='mvim'
 
 alias q='rlwrap q'
 
@@ -32,8 +36,9 @@ alias df='df -H'
 alias du='du -ch'
 
 alias hgp='hg push -r `hg branch`'
+alias hgd='hg diff --color=always | less -R'
 
-alias work='cd /Volumes/work/cm-workspace'
+alias work='cd /Volumes/work/workspace/hddvr-plugin'
 eval "$(thefuck --alias)"
 
 alias upgrade='softwareupdate --install --all;
@@ -97,3 +102,5 @@ function prompt_char {
 export PS1='   %m:%1d $(prompt_char) '
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

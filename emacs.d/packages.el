@@ -1,8 +1,3 @@
-(load-theme 'solarized t)
-(set-frame-parameter nil 'background-mode 'dark)
-(enable-theme 'solarized)
-(set-cursor-color "#c1cdc1")
-
 (require 'helm-config)
 (helm-mode 1)
 (setq helm-mode-fuzzy-match t)
@@ -22,6 +17,8 @@
  '(helm-match ((t (:foreground "#d002b36" :background "#d33682"))))
  '(helm-selection ((t (:background "#073642" :foreground "#93a1a1"))))
  '(helm-source-header ((t (:background "#002b36" :foreground "white" :weight bold)))))
+
+(define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
 
 (require 'popwin)
 (popwin-mode 1)
@@ -68,3 +65,6 @@
 
 ;; global autocomplete
 (add-hook 'after-init-hook 'global-company-mode)
+
+;; magit
+(define-key ctl-x-map "\C-n" 'magit-status)

@@ -1,19 +1,37 @@
 [ui]
 username = Oleksii Kramarenko <okramarenko@intropro.com>
+ignore = ~/.hgignore
 
 [extensions]
 shelve =
 hgext.gpg =
 color =
+strip =
+rebase =
+hgext.extdiff =
+graphlog =
 
 [gpg]
 key=4918809F
 
 [alias]
 pushb = push -r `hg branch`
+diffc = diff --color=always | less -R
+u = !hg up $1 && hg bookmark cur -f
+vi  = vimdiff
+vim = vimdiff
 
 [merge-tools]
-p4.priority = 100
-p4.executable = /Applications/p4merge.app/Contents/MacOS/p4merge
-p4.gui = True
-p4.args = $base $local $other $output
+meld.priority = 100
+meld.executable = /Applications/Meld.app/Contents/MacOS/Meld
+meld.gui = True
+#meld.args = $base $local $other $output
+meld.args = $local $base $other
+
+vimdiff.priority = 200
+vimdiff.executable = mvim
+vimdiff.args = -f -d $output -M $local $base $other -c "wincmd J" -c "set modifiable" -c "set write"
+vimdiff.premerge = keep
+
+[extdiff]
+cmd.vimdiff = mvim
