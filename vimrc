@@ -209,8 +209,8 @@ nnoremap <CR> :nohlsearch<CR>/<BS>
 noremap H ^
 noremap L $
 "------diff--------------
-noremap ]] ]n
-noremap [[ [n
+noremap ]] ]c
+noremap [[ [c
 
 noremap <silent> <leader>2 :diffget 2<CR> :diffupdate<CR>
 noremap <silent> <leader>3 :diffget 3<CR> :diffupdate<CR>

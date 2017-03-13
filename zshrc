@@ -38,7 +38,7 @@ alias du='du -ch'
 alias hgp='hg push -r `hg branch`'
 alias hgd='hg diff --color=always | less -R'
 
-alias work='cd /Volumes/work/workspace/hddvr-plugin'
+alias work='cd /Volumes/work/dam_plugins/hddvr-plugin'
 eval "$(thefuck --alias)"
 
 alias upgrade='softwareupdate --install --all;

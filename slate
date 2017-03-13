@@ -69,7 +69,7 @@ bind down:${hyper}     focus down
 
 # App bindings
 bind g:${hyper} focus 'Google Chrome'
-#bind c:${hyper} focus 'FirefoxDeveloperEdition'
+bind c:${hyper} focus 'Firefox'
 bind h:${hyper} focus 'Sublime Text'
 #bind h:${hyper} focus 'SourceTree'
 bind f:${hyper} focus 'Spotify'

@@ -12,6 +12,7 @@
                color-theme-monokai
                color-theme-solarized
                rainbow-delimiters
+               rainbow-mode
                popwin
                magit
                cider
