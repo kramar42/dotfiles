@@ -1,7 +1,7 @@
 export ZSH=/Users/kramar/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 DISABLE_AUTO_TITLE="true"
-export PATH="/usr/local/sbin:usr/texbin:/usr/local/bin:/Users/kramar/Library/Haskell/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/MacGPG2/bin:/Library/TeX/texbin:/usr/local/sbin:usr/texbin:/Users/kramar/Library/Haskell/bin"
+export PATH="$HOME/anaconda2/bin:/usr/local/sbin:usr/texbin:/usr/local/bin:/Users/kramar/Library/Haskell/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/MacGPG2/bin:/Library/TeX/texbin:/usr/local/sbin:usr/texbin:/Users/kramar/Library/Haskell/bin"
 
 export EDITOR='vim'
 export SSH_KEY_PATH="~/.ssh/dsa_id"
@@ -104,3 +104,8 @@ export PS1='   %m:%1d $(prompt_char) '
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+precmd() {
+  # sets the tab title to current dir
+  echo -ne "\e]1;${PWD##*/}\a"
+}

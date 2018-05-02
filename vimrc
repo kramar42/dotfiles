@@ -43,6 +43,8 @@ Plug 'tpope/vim-repeat'
 Plug 'jpalardy/vim-slime'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 
+Plug 'ajh17/VimCompletesMe'
+
 call plug#end()
 
 "------------------------}}}"
@@ -70,8 +72,8 @@ set complete=.,w,b,u,U  " better complete options to speed it up
 set binary
 set noeol
 " Centralize backups, swapfiles and undo history
-set backupdir=~/.vim/backups
-set directory=~/.vim/swaps
+set backupdir=~/.vim/backup
+set directory=~/.vim/swap
 set undodir=~/.vim/undo
 
 " Show “invisible” characters
@@ -236,7 +238,7 @@ function! ToggleHiddenAll()
     endif
 endfunction
 
-"nnoremap <silent> <leader>t :call ToggleHiddenAll()<CR>
+nnoremap <silent> <leader>t :call ToggleHiddenAll()<CR>
 
 "-----plugins shortcuts--
 "-----trail whitespaces--

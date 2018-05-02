@@ -27,32 +27,25 @@ alias rightless     move screenOriginX+screenSizeX*0.6;screenOriginY  screenSize
 alias leftmost      move screenOriginX;screenOriginY                  screenSizeX*0.6;screenSizeY
 alias leftless      move screenOriginX;screenOriginY                  screenSizeX*0.4;screenSizeY
 
-# Numpad location Bindings
-bind pad0 ${showHintsLeftHand}
-bind pad1 ${leftless}
-bind pad2 push bottom bar-resize:screenSizeY/2
-bind pad3 ${rightless}
-bind pad4 ${lefthalf}
-bind pad5 ${full}
-bind pad6 ${righthalf}
-bind pad7 ${leftmost}
-bind pad8 push top bar-resize:screenSizeY/2
-bind pad9 ${rightmost}
-bind pad+ throw next
-bind pad. focus behind
-
 # ======================================
 # The HYPER key
 # ======================================
 
-alias hyper cmd;shift
+# kinesis
+#alias hyper ctrl;shift
+alias hyper ctrl;cmd
 
-bind x:${hyper} grid 6,4
-
+bind x:${hyper} grid padding:5 1:6,2 0:8,3
+bind y:${hyper} relaunch
 # Location bindings
+bind o:${hyper} activate-snapshot default
+bind a:${hyper} snapshot default save-to-disk;stack
+#bind tab:cmd switch
 bind e:${hyper} ${lefthalf}
 bind i:${hyper} ${full}
 bind u:${hyper} ${righthalf}
+bind j:${hyper} ${bottom}
+bind k:${hyper} ${top}
 bind -:${hyper} throw next
 #bind p:${hyper} ${bottom}
 #bind .:${hyper} ${top}
@@ -62,19 +55,22 @@ bind -:${hyper} throw next
 #bind g:${hyper} ${rightmost}
 
 # Focus Bindings
-bind right:${hyper}    focus right
-bind left:${hyper}     focus left
-bind up:${hyper}       focus up
-bind down:${hyper}     focus down
+#bind right:${hyper}    focus right
+#bind left:${hyper}     focus left
+#bind up:${hyper}       focus up
+#bind down:${hyper}     focus down
 
 # App bindings
 bind g:${hyper} focus 'Google Chrome'
 bind c:${hyper} focus 'Firefox'
-bind h:${hyper} focus 'Sublime Text'
-#bind h:${hyper} focus 'SourceTree'
+bind t:${hyper} focus 'iTerm2'
+bind d:${hyper} focus 'Sourcetree'
 bind f:${hyper} focus 'Spotify'
+bind n:${hyper} focus 'Sublime Text'
 bind m:${hyper} focus 'Mail'
-bind d:${hyper} focus 'IntelliJ IDEA'
+bind h:${hyper} focus 'IntelliJ IDEA'
 bind s:${hyper} focus 'Skype'
 bind l:${hyper} focus 'Telegram'
-#bind l:${hyper} focus 'Messages'
+#bind n:${hyper} focus 'Microsoft OneNote'
+#bind d:${hyper} focus 'Todoist'
+bind v:${hyper} focus 'Finder'
