@@ -8,6 +8,8 @@ export SSH_KEY_PATH="~/.ssh/dsa_id"
 export LESS_TERMCAP_md="${yellow}"
 export MANPAGER='less -X'
 
+export MOSH_TITLE_NOPREFIX=1
+
 export LANG='en_US.UTF-8'
 export LC_ALL='en_US.UTF-8'
 
@@ -17,7 +19,7 @@ export QHOME="/usr/local/lib/q"
 export HOMEBREW_GITHUB_API_TOKEN=b58c1c1ed918178b3fb7a6efff56f9b4d2e1f999
 export JAVA_HOME=$(/usr/libexec/java_home)
 
-plugins=(git mercurial)
+plugins=(git mercurial osx)
 
 alias -s hs=vim
 
@@ -38,7 +40,9 @@ alias du='du -ch'
 alias hgp='hg push -r `hg branch`'
 alias hgd='hg diff --color=always | less -R'
 
-alias work='cd /Volumes/work/dam_plugins/hddvr-plugin'
+alias work='cd ~/work/djem/djem-parent/djem-common'
+alias bluetick='cd ~/work/bluetick'
+alias ftp='cd ~/work/djem/ftp'
 eval "$(thefuck --alias)"
 
 alias upgrade='softwareupdate --install --all;
