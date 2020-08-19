@@ -32,21 +32,30 @@ alias leftless      move screenOriginX;screenOriginY                  screenSize
 # ======================================
 
 # kinesis
-#alias hyper ctrl;shift
-alias hyper ctrl;cmd
+alias hyper_kinesis ctrl;shift
+alias hyper_laptop  ctrl;cmd
 
-bind x:${hyper} grid padding:5 1:6,2 0:8,3
-bind y:${hyper} relaunch
+bind x:${hyper_kinesis} grid padding:5 1:6,2 0:8,3
+bind x:${hyper_laptop} grid padding:5 1:6,2 0:8,3
+bind y:${hyper_kinesis} relaunch
+bind y:${hyper_laptop} relaunch
 # Location bindings
-bind o:${hyper} activate-snapshot default
-bind a:${hyper} snapshot default save-to-disk;stack
-#bind tab:cmd switch
-bind e:${hyper} ${lefthalf}
-bind i:${hyper} ${full}
-bind u:${hyper} ${righthalf}
-bind j:${hyper} ${bottom}
-bind k:${hyper} ${top}
-bind -:${hyper} throw next
+bind o:${hyper_kinesis} activate-snapshot default
+bind o:${hyper_laptop} activate-snapshot default
+bind a:${hyper_kinesis} snapshot default save-to-disk;stack
+bind a:${hyper_laptop} snapshot default save-to-disk;stack
+bind e:${hyper_kinesis} ${lefthalf}
+bind e:${hyper_laptop} ${lefthalf}
+bind i:${hyper_kinesis} ${full}
+bind i:${hyper_laptop} ${full}
+bind u:${hyper_kinesis} ${righthalf}
+bind u:${hyper_laptop} ${righthalf}
+bind j:${hyper_kinesis} ${bottom}
+bind j:${hyper_laptop} ${bottom}
+bind k:${hyper_kinesis} ${top}
+bind k:${hyper_laptop} ${top}
+bind -:${hyper_kinesis} throw next
+bind -:${hyper_laptop} throw next
 #bind p:${hyper} ${bottom}
 #bind .:${hyper} ${top}
 
@@ -60,17 +69,41 @@ bind -:${hyper} throw next
 #bind up:${hyper}       focus up
 #bind down:${hyper}     focus down
 
+bind `:${hyper_kinesis} relaunch
+bind `:${hyper_laptop} relaunch
+
 # App bindings
-bind g:${hyper} focus 'Google Chrome'
-bind c:${hyper} focus 'Firefox'
-bind t:${hyper} focus 'iTerm2'
-bind d:${hyper} focus 'Sourcetree'
-bind f:${hyper} focus 'Spotify'
-bind n:${hyper} focus 'Sublime Text'
-bind m:${hyper} focus 'Mail'
-bind h:${hyper} focus 'IntelliJ IDEA'
-bind s:${hyper} focus 'Skype'
-bind l:${hyper} focus 'Telegram'
-#bind n:${hyper} focus 'Microsoft OneNote'
-#bind d:${hyper} focus 'Todoist'
-bind v:${hyper} focus 'Finder'
+bind g:${hyper_kinesis} focus 'Google Chrome'
+bind g:${hyper_laptop} focus 'Google Chrome'
+bind r:${hyper_kinesis} focus 'Firefox'
+bind r:${hyper_laptop} focus 'Firefox'
+bind t:${hyper_kinesis} focus 'iTerm2'
+bind t:${hyper_laptop} focus 'iTerm2'
+bind f:${hyper_kinesis} focus 'Spotify'
+bind f:${hyper_laptop} focus 'Spotify'
+bind m:${hyper_kinesis} focus 'Mail'
+bind m:${hyper_laptop} focus 'Mail'
+#bind d:${hyper_kinesis} focus 'Sublime Merge'
+#bind d:${hyper_laptop} focus 'Sublime Merge'
+bind d:${hyper_kinesis} focus 'Fork'
+bind d:${hyper_laptop} focus 'Fork'
+bind h:${hyper_kinesis} focus 'IntelliJ IDEA'
+bind h:${hyper_laptop} focus 'IntelliJ IDEA'
+bind s:${hyper_kinesis} focus 'Skype'
+bind s:${hyper_laptop} focus 'Skype'
+bind l:${hyper_kinesis} focus 'Telegram'
+bind l:${hyper_laptop} focus 'Telegram'
+bind v:${hyper_kinesis} focus 'Finder'
+bind v:${hyper_laptop} focus 'Finder'
+#bind n:${hyper_kinesis} focus 'Atom'
+#bind n:${hyper_laptop} focus 'Atom'
+#bind d:${hyper_kinesis} focus 'Sourcetree'
+#bind d:${hyper_laptop} focus 'Sourcetree'
+bind n:${hyper_kinesis} focus 'Sublime Text'
+bind n:${hyper_laptop} focus 'Sublime Text'
+#bind b:${hyper_kinesis} focus 'Emacs'
+#bind b:${hyper_laptop} focus 'Emacs'
+#bind 9:${hyper_laptop} focus 'LastPass'
+#bind 9:${hyper_kinesis} focus 'LastPass'
+#bind 0:${hyper_laptop} focus 'Activity Monitor'
+#bind 0:${hyper_kinesis} focus 'Activity Monitor'
