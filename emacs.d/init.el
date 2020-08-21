@@ -8,9 +8,6 @@
   (when (not package-archive-contents)
     (package-refresh-contents))
   (dolist (p '(
-               color-theme
-               color-theme-monokai
-               color-theme-solarized
                rainbow-delimiters
                rainbow-mode
                popwin

@@ -104,7 +104,7 @@
     (progn
       (server-start)
       (scroll-bar-mode -1)
-      (load-theme 'solarized t)
-      (set-frame-parameter nil 'background-mode 'dark)
-      (enable-theme 'solarized)
+;;      (load-theme 'solarized t)
+;;      (set-frame-parameter nil 'background-mode 'dark)
+;;      (enable-theme 'solarized)
       (set-cursor-color "#c1cdc1")))
