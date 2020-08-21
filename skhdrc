@@ -62,8 +62,8 @@ ctrl - 9 : yabai -m space --focus 9
 ctrl - left : yabai -m space --focus prev
 ctrl - right : yabai -m space --focus next
 
-#ctrl - left : chunkc tiling::desktop -f prev
-#ctrl - right : chunkc tiling::desktop -f next
+ctrl + shift - 0x0D : yabai -m window --space prev && yabai -m space --focus prev
+ctrl + shift - 0x0E : yabai -m window --space next && yabai -m space --focus next
 
 # create desktop, move window and follow focus
 shift + cmd + ctrl - b : yabai -m space --create && \
@@ -82,95 +82,16 @@ shift + cmd - 7 : yabai -m window --space  7; yabai -m space --focus 7
 shift + cmd - 8 : yabai -m window --space  8; yabai -m space --focus 8
 shift + cmd - 9 : yabai -m window --space  9; yabai -m space --focus 9
 
-# make floating window fill screen
-shift + alt - up     : chunkc tiling::window --grid-layout 1:1:0:0:1:1
-
-# make floating window fill left-half of screen
-shift + alt - left   : chunkc tiling::window --grid-layout 1:2:0:0:1:1
-
-# make floating window fill right-half of screen
-shift + alt - right  : chunkc tiling::window --grid-layout 1:2:1:0:1:1
-
-# move floating windows / windows on a grid space
-# 10 rows 10 cols grid, windows left and top on 0 grid, and have 5 grid width 5 grid height
-alt - q : chunkc tiling::window --grid-layout 10:10:0:0:5:5
-
-# send window to desktop
-shift + alt - x : chunkc tiling::window --send-to-desktop $(chunkc get _last_active_desktop)
-shift + alt - z : chunkc tiling::window --send-to-desktop prev
-shift + alt - c : chunkc tiling::window --send-to-desktop next
-shift + alt - 1 : chunkc tiling::window --send-to-desktop 1
-shift + alt - 2 : chunkc tiling::window --send-to-desktop 2
-shift + alt - 3 : chunkc tiling::window --send-to-desktop 3
-shift + alt - 4 : chunkc tiling::window --send-to-desktop 4
-shift + alt - 5 : chunkc tiling::window --send-to-desktop 5
-shift + alt - 6 : chunkc tiling::window --send-to-desktop 6
-
-
 # focus monitor
-ctrl + alt - z  : chunkc tiling::monitor -f prev
-ctrl + alt - c  : chunkc tiling::monitor -f next
-ctrl + alt - 1  : chunkc tiling::monitor -f 1
-ctrl + alt - 2  : chunkc tiling::monitor -f 2
-ctrl + alt - 3  : chunkc tiling::monitor -f 3
+ctrl + shift - right : yabai -m display --focus next
+ctrl + shift - left : yabai -m display --focus prev
 
-# send window to monitor and follow focus
-ctrl + cmd - z  : chunkc tiling::window --send-to-monitor prev; chunkc tiling::monitor -f prev
-ctrl + cmd - c  : chunkc tiling::window --send-to-monitor next; chunkc tiling::monitor -f next
-ctrl + cmd - 1  : chunkc tiling::window --send-to-monitor 1; chunkc tiling::monitor -f 1
-ctrl + cmd - 2  : chunkc tiling::window --send-to-monitor 2; chunkc tiling::monitor -f 2
-ctrl + cmd - 3  : chunkc tiling::window --send-to-monitor 3; chunkc tiling::monitor -f 3
-
-
-# set insertion point for focused container
-ctrl + alt - f : chunkc tiling::window --use-insertion-point cancel
-ctrl + alt - h : chunkc tiling::window --use-insertion-point west
-ctrl + alt - j : chunkc tiling::window --use-insertion-point south
-ctrl + alt - k : chunkc tiling::window --use-insertion-point north
-ctrl + alt - l : chunkc tiling::window --use-insertion-point east
+# send window to desktop and follow
+shift + ctrl - k : yabai -m window --display prev && yabai -m display --focus prev
+shift + ctrl - x : yabai -m window --display next && yabai -m display --focus next
 
 # toggle window split type
 alt - r : yabai -m window --toggle split
 
-# mirror tree y-axis
-alt - y : chunkc tiling::desktop --mirror vertical
-
-# mirror tree x-axis
-alt - x : chunkc tiling::desktop --mirror horizontal
-
-# toggle desktop offset
-alt - a : chunkc tiling::desktop --toggle offset
-
-# toggle window fullscreen
-alt - f : chunkc tiling::window --toggle fullscreen
-
-# toggle window native fullscreen
-shift + alt - f : chunkc tiling::window --toggle native-fullscreen
-
-# toggle window parent zoom
-alt - d : chunkc tiling::window --toggle parent
-
-# toggle window split type
-alt - e : chunkc tiling::window --toggle split
-
 # float / unfloat window and center on screen
 alt - t : yabai -m window --toggle float
-
-# toggle sticky, float and resize to picture-in-picture size
-alt - s : chunkc tiling::window --toggle sticky;\
-          chunkc tiling::window --grid-layout 5:5:4:0:1:1
-
-# float next window to be tiled
-shift + alt - t : chunkc set window_float_next 1
-
-# change layout of desktop
-ctrl + alt - a : chunkc tiling::desktop --layout bsp
-ctrl + alt - s : chunkc tiling::desktop --layout monocle
-ctrl + alt - d : chunkc tiling::desktop --layout float
-
-#shift + cmd - n : chunkc tiling::desktop --create;\
-#                  ids=$(chunkc tiling::query --desktops-for-monitor $(chunkc tiling::query --monitor-for-desktop $(chunkc tiling::query --desktop id)));\
-#                  chunkc tiling::window --send-to-desktop $(echo ${ids##* });\
-#                  chunkc tiling::desktop --focus $(echo ${ids##* })
-
-#chunkc tiling::desktop --annihilate

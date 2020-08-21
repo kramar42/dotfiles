@@ -1,4 +1,5 @@
 *.pyc
+*/.m2/
 .DS_Store
 Desktop.ini
 ._*
@@ -10,3 +11,7 @@ Thumbs.db
 *.iml
 *.orig
 .project
+.gitignore
+.gradle
+*/.cpcache/
+*/.lumo_cache/

@@ -1,9 +1,8 @@
 export ZSH=/Users/kramar/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 DISABLE_AUTO_TITLE="true"
-export PATH="$HOME/anaconda2/bin:/usr/local/sbin:usr/texbin:/usr/local/bin:/Users/kramar/Library/Haskell/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/MacGPG2/bin:/Library/TeX/texbin:/usr/local/sbin:usr/texbin:/Users/kramar/Library/Haskell/bin"
 
-export EDITOR='vim'
+export EDITOR='nvim'
 export SSH_KEY_PATH="~/.ssh/dsa_id"
 export LESS_TERMCAP_md="${yellow}"
 export MANPAGER='less -X'
@@ -11,7 +10,9 @@ export MANPAGER='less -X'
 export MOSH_TITLE_NOPREFIX=1
 
 export LANG='en_US.UTF-8'
+export LANGUAGE='en_US.UTF-8'
 export LC_ALL='en_US.UTF-8'
+export LC_CTYPE='en_US.UTF-8'
 
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 export QHOME="/usr/local/lib/q"
@@ -26,8 +27,9 @@ alias -s hs=vim
 alias repl='rlwrap repl'
 
 alias e='emacsclient -n'
-alias v='vim'
+alias v='nvim'
 alias m='mvim'
+alias t='tmux attach -t'
 
 alias q='rlwrap q'
 
@@ -40,16 +42,16 @@ alias du='du -ch'
 alias hgp='hg push -r `hg branch`'
 alias hgd='hg diff --color=always | less -R'
 
-alias work='cd ~/work/djem/djem-parent/djem-common'
-alias bluetick='cd ~/work/bluetick'
-alias ftp='cd ~/work/djem/ftp'
-eval "$(thefuck --alias)"
+# Get macOS Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
+alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update; sudo gem cleanup'
 
 alias upgrade='softwareupdate --install --all;
-               brew update && brew upgrade --all;
-               brew cleanup; brew doctor;
-               brew cask cleanup;
-               npm update -g;'
+               brew update && brew upgrade; brew cleanup; brew doctor;
+               npm update -g;
+               pip-review --auto;
+               sudo gem update --system; sudo gem update; sudo gem cleanup
+               '
+#stack update; stack upgrade;
 
 alias graph="git log --all --color --graph --pretty=format:'%Cred%h%Cgreen(%cr) -%C(yellow)%d%Creset %s %C(bold blue)<%an>' --abbrev-commit"
 alias g='git'
@@ -79,6 +81,11 @@ function fs() {
     else
         du $arg .[^.]* *;
     fi;
+}
+
+function d() {
+    cd "$@";
+    l;
 }
 
 # c - browse chrome history

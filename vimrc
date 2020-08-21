@@ -4,6 +4,12 @@ call plug#begin('~/.vim/plugged')
 " smart comment
 Plug 'scrooloose/nerdcommenter'
 
+Plug 'scrooloose/nerdtree'
+Plug 'qpkorr/vim-bufkill'
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
 " faster grep
 Plug 'rking/ag.vim'
 
@@ -12,15 +18,21 @@ Plug 'tomasr/molokai'
 Plug 'vim-scripts/xoria256.vim'
 Plug 'altercation/vim-colors-solarized'
 
+Plug 'elzr/vim-json'
+
 " chech syntax on the fly
 Plug 'scrooloose/syntastic'
 
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+
 " lisp related
 Plug 'kien/rainbow_parentheses.vim'
-Plug 'vim-scripts/paredit.vim', { 'for': 'clojure' }
+"Plug 'vim-scripts/paredit.vim', { 'for': 'clojure' }
 Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
 Plug 'tpope/vim-leiningen', { 'for': 'clojure' }
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+Plug 'jpalardy/vim-slime', { 'for': 'clojure' }
 
 " haskell
 Plug 'Shougo/vimproc.vim', { 'for': 'haskell' }
@@ -32,7 +44,7 @@ Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for': 'latex' }
 
 " other lang support
 Plug 'vim-scripts/groovy.vim', { 'for': 'groovy' }
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+"Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
 " other stuff
 Plug 'kana/vim-textobj-user'
@@ -40,7 +52,6 @@ Plug 'tpope/vim-classpath'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'jpalardy/vim-slime'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 
 Plug 'ajh17/VimCompletesMe'
@@ -81,7 +92,7 @@ set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
 set list
 
 set mouse=a
-set noesckeys
+"set noesckeys
 
 "------------------------}}}
 "-----editing------------{{{
@@ -148,7 +159,9 @@ if has('gui_running')
     set background=dark
     colorscheme solarized
 else
-    set background=dark
+    "let g:solarized_termcolors=256
+    "set background=light
+    "colorscheme solarized
     colorscheme xoria256
 endif
 set laststatus=2        " last windows always have status line
@@ -171,11 +184,30 @@ nnoremap <leader>k  :bn<CR>:bd#<CR>
 nnoremap <leader>x  :xa<CR>
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 nnoremap <leader>l  :Lines<CR>
-"nnoremap <leader>n  :set number!<CR><Esc>
-" Save a file as root (,W)
-noremap <leader>W :w !sudo tee % > /dev/null<CR>
+nnoremap <leader>n  :set number!<CR><Esc>
+nnoremap <leader>W  :w !sudo tee % > /dev/null<CR>
+nnoremap <leader>t  :NERDTreeToggle<CR>
+nnoremap <leader>d  :BD<CR>
 
-nnoremap n nzz
+let s:hidden_all = 0
+function! ToggleHiddenAll()
+    if s:hidden_all  == 0
+        let s:hidden_all = 1
+        set noshowmode
+        set noruler
+        set laststatus=0
+        set noshowcmd
+        set nolist
+    else
+        let s:hidden_all = 0
+        set showmode
+        set ruler
+        set laststatus=2
+        set showcmd
+        set list
+    endif
+endfunction
+nnoremap <silent> <leader>l :call ToggleHiddenAll()<CR>
 
 "-----swap ; and : ------
 nnoremap ; :
@@ -193,11 +225,8 @@ nnoremap <silent> <C-p> :bp<CR>
 nnoremap <silent> j gj
 nnoremap <silent> k gk
 
-"-----work with windows--
-nnoremap <leader>h <C-W>j
-nnoremap <leader>t <C-W>k
-nnoremap <leader>d <C-W>h
-nnoremap <leader>n <C-W>l
+"-----search and center--
+nnoremap n nzz
 
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
@@ -219,29 +248,9 @@ noremap <silent> <leader>3 :diffget 3<CR> :diffupdate<CR>
 noremap <silent> <leader>4 :diffget 4<CR> :diffupdate<CR>
 noremap <silent> <leader>u :diffput<CR> :diffupdate<CR>
 
-let s:hidden_all = 0
-function! ToggleHiddenAll()
-    if s:hidden_all  == 0
-        let s:hidden_all = 1
-        set noshowmode
-        set noruler
-        set laststatus=0
-        set noshowcmd
-        set nolist
-    else
-        let s:hidden_all = 0
-        set showmode
-        set ruler
-        set laststatus=2
-        set showcmd
-        set list
-    endif
-endfunction
-
-nnoremap <silent> <leader>t :call ToggleHiddenAll()<CR>
-
 "-----plugins shortcuts--
 "-----trail whitespaces--
+nnoremap <F8> :%s///g<CR>
 nnoremap <F9> :%s/\s\+$//e<CR>
 
 "------------------------}}}
@@ -307,6 +316,6 @@ function! MarkdownLevel()
         return ">" . len(h)
     endif
 endfunction
-au BufEnter *.md setlocal foldexpr=MarkdownLevel()  
+au BufEnter *.md setlocal foldexpr=MarkdownLevel()
 au BufEnter *.md setlocal foldmethod=expr
 "------------------------}}}
