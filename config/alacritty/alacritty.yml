@@ -20,15 +20,15 @@ window:
   # setting is ignored.
   dimensions:
     columns: 100
-    lines: 85
+    lines: 40
 
   # Window padding (changes require restart)
   #
   # Blank space added around the window in pixels. This padding is not scaled by
   # DPI and the specified value is always added at both opposing sides.
   padding:
-    x: 0
-    y: 0
+    x: 4
+    y: 4
 
   # Spread additional padding evenly around the terminal content.
   dynamic_padding: true
@@ -67,28 +67,28 @@ font:
   # The normal (roman) font face to use.
   # Style can be specified to pick a specific face.
   normal:
-    family: Hack
-    # family: "Fira Code"
-    # style: Retina
-    # family: "Source Code Pro"
+    family: "Fira Code"
+    #style: Retina
+    #family: Hack
+    #family: "Source Code Pro"
 
   # The bold font face
   bold:
-    family: Hack
-    # family: "Fira Code"
-    # style: Retina
-    # family: "Source Code Pro"
+    #family: Hack
+    family: "Fira Code"
+    #tyle: Retina
+    #family: "Source Code Pro"
 
   # The italic font face
   italic:
-    family: Hack
-    # family: "Fira Code"
-    # style: Retina
-    # family: "Source Code Pro"
+    family: "Fira Code"
+    #style: Retina
+    #family: "Source Code Pro"
+    #family: Hack
     # style: "Medium Italic"
 
   # Point size of the font
-  size: 12.0
+  size: 10.0
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
@@ -346,9 +346,11 @@ key_bindings:
   - { key: Home,                          chars: "\x1b[H",   mode: ~AppCursor  }
   - { key: End,                           chars: "\x1bOF",   mode: AppCursor   }
   - { key: End,                           chars: "\x1b[F",   mode: ~AppCursor  }
-  - { key: Equals,   mods: Command,       action: IncreaseFontSize             }
-  - { key: Minus,    mods: Command,       action: DecreaseFontSize             }
+  - { key: Equals,   mods: Command|Shift, action: IncreaseFontSize             }
+  - { key: Minus,    mods: Command|Shift, action: DecreaseFontSize             }
   - { key: Minus,    mods: Command|Shift, action: ResetFontSize                }
+  - { key: U,        mods: Command,       action: ScrollPageUp                 }
+  - { key: D,        mods: Command,       action: ScrollPageDown               }
   - { key: PageUp,   mods: Shift,         chars: "\x1b[5;2~"                   }
   - { key: PageUp,   mods: Control,       chars: "\x1b[5;5~"                   }
   - { key: PageUp,                        chars: "\x1b[5~"                     }
@@ -480,7 +482,7 @@ live_config_reload: true
 # You can set shell.program to the path of your favorite shell, e.g. /bin/fish.
 # Entries in shell.args are passed unmodified as arguments to the shell.
 shell:
-  program: /usr/local/bin/fish
+  program: /bin/bash
 
 debug:
   # Should display the render timer

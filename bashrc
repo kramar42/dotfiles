@@ -1,12 +1,23 @@
 export EDITOR='vim'
 
-export PATH=/usr/local/sbin:usr/texbin:/usr/local/bin:$HOME/Library/Haskell/bin:$PATH
-eval "$(thefuck --alias)"
-
 export LESS_TERMCAP_md="${yellow}"
 export MANPAGER='less -X'
 
-export JAVA_HOME=$(/usr/libexec/java_home -v 11)
+#export JAVA_HOME=$(/usr/libexec/java_home)
+#export _JAVA_AWT_WM_NONREPARENTING=1
+#export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
+#export AWT_TOOLKIT=MToolkit
+#export JDK_JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
+#export _JAVA_OPTIONS='-Dsun.java2d.opengl=true'
+
+export GOPATH=$HOME/code/go
+
+export PATH=$HOME/bin:$HOME/.local/bin:$GOPATH/bin:$PATH
+
+export DJEM_HOME=$HOME/code/djem
+export BLUEGLUE_HOME=$HOME/code/blueglue
+
+export MONITOR="DP-0"
 
 export LANG='en_US.UTF-8'
 export LC_ALL='en_US.UTF-8'
@@ -84,20 +95,21 @@ export QHOME="/usr/local/lib/q"
 
 alias ..='c ..'
 
+alias t='tmux attach'
+
 alias e='emacsclient -n'
-alias v='nvim'
+alias v='vim'
 
 alias q='rlwrap q'
 
 alias l='ls -GFh'
 alias ll='l -l'
+alias la='l -la'
 
 alias df='df -H'
 alias du='du -ch'
 
-alias hgp='hg push -r `hg branch`'
-
-alias work='cd /Volumes/work/cm-workspace'
+alias fbg='feh --no-fehbg --bg-center https://thisartworkdoesnotexist.com/'
 
 if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
      complete -o default -o nospace -F _git g;

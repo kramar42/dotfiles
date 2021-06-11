@@ -1,0 +1,227 @@
+;-----------------------------------------------------------
+[settings]
+throttle-ms = 50
+throttle-limit = 5
+
+;-----------------------------------------------------------
+[color]
+;background = #2F2F2F
+background = #89a
+foreground = #FFFFFF
+foreground-alt = #8F8F8F
+module-fg = #1F1F1F
+primary = #ffb300
+secondary = #E53935
+alternate = #7cb342
+red = #FF5250
+green = #43a047
+yellow = #fdd835
+black = #000
+active = #7cb342
+alpha = #0000
+
+;-----------------------------------------------------------
+[bar]
+width = 60%
+offset-x = 20%
+
+height = 50
+offset-y = 45
+
+fill = 
+empty = 
+indicator = 
+
+space-margin = 0
+space-padding = 1
+
+;-----------------------------------------------------------
+[bar/main]
+modules-left = workspaces title
+modules-right = fs cpu memory volume date
+
+tray-position = right
+tray-maxsize = 32
+tray-padding = 10
+tray-background = ${color.alpha}
+
+wm-restack = bspwm
+
+width = ${bar.width}
+height = ${bar.height}
+offset-y = ${bar.offset-y}
+offset-x =${bar.offset-x}
+module-margin-left = 1
+
+; big icons
+font-0 = Noto Mono Nerd Font Mono:pixelsize=28;6
+; small icons
+font-1 = Noto Mono Nerd Font Mono:pixelsize=20;4
+; title
+font-2 = Fira Code:pixelsize=13;3
+font-3 = Terminus:pixelsize=13;3
+font-4 = waffle:size=13;3
+
+background-0 = ${color.alpha}
+background-1 = ${color.background}
+background-2 = ${color.background}
+background-3 = ${color.background}
+background-4 = ${color.background}
+background-5 = ${color.background}
+background-6 = ${color.background}
+background-7 = ${color.background}
+background-8 = ${color.background}
+background-9 = ${color.background}
+background-10 = ${color.alpha}
+
+[module/sep]
+type = custom/text
+content = " "
+
+[module/workspaces]
+type = internal/bspwm
+
+ws-icon-0 = 1;ﬦ
+ws-icon-1 = 2;שׂ
+ws-icon-2 = 3;
+ws-icon-3 = 4;ﲵ
+ws-icon-4 = 5;
+ws-icon-5 = 6;恵
+
+label-focused = %icon%
+label-focused-icon = 1
+label-focused-padding = ${bar.space-padding}
+label-focused-margin-right = ${bar.space-margin}
+label-focused-background = ${color.active}
+
+label-occupied = %icon%
+label-occupied-icon = 1
+label-occupied-padding = ${bar.space-padding}
+label-occupied-margin-right = ${bar.space-margin}
+label-occupied-background = #eeeeee
+label-occupied-foreground = #dd222222
+
+label-urgent = %icon%
+label-urgent-icon = 1
+label-urgent-padding = ${bar.space-padding}
+label-urgent-margin-right = ${bar.space-margin}
+
+label-empty = %icon%
+label-empty-icon = 1
+label-empty-padding = ${bar.space-padding}
+label-empty-margin-right = ${bar.space-margin}
+
+[module/title]
+type = internal/xwindow
+
+label-maxlen = 89
+label-overline = ${color.alpha}
+label-underline = ${color.black}
+label-font = 3
+
+;-----------------------------------------------------------
+[module/volume]
+type = internal/alsa
+;mapped = true
+
+format-volume = <ramp-volume> <bar-volume>
+format-volume-padding = 1
+format-volume-background = #9c9
+
+format-muted-prefix = 
+format-muted-prefix-foreground = ${color.red}
+format-muted-padding = 1
+format-muted-background = #9c9
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-3 = 
+ramp-volume-4 = 
+
+bar-volume-format = "%fill%%indicator%%empty%"
+bar-volume-width = 20
+
+bar-volume-indicator = ${bar.indicator}
+bar-volume-indicator-font = 5
+
+bar-volume-fill = ${bar.fill}
+bar-volume-fill-font = 5
+bar-volume-foreground = ${color.green}
+
+bar-volume-empty = ${bar.empty}
+bar-volume-empty-font = 5
+bar-volume-empty-foreground = ${color.background}
+
+label-muted = "  muted"
+label-muted-font = 3
+
+;-----------------------------------------------------------
+[module/fs]
+type = internal/fs
+interval = 60
+
+mount-0 = /
+;mount-1 = /home
+;spacing = 4
+
+label-mounted = %used%/%total%
+label-mounted-font = 4
+
+format-mounted-font = 1
+format-mounted-prefix = " "
+format-mounted-padding = 1
+format-mounted-background = #0ba0c0
+
+;-----------------------------------------------------------
+[module/cpu]
+type = internal/cpu
+interval = 1
+
+format = <ramp-coreload>
+format-prefix = " "
+format-padding = 1
+format-background = #66cc99
+
+ramp-coreload-spacing = 0
+ramp-coreload-font = 4
+ramp-coreload-foreground = #fff
+ramp-coreload-0 = ▁
+ramp-coreload-0-foreground = #000
+ramp-coreload-1 = ▂
+ramp-coreload-2 = ▃
+ramp-coreload-3 = ▄
+ramp-coreload-4 = ▅
+ramp-coreload-5 = ▆
+ramp-coreload-6 = ▇
+ramp-coreload-7 = █
+
+;-----------------------------------------------------------
+[module/memory]
+type = internal/memory
+
+format = <bar-used>
+;format-prefix = "塞 "
+format-prefix = "兩 "
+format-font = 2
+format-padding = 2
+format-background = #cb66cc
+
+bar-used-width = 10
+bar-used-indicator = |
+bar-used-indicator-font = 4
+bar-used-indicator-foreground = #ffaaf5
+bar-used-fill = ─
+bar-used-fill-font = 4
+bar-used-fill-foreground = #ffaaf5
+bar-used-empty = ─
+bar-used-empty-font = 4
+bar-used-empty-foreground = #934e94
+
+[module/date]
+type = internal/date
+date = %Y-%m-%d %H:%M%
+
+format-font = 3
+format-padding = 1
+format-background = #ff4279

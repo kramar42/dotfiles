@@ -8,7 +8,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'qpkorr/vim-bufkill'
 
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline-themes'
+"Plug 'powerline/powerline'
 
 " faster grep
 Plug 'rking/ag.vim'
@@ -21,7 +22,7 @@ Plug 'vim-scripts/xoria256.vim'
 Plug 'elzr/vim-json'
 
 " chech syntax on the fly
-Plug 'scrooloose/syntastic'
+"Plug 'scrooloose/syntastic'
 
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
