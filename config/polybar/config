@@ -26,7 +26,7 @@ width = 80%
 offset-x = 10%
 
 height = 50
-offset-y = 15
+offset-y = 20
 
 fill = 
 empty = 
@@ -37,8 +37,8 @@ space-padding = 1
 
 ;-----------------------------------------------------------
 [bar/main]
-modules-left = l workspaces r s l title r
-modules-right = l fs memory cpu-temp cpu volume date
+modules-left = workspaces title
+modules-right = fs memory cpu-temp cpu volume date
 
 tray-position = right
 tray-maxsize = 32
@@ -51,13 +51,12 @@ width = ${bar.width}
 height = ${bar.height}
 offset-y = ${bar.offset-y}
 offset-x =${bar.offset-x}
-
-radius = 0
+module-margin-left = 1
 
 ; big icons
-font-0 = Noto Mono Nerd Font Mono:pixelsize=28;6
+font-0 = Noto Mono Nerd Font Mono:pixelsize=28;7
 ; small icons
-font-1 = Noto Mono Nerd Font Mono:pixelsize=21;4
+font-1 = Noto Mono Nerd Font Mono:pixelsize=22;4
 ; title
 font-2 = Fira Code:pixelsize=13;3
 font-3 = Terminus:pixelsize=13;3
@@ -75,35 +74,22 @@ background-8 = ${color.background}
 background-9 = ${color.alpha}
 background-10 = ${color.alpha}
 
-[module/l]
-type = custom/text
-content = ""
-content-foreground = ${color.background}
-content-background = ${color.black}
-content-font = 2
-
-[module/r]
-type = custom/text
-content = ""
-content-foreground = ${color.background}
-content-background = ${color.black}
-content-font = 2
-
-[module/s]
+[module/sep]
 type = custom/text
 content = " "
-content-padding = 0
-content-background = ${color.black}
 
 [module/workspaces]
 type = internal/bspwm
 
-ws-icon-0 = 1;ﬦ
+; text 
+; clj 
+
+ws-icon-0 = 1;
 ws-icon-1 = 2;שׂ
-ws-icon-2 = 3;
+ws-icon-2 = 3;
 ws-icon-3 = 4;ﲵ
-ws-icon-4 = 5;
-ws-icon-5 = 6;恵
+ws-icon-4 = 5;
+ws-icon-5 = 6;
 
 label-focused = %icon%
 label-focused-icon = 1
@@ -164,13 +150,12 @@ bar-volume-indicator-font = 5
 
 bar-volume-fill = ${bar.fill}
 bar-volume-fill-font = 5
-bar-volume-foreground = ${color.green}
 
 bar-volume-empty = ${bar.empty}
 bar-volume-empty-font = 5
 bar-volume-empty-foreground = ${color.background}
 
-label-muted = "  muted"
+label-muted = " "
 label-muted-font = 3
 
 ;-----------------------------------------------------------
@@ -182,13 +167,26 @@ mount-0 = /
 ;mount-1 = /home
 ;spacing = 4
 
-label-mounted = %used%/%total%
+format-mounted = <label-mounted> <bar-used>
+
+label-mounted = %used%
 label-mounted-font = 4
 
 format-mounted-font = 1
 format-mounted-prefix = " "
 format-mounted-padding = 1
 format-mounted-background = #0ba0c0
+
+bar-used-width = 10
+bar-used-indicator = |
+bar-used-indicator-font = 4
+bar-used-indicator-foreground = #ffaaf5
+bar-used-fill = ─
+bar-used-fill-font = 4
+bar-used-fill-foreground = #ffaaf5
+bar-used-empty = ─
+bar-used-empty-font = 4
+bar-used-empty-foreground = #934e94
 
 ;-----------------------------------------------------------
 [module/cpu]
@@ -223,12 +221,14 @@ ramp-coreload-7-foreground = #eee
 ;-----------------------------------------------------------
 [module/memory]
 type = internal/memory
+interval = 3
 
-format = <bar-used>
-;format-prefix = "塞 "
+format = <label> <bar-used>
+label = %gb_used%
+label-font = 4
 format-prefix = "兩 "
 format-font = 2
-format-padding = 2
+format-padding = 1
 format-background = #cb66cc
 
 bar-used-width = 10
@@ -245,14 +245,17 @@ bar-used-empty-foreground = #934e94
 [module/date]
 type = internal/date
 date = %Y-%m-%d %H:%M%
+date-alt = %A, %d %B %Y | %H:%M:%S
 
-format-font = 3
+format-prefix= " "
+
+label-font = 3
 format-padding = 1
 format-background = #ff4279
 
 [module/cpu-temp]
 type = internal/temperature
-interval = 2
+interval = 3
 hwmon-path = /sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon1/temp1_input
 base-temperature = 30
 warn-temperature = 76
