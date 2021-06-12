@@ -37,8 +37,8 @@ space-padding = 1
 
 ;-----------------------------------------------------------
 [bar/main]
-modules-left = workspaces title
-modules-right = fs cpu memory volume date
+modules-left = l workspaces r s l title r
+modules-right = l fs memory cpu-temp cpu volume date
 
 tray-position = right
 tray-maxsize = 32
@@ -51,19 +51,20 @@ width = ${bar.width}
 height = ${bar.height}
 offset-y = ${bar.offset-y}
 offset-x =${bar.offset-x}
-module-margin-left = 1
+
+radius = 0
 
 ; big icons
 font-0 = Noto Mono Nerd Font Mono:pixelsize=28;6
 ; small icons
-font-1 = Noto Mono Nerd Font Mono:pixelsize=20;4
+font-1 = Noto Mono Nerd Font Mono:pixelsize=21;4
 ; title
 font-2 = Fira Code:pixelsize=13;3
 font-3 = Terminus:pixelsize=13;3
 font-4 = waffle:size=13;3
 
 background-0 = ${color.alpha}
-background-1 = ${color.background}
+background-1 = ${color.alpha}
 background-2 = ${color.background}
 background-3 = ${color.background}
 background-4 = ${color.background}
@@ -71,12 +72,28 @@ background-5 = ${color.background}
 background-6 = ${color.background}
 background-7 = ${color.background}
 background-8 = ${color.background}
-background-9 = ${color.background}
+background-9 = ${color.alpha}
 background-10 = ${color.alpha}
 
-[module/sep]
+[module/l]
+type = custom/text
+content = ""
+content-foreground = ${color.background}
+content-background = ${color.black}
+content-font = 2
+
+[module/r]
+type = custom/text
+content = ""
+content-foreground = ${color.background}
+content-background = ${color.black}
+content-font = 2
+
+[module/s]
 type = custom/text
 content = " "
+content-padding = 0
+content-background = ${color.black}
 
 [module/workspaces]
 type = internal/bspwm
