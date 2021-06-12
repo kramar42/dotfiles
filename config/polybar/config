@@ -22,11 +22,11 @@ alpha = #0000
 
 ;-----------------------------------------------------------
 [bar]
-width = 60%
-offset-x = 20%
+width = 80%
+offset-x = 10%
 
 height = 50
-offset-y = 45
+offset-y = 15
 
 fill = 
 empty = 
@@ -189,12 +189,19 @@ ramp-coreload-foreground = #fff
 ramp-coreload-0 = ▁
 ramp-coreload-0-foreground = #000
 ramp-coreload-1 = ▂
+ramp-coreload-1-foreground = #222
 ramp-coreload-2 = ▃
+ramp-coreload-2-foreground = #444
 ramp-coreload-3 = ▄
+ramp-coreload-3-foreground = #666
 ramp-coreload-4 = ▅
+ramp-coreload-4-foreground = #888
 ramp-coreload-5 = ▆
+ramp-coreload-5-foreground = #aaa
 ramp-coreload-6 = ▇
+ramp-coreload-6-foreground = #ccc
 ramp-coreload-7 = █
+ramp-coreload-7-foreground = #eee
 
 ;-----------------------------------------------------------
 [module/memory]
@@ -225,3 +232,31 @@ date = %Y-%m-%d %H:%M%
 format-font = 3
 format-padding = 1
 format-background = #ff4279
+
+[module/cpu-temp]
+type = internal/temperature
+interval = 2
+hwmon-path = /sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon1/temp1_input
+base-temperature = 30
+warn-temperature = 76
+
+format = <ramp> <label>
+
+format-font = 1
+format-background = #d74
+format-padding = 1
+
+format-warn-prefix = " "
+format-warn-font = 1
+format-warn-background = #c34
+format-warn-padding = 1
+
+label = %temperature-c%
+label-font = 4
+
+label-warn = %temperature-c%
+label-warn-font = 4
+
+ramp-0 = ""
+ramp-1 = ""
+ramp-2 = ""
