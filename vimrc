@@ -14,9 +14,9 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'rking/ag.vim'
 
 " colorschemes
-Plug 'tomasr/molokai'
+"Plug 'tomasr/molokai'
 Plug 'vim-scripts/xoria256.vim'
-Plug 'altercation/vim-colors-solarized'
+"Plug 'altercation/vim-colors-solarized'
 
 Plug 'elzr/vim-json'
 
@@ -30,25 +30,25 @@ Plug 'junegunn/fzf.vim'
 Plug 'kien/rainbow_parentheses.vim'
 "Plug 'vim-scripts/paredit.vim', { 'for': 'clojure' }
 Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
-Plug 'tpope/vim-leiningen', { 'for': 'clojure' }
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-Plug 'jpalardy/vim-slime', { 'for': 'clojure' }
+"Plug 'tpope/vim-leiningen', { 'for': 'clojure' }
+"Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+"Plug 'jpalardy/vim-slime', { 'for': 'clojure' }
 
 " haskell
-Plug 'Shougo/vimproc.vim', { 'for': 'haskell' }
-Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
-Plug 'majutsushi/tagbar', { 'for': 'haskell' }
+"Plug 'Shougo/vimproc.vim', { 'for': 'haskell' }
+"Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
+"Plug 'majutsushi/tagbar', { 'for': 'haskell' }
 
 " latex integration
-Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for': 'latex' }
+"Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for': 'latex' }
 
 " other lang support
-Plug 'vim-scripts/groovy.vim', { 'for': 'groovy' }
+"Plug 'vim-scripts/groovy.vim', { 'for': 'groovy' }
 "Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
 " other stuff
 Plug 'kana/vim-textobj-user'
-Plug 'tpope/vim-classpath'
+"Plug 'tpope/vim-classpath'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -217,9 +217,9 @@ vnoremap ; :
 vnoremap : ;
 
 "-----work with buffers--
-nnoremap <silent> <C-o> :b#<CR>
-nnoremap <silent> <C-n> :bn<CR>
-nnoremap <silent> <C-p> :bp<CR>
+"nnoremap <silent> <C-o> :b#<CR>
+"nnoremap <silent> <C-n> :bn<CR>
+"nnoremap <silent> <C-p> :bp<CR>
 
 "-----work with wrapped lines
 nnoremap <silent> j gj

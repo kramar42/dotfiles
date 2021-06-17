@@ -3,11 +3,20 @@
 ctrl + cmd - g : open -a /Applications/Google\ Chrome.app
 ctrl + shift - g : open -a /Applications/Google\ Chrome.app
 
-ctrl + cmd - c : open -a /Applications/Firefox.app
-ctrl + shift - c : open -a /Applications/Firefox.app
+#ctrl + cmd - c : open -a /Applications/Firefox.app
+#ctrl + shift - c : open -a /Applications/Firefox.app
 
-ctrl + cmd - t : open -a /Applications/iTerm.app
-ctrl + shift - t : open -a /Applications/iTerm.app
+ctrl + cmd - r : open -a /Applications/Brave\ Browser.app
+ctrl + shift - r : open -a /Applications/Brave\ Browser.app
+
+ctrl + cmd - t : open -a /Applications/Alacritty.app
+ctrl + shift - t : open -a /Applications/Alacritty.app
+
+#ctrl + cmd - t : yabai -m window --focus (bb ~/.yabai.clj "Alacritty") || /Applications/Alacritty.app/Contents/MacOS/alacritty --position 1050 750 -d 80 20
+#ctrl + shift - t : yabai -m window --focus (bb ~/.yabai.clj "Alacritty") || /Applications/Alacritty.app/Contents/MacOS/alacritty --position 1050 750 -d 80 20
+
+ctrl + cmd - return : /Applications/Alacritty.app/Contents/MacOS/alacritty --position 1050 750 -d 80 20
+ctrl + shift - return : /Applications/Alacritty.app/Contents/MacOS/alacritty --position 1050 750 -d 80 20
 
 ctrl + cmd - h : open -a /Applications/IntelliJ\ IDEA.app
 ctrl + shift - h : open -a /Applications/IntelliJ\ IDEA.app
@@ -15,8 +24,8 @@ ctrl + shift - h : open -a /Applications/IntelliJ\ IDEA.app
 ctrl + cmd - d : open -a /Applications/Sublime\ Merge.app
 ctrl + shift - d : open -a /Applications/Sublime\ Merge.app
 
-ctrl + cmd - s : open -a /Applications/Skype.app
-ctrl + shift - s : open -a /Applications/Skype.app
+ctrl + cmd - s : open -a /Applications/Slack.app
+ctrl + shift - s : open -a /Applications/Slack.app
 
 ctrl + cmd - l : open -a /Applications/Telegram\ Desktop.app
 ctrl + shift - l : open -a /Applications/Telegram\ Desktop.app
@@ -30,6 +39,12 @@ ctrl + shift - f : open -a /Applications/Spotify.app
 ctrl + cmd - v : open -a /System/Library/CoreServices/Finder.app
 ctrl + shift - v : open -a /System/Library/CoreServices/Finder.app
 
+ctrl + cmd - 0x1B : open -a /Applications/OBS.app
+ctrl + shift - 0x1B : open -a /Applications/OBS.app
+
+ctrl + cmd - b : open -a /Applications/Emacs.app || yabai -m window --focus `yabai -m query --windows | jq '.[] | select(.app=="Emacs") | .id'`
+ctrl + shift - b : yabai -m window --focus `yabai -m query --windows | jq '.[] | select(.app=="Emacs") | .id'`
+
 # focus
 cmd - h : yabai -m window --focus west
 cmd - j : yabai -m window --focus south
@@ -42,25 +57,25 @@ cmd + alt - j : yabai -m window --swap south
 cmd + alt - k : yabai -m window --swap north
 cmd + alt - l : yabai -m window --swap east
 
+# set insertion point in focused container
+ctrl + alt - h : yabai -m window --insert west
+ctrl + alt - j : yabai -m window --insert south
+ctrl + alt - k : yabai -m window --insert north
+ctrl + alt - l : yabai -m window --insert east
+
 # resize
 shift + cmd - h : yabai -m window west --resize right:-50:0 2> /dev/null || yabai -m window --resize right:-50:0
 shift + cmd - j : yabai -m window north --resize bottom:0:50 2> /dev/null || yabai -m window --resize bottom:0:50
 shift + cmd - k : yabai -m window south --resize top:0:-50 2> /dev/null || yabai -m window --resize top:0:-50
 shift + cmd - l : yabai -m window east --resize left:50:0 2> /dev/null || yabai -m window --resize left:50:0
 
-# switch desktop
-ctrl - 1 : yabai -m space --focus 1
-ctrl - 2 : yabai -m space --focus 2
-ctrl - 3 : yabai -m space --focus 3
-ctrl - 4 : yabai -m space --focus 4
-ctrl - 5 : yabai -m space --focus 5
-ctrl - 6 : yabai -m space --focus 6
-ctrl - 7 : yabai -m space --focus 7
-ctrl - 8 : yabai -m space --focus 8
-ctrl - 9 : yabai -m space --focus 9
+#ctrl - n : skhd -k "down"
+#ctrl - p : skhd -k "up"
+#ctrl - l : skhd -k "right"
+#ctrl - h : skhd -k "left"
 
-ctrl - left : yabai -m space --focus prev
-ctrl - right : yabai -m space --focus next
+alt - left : yabai -m space --focus prev
+alt - right : yabai -m space --focus next
 
 ctrl + shift - 0x0D : yabai -m window --space prev && yabai -m space --focus prev
 ctrl + shift - 0x0E : yabai -m window --space next && yabai -m space --focus next
@@ -86,12 +101,49 @@ shift + cmd - 9 : yabai -m window --space  9; yabai -m space --focus 9
 ctrl + shift - right : yabai -m display --focus next
 ctrl + shift - left : yabai -m display --focus prev
 
+ctrl + cmd - right : yabai -m display --focus next
+ctrl + cmd - left : yabai -m display --focus prev
+
 # send window to desktop and follow
-shift + ctrl - k : yabai -m window --display prev && yabai -m display --focus prev
-shift + ctrl - x : yabai -m window --display next && yabai -m display --focus next
+shift + ctrl - 0x0E : yabai -m window --display recent && yabai -m display --focus recent
+cmd + ctrl - 0x0E : yabai -m window --display recent && yabai -m display --focus recent
 
 # toggle window split type
 alt - r : yabai -m window --toggle split
 
+# mirror tree x-axis
+alt - x : yabai -m space --mirror x-axis
+
+# mirror tree y-axis
+alt - y : yabai -m space --mirror y-axis
+
 # float / unfloat window and center on screen
 alt - t : yabai -m window --toggle float
+
+# toggle desktop offset
+alt - p : yabai -m space --toggle padding; yabai -m space --toggle gap
+
+# toggle window parent zoom
+alt - m : yabai -m window --toggle zoom-parent
+
+# toggle window fullscreen zoom
+#alt - f : yabai -m window --toggle zoom-fullscreen
+
+# toggle window native fullscreen
+alt - f : yabai -m window --toggle native-fullscreen
+
+# launcher shortcuts
+alt - h: open ~
+
+# toggle window border
+alt - b : yabai -m window --toggle border
+
+# close window
+alt - w : yabai -m window --close
+
+# delete key
+alt - d : skhd -k "delete"
+
+# restart yabai
+shift + alt + cmd - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
+

@@ -22,6 +22,15 @@ export JAVA_HOME=$(/usr/libexec/java_home)
 
 plugins=(git mercurial osx)
 
+export GOPATH="${HOME}/.go"
+export GOROOT="/usr/local/opt/go/libexec"
+
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/users/kramar/code/scripts/sh:$PATH"
+export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+#export PATH="$PATH:/Library/Java/JavaVirtualMachines/graalvm-ce-java8-20.0.0/Contents/Home/bin"
+
+plugins=(git kubectl osx)
+
 alias -s hs=vim
 
 alias repl='rlwrap repl'
@@ -39,8 +48,6 @@ alias ll='l -l'
 alias df='df -H'
 alias du='du -ch'
 
-alias hgp='hg push -r `hg branch`'
-alias hgd='hg diff --color=always | less -R'
 
 # Get macOS Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
 alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update; sudo gem cleanup'
@@ -110,7 +117,8 @@ function prompt_char {
     echo 'λ'
 }
 
-export PS1='   %m:%1d $(prompt_char) '
+#export PS1=$'   %m:%1d \e[0;32m$(prompt_char)\e[0m '
+export PS1=$'   %m:%1d $(prompt_char) '
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
