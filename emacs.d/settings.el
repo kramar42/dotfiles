@@ -2,15 +2,14 @@
 ;; fix the PATH variable
 (defun set-exec-path-from-shell-PATH ()
   (let ((path-from-shell (shell-command-to-string
-			  "TERM=vt100 $SHELL -i -c 'echo $PATH'")))
+                          "TERM=vt100 $SHELL -i -c 'echo $PATH'")))
     (setenv "PATH" path-from-shell)
     (setq exec-path (split-string path-from-shell path-separator))))
 (when window-system (set-exec-path-from-shell-PATH))
 
-
 ;; fullscreen
-(custom-set-variables
- '(initial-frame-alist (quote ((fullscreen . maximized)))))
+;; (custom-set-variables
+;; '(initial-frame-alist (quote ((fullscreen . maximized)))))
 
 ;; visual settings
 (blink-cursor-mode -1)
@@ -47,7 +46,6 @@
 ;; remap C-x to C-t
 (global-set-key "\C-t" ctl-x-map)
 (global-set-key "\C-x" 'transpose-char)
-(global-set-key "\C-w" 'unix-werase-or-kill)
 
 (defun next-code-buffer ()
   (interactive)
@@ -82,7 +80,7 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 (setq column-number-mode t)
-;; (set-face-attribute 'default nil :font "Monaco" :height 110)
+(set-face-attribute 'default nil :font "Fira Code" :height 120)
 ;(setq iswitchb-buffer-ignore '("^ " "*Completions*" "*Shell Command Output*"
 ;                               "*Messages*" "Async Shell Command"))
 
@@ -90,9 +88,10 @@
 (defun unix-werase-or-kill (arg)
   (interactive "*p")
   (if (and transient-mark-mode
-	   mark-active)
+           mark-active)
       (kill-region (region-beginning) (region-end))
     (backward-kill-word arg)))
+(global-set-key "\C-w" 'unix-werase-or-kill)
 
 (defun revert-buffer-no-confirm ()
   "Revert buffer without confirmation."
@@ -104,7 +103,19 @@
     (progn
       (server-start)
       (scroll-bar-mode -1)
-;;      (load-theme 'solarized t)
-;;      (set-frame-parameter nil 'background-mode 'dark)
-;;      (enable-theme 'solarized)
+      (load-theme 'solarized-gruvbox-dark t)
       (set-cursor-color "#c1cdc1")))
+
+(global-set-key (kbd "s-/") 'comment-line)
+
+(setq vc-follow-symlinks t)
+(setq default-directory "/users/kramar/")
+
+;; don't spam warnings from packages
+(setq ad-redefinition-action 'accept)
+
+(show-paren-mode t)
+
+(global-hl-line-mode t)
+
+(setq-default frame-title-format "%b %f")
