@@ -17,10 +17,11 @@ export LC_CTYPE='en_US.UTF-8'
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 export QHOME="/usr/local/lib/q"
 
-export HOMEBREW_GITHUB_API_TOKEN=b58c1c1ed918178b3fb7a6efff56f9b4d2e1f999
-export JAVA_HOME=$(/usr/libexec/java_home)
+export HOMEBREW_GITHUB_API_TOKEN=8b7a2b78d63ed4b44f6030611f8f61b9cae3da65
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 
-plugins=(git mercurial osx)
+export DJEM_HOME=~/code/djem
+export BLUEGLUE_HOME=~/code/blueglue
 
 export GOPATH="${HOME}/.go"
 export GOROOT="/usr/local/opt/go/libexec"
@@ -48,6 +49,10 @@ alias ll='l -l'
 alias df='df -H'
 alias du='du -ch'
 
+alias djem='cd ~/code/djem'
+alias dconf='cd ~/code/djem/djem-config'
+alias blueglue='cd ~/code/blueglue'
+#alias ftp='cd ~/code/djem/ftp'
 
 # Get macOS Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
 alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update; sudo gem cleanup'

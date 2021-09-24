@@ -52,10 +52,10 @@ cmd - k : yabai -m window --focus north
 cmd - l : yabai -m window --focus east
 
 # swap
-cmd + alt - h : yabai -m window --swap west
-cmd + alt - j : yabai -m window --swap south
-cmd + alt - k : yabai -m window --swap north
-cmd + alt - l : yabai -m window --swap east
+cmd + shift - h : yabai -m window --swap west
+cmd + shift - j : yabai -m window --swap south
+cmd + shift - k : yabai -m window --swap north
+cmd + shift - l : yabai -m window --swap east
 
 # set insertion point in focused container
 ctrl + alt - h : yabai -m window --insert west
@@ -64,10 +64,10 @@ ctrl + alt - k : yabai -m window --insert north
 ctrl + alt - l : yabai -m window --insert east
 
 # resize
-shift + cmd - h : yabai -m window west --resize right:-50:0 2> /dev/null || yabai -m window --resize right:-50:0
-shift + cmd - j : yabai -m window north --resize bottom:0:50 2> /dev/null || yabai -m window --resize bottom:0:50
-shift + cmd - k : yabai -m window south --resize top:0:-50 2> /dev/null || yabai -m window --resize top:0:-50
-shift + cmd - l : yabai -m window east --resize left:50:0 2> /dev/null || yabai -m window --resize left:50:0
+alt + cmd - h : yabai -m window west --resize right:-50:0 2> /dev/null || yabai -m window --resize right:-50:0
+alt + cmd - j : yabai -m window north --resize bottom:0:50 2> /dev/null || yabai -m window --resize bottom:0:50
+alt + cmd - k : yabai -m window south --resize top:0:-50 2> /dev/null || yabai -m window --resize top:0:-50
+alt + cmd - l : yabai -m window east --resize left:50:0 2> /dev/null || yabai -m window --resize left:50:0
 
 #ctrl - n : skhd -k "down"
 #ctrl - p : skhd -k "up"

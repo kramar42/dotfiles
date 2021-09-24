@@ -6,7 +6,7 @@ eval "$(thefuck --alias)"
 export LESS_TERMCAP_md="${yellow}"
 export MANPAGER='less -X'
 
-export JAVA_HOME=$(/usr/libexec/java_home)
+export JAVA_HOME=$(/usr/libexec/java_home -v 11)
 
 export LANG='en_US.UTF-8'
 export LC_ALL='en_US.UTF-8'
