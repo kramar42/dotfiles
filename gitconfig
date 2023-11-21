@@ -43,3 +43,5 @@
 	helper = cache --timeout=86400
 [pull]
 	ff = only
+[diff]
+	submodule = log

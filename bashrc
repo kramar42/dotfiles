@@ -8,6 +8,8 @@ export QHOME="/usr/local/lib/q"
 export GOPATH=$HOME/code/go
 export JAVA_HOME=$(java-config --select-vm=graalvm-11 -O)
 export PATH=$HOME/bin:$HOME/.local/bin:$JAVA_HOME/bin:$GOPATH/bin:$HOME/.cargo/bin:$HOME/.krew/bin:$PATH:/usr/lib64/qt5/bin
+export GRAALVM_HOME='/Users/kramar/Code/build/graalvm/Contents/Home/'
+#export PATH=/usr/local/sbin:/usr/local/bin:$GRAALVM_HOME/bin:$HOME/.cargo/bin:$PATH
 
 
 ### EXPORTS

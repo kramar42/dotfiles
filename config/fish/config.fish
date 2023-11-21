@@ -1,15 +1,18 @@
-set -x PATH $PATH /usr/local/bin:/users/kramar/code/scripts/sh
+set -x PATH /opt/homebrew/bin $PATH /usr/local/bin /users/kramar/code/scripts/sh /users/kramar/.cargo/bin /users/kramar/code/go/bin
 
 set fish_greeting
 function fish_prompt
     echo "("(prompt_pwd)") λ "
 end
 
-set -x JAVA_HOME (/usr/libexec/java_home -v 1.8.0_231)
-set -x JAVA_HOME (/usr/libexec/java_home -v 11)
+#set -x JAVA_HOME (/usr/libexec/java_home -v 1.8.0)
+#set -x JAVA_HOME (/usr/libexec/java_home -v 11)
+#set -x JAVA_HOME '/opt/homebrew/opt/java/libexec/openjdk.jdk/Contents/Home'
+set -x JAVA_HOME (/usr/libexec/java_home -v 19)
 set -x GOPATH ~/code/go
 set -x DJEM_HOME ~/code/djem
 set -x BLUEGLUE_HOME ~/code/blueglue
+set -gx PATH $PATH $HOME/.krew/bin
 
 function sudo
     if test "$argv" = !!
@@ -28,6 +31,7 @@ alias l="ls"
 alias ll="ls -lh"
 alias t="tmux"
 alias g="git"
+alias k="kubectl"
 
 alias dc="docker container"
 alias di="docker image"
@@ -64,3 +68,8 @@ end
 function e
     command emacsclient -n
 end
+
+function setver --wraps mvn --description 'alias ...'
+    mvn versions:set -DgenerateBackupPoms=false -DnewVersion=$argv
+end
+

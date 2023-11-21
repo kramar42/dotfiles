@@ -27,7 +27,8 @@ Plug 'elzr/vim-json'
 " chech syntax on the fly
 "Plug 'scrooloose/syntastic'
 
-Plug '/usr/local/opt/fzf'
+" Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 
 " lisp related
@@ -58,7 +59,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 
-Plug 'ajh17/VimCompletesMe'
+"Plug 'ajh17/VimCompletesMe'
 
 call plug#end()
 
@@ -189,6 +190,7 @@ let mapleader="\<space>"
 nnoremap <leader>w  :w<CR>
 nnoremap <leader>q  :qall!<CR>
 nnoremap <leader>e  :Files<CR>
+nnoremap <leader>g  :GitFiles<CR>
 nnoremap <leader>b  :Buffers<CR>
 nnoremap <leader>m  :make<CR>
 nnoremap <leader>cn :cn<CR>
@@ -278,12 +280,14 @@ set autowrite
 
 "-----autoreload .vimrc--
 autocmd! bufwritepost .vimrc source %
+autocmd! bufwritepost init.vim source %
 
 "-----gist---------------
 let g:gist_get_multiplefile=1
 
 "-----color column-------
 highlight ColorColumn ctermbg=3 ctermfg=9
+hi SignColumn ctermbg=none
 call matchadd('ColorColumn', '\%81v', 100)
 
 au VimEnter * RainbowParenthesesToggle
@@ -336,4 +340,6 @@ function! MarkdownLevel()
 endfunction
 au BufEnter *.md setlocal foldexpr=MarkdownLevel()
 au BufEnter *.md setlocal foldmethod=expr
+
+"let g:airline_powerline_fonts = 1
 "------------------------}}}

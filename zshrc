@@ -1,5 +1,5 @@
-export ZSH=/Users/kramar/.oh-my-zsh
-source $ZSH/oh-my-zsh.sh
+#export ZSH=/Users/kramar/.oh-my-zsh
+#source $ZSH/oh-my-zsh.sh
 DISABLE_AUTO_TITLE="true"
 
 export EDITOR='nvim'
@@ -133,3 +133,5 @@ precmd() {
   # sets the tab title to current dir
   echo -ne "\e]1;${PWD##*/}\a"
 }
+
+source /Users/kramar/.config/broot/launcher/bash/br

@@ -1,6 +1,7 @@
 {
 ; :mvn/local-repo ".m2/repository"
- :mvn/repos {"sonatype" {:url "https://oss.sonatype.org/content/repositories/snapshots/"}}
+ :mvn/repos {"sonatype" {:url "https://oss.sonatype.org/content/repositories/snapshots/"}
+             "cognitect-dev-tools" {:url "https://dev-tools.cognitect.com/maven/releases/"}}
  :aliases
  {
   ;; testing and debugging tools:
@@ -53,12 +54,25 @@
   :comp {:extra-deps {compliment/compliment {:mvn/version "RELEASE"}}}
 
   :rebl-8 {:extra-deps {
-	org.clojure/clojure {:mvn/version "1.10.3"}
-        org.clojure/core.async {:mvn/version "0.4.490"}
-	com.cognitect/rebl {:local/root "/home/kramar/code/build/rebl/rebl.jar"}
-    }
-         :main-opts ["-m" "cognitect.rebl"]
-         }
+    org.clojure/clojure {:mvn/version "1.10.3"}
+    org.clojure/core.async {:mvn/version "0.4.490"}
+    com.cognitect/rebl {:local/root "/home/kramar/code/build/rebl/rebl.jar"}}
+    :main-opts ["-m" "cognitect.rebl"]}
+
+  :rebl-arm {:extra-deps {org.clojure/core.async {:mvn/version "0.4.490"}
+                         ;; deps for file datafication (0.9.149 or later)
+                         org.clojure/data.csv {:mvn/version "0.1.4"}
+                         org.clojure/data.json {:mvn/version "0.2.3"}
+                         org.yaml/snakeyaml {:mvn/version "1.23"}
+                         com.cognitect/rebl {:local/root "/users/kramar/code/build/rebl/rebl.jar"}
+                         org.openjfx/javafx-fxml     {:local/root "/users/kramar/code/build/javafx/lib/javafx.fxml.jar"}
+                         org.openjfx/javafx-controls {:local/root "/users/kramar/code/build/javafx/lib/javafx.controls.jar"}
+                         org.openjfx/javafx-graphics {:local/root "/users/kramar/code/build/javafx/lib/javafx.graphics.jar"}
+                         org.openjfx/javafx-media    {:local/root "/users/kramar/code/build/javafx/lib/javafx.media.jar"}
+                         org.openjfx/javafx-swing    {:local/root "/users/kramar/code/build/javafx/lib/javafx.swing.jar"}
+                         org.openjfx/javafx-base     {:local/root "/users/kramar/code/build/javafx/lib/javafx.base.jar"}
+                         org.openjfx/javafx-web      {:local/root "/users/kramar/code/build/javafx/lib/javafx.web.jar"}}
+            :main-opts ["-m" "cognitect.rebl"]}
 
   :rebl
   {:extra-deps {org.clojure/core.async {:mvn/version "0.4.490"}
