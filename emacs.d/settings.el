@@ -14,6 +14,7 @@
 ;; visual settings
 (blink-cursor-mode -1)
 (tool-bar-mode -1)
+(menu-bar-mode -1)
 
 ;; don't indent using tabs
 (setq-default indent-tabs-mode nil)

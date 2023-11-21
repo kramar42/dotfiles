@@ -4,22 +4,19 @@
 
 # terminal emulator
 super + Return
-	alacritty
+    alacritty
 
 # program launcher
 alt + @space
-	rofi -show run
-
-# make sxhkd reload its configuration files:
-super + Escape
-	pkill -USR1 -x sxhkd
-
-super + =
-	scratchpad.sh dropdown
+    rofi -show run
+#dmenu_run
 
 #
 # bspwm hotkeys
 #
+
+super + Escape
+	pkill -USR1 -x sxhkd
 
 # quit/restart bspwm
 super + alt + {q,r}
@@ -29,18 +26,44 @@ super + alt + {q,r}
 super + {_,shift + }w
 	bspc node -{c,k}
 
+# Navigate layouts
+super + {_,shift + }n
+	bspc desktop --layout {next,prev}
+
+# rotate active level
+super + r
+    WID=$(bspc query -N -d newest) && bspc node -f @parent && bspc node -R 90 && bspc node -f $WID
+
+# Rotate desktop
+super + shift + r
+	bspc node @/ --rotate 90
+
+# Flip layout vertically/horizontally
+super + {_,shift + }y
+	bspc node @/ --flip {vertical,horizontal}
+
+# Circulate the leaves of the tree
+super + {_,shift + }c
+	bspc node @/ --circulate {backward,forward}
+
 # alternate between the tiled and monocle layout
+super + shift + s
+    bspc desktop -l next
 
 # send the newest marked node to the newest preselected node
 super + y
 	bspc node newest.marked.local -n newest.!automatic.local
 
 # swap the current node and the biggest window
+# TODO: this can send window to any other screen
 super + g
 	bspc node -s biggest.window
 
-super + alt + d
-    new-bg.sh
+super + alt + n
+    /home/kramar/bin/new-bg
+
+super + alt + s
+    /home/kramar/bin/rand-bg
 
 #
 # state/flags
@@ -51,7 +74,7 @@ super + {t,shift + t,s,f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 # set the node flags
-super + ctrl + {m,x,y,z}
+super + alt + {m,x,y,z}
 	bspc node -g {marked,locked,sticky,private}
 
 #
@@ -79,7 +102,7 @@ super + {grave,Tab}
 	bspc {node,desktop} -f last
 
 # focus the older or newer node in the focus history
-super + {o,i}
+super + shift + {h,l}
 	bspc wm -h off; \
 	bspc node {older,newer} -f; \
 	bspc wm -h on
@@ -93,15 +116,15 @@ super + {_,shift + }{1-9,0}
 #
 
 # preselect the direction
-super + ctrl + {h,j,k,l}
+alt + ctrl + {h,j,k,l}
 	bspc node -p {west,south,north,east}
 
 # preselect the ratio
-super + ctrl + {1-9}
+alt + ctrl + {1-9}
 	bspc node -o 0.{1-9}
 
 # cancel the preselection for the focused node
-super + ctrl + space
+alt + ctrl + space
 	bspc node -p cancel
 
 # cancel the preselection for the focused desktop
@@ -112,13 +135,17 @@ super + ctrl + shift + space
 # move/resize
 #
 
-# expand a window by moving one of its side outward
-super + alt + {h,j,k,l}
-	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+super + alt + h
+    bspc node @east -r -40 || bspc node @west -r -40
 
-# contract a window by moving one of its side inward
-super + alt + shift + {h,j,k,l}
-	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+super + alt + l
+    bspc node @west -r +40 || bspc node @east -r +40
+
+super + alt + j
+    bspc node @south -r +35 || bspc node @north -r +35
+
+super + alt + k
+    bspc node @north -r -35 || bspc node @south -r -35
 
 # move a floating window
 super + {Left,Down,Up,Right}

@@ -19,19 +19,19 @@ window:
   # Specified in number of columns/lines, not pixels. If both are zero this
   # setting is ignored.
   dimensions:
-    columns: 100
-    lines: 40
+    columns: 80
+    lines: 30
 
   # Window padding (changes require restart)
   #
   # Blank space added around the window in pixels. This padding is not scaled by
   # DPI and the specified value is always added at both opposing sides.
   padding:
-    x: 4
-    y: 4
+    x: 0
+    y: 0
 
   # Spread additional padding evenly around the terminal content.
-  dynamic_padding: true
+  dynamic_padding: false
 
   # Window decorations
   #
@@ -41,6 +41,8 @@ window:
   # - transparent: title bar, transparent background and title bar buttons
   # - buttonless: title bar, transparent background, but no title bar buttons
   decorations: none
+
+  opacity: .9
 
   # Startup Mode (changes require restart)
   #
@@ -67,7 +69,7 @@ font:
   # The normal (roman) font face to use.
   # Style can be specified to pick a specific face.
   normal:
-    family: "Fira Code"
+    family: Fira Code
     #style: Retina
     #family: Hack
     #family: "Source Code Pro"
@@ -75,7 +77,7 @@ font:
   # The bold font face
   bold:
     #family: Hack
-    family: "Fira Code"
+    family: Fira Code
     #tyle: Retina
     #family: "Source Code Pro"
 
@@ -117,100 +119,10 @@ font:
   #
   # This is a global setting and will require a log out or restart to take
   # effect.
-  use_thin_strokes: true
+  #use_thin_strokes: true
 
 # When true, bold text is drawn using the bright variant of colors.
 draw_bold_text_with_bright_colors: false
-
-# Use custom cursor colors. If true, display the cursor in the cursor.foreground
-# and cursor.background colors, otherwise invert the colors of the cursor.
-# custom_cursor_colors: false
-
-# # Colors
-colors:
-#   # Default colours
-#   primary:
-#     background: '0xffffff'
-#     foreground: '0x2e2e2d'
-
-#   # Colors that should be used to draw the terminal cursor. If these are unset,
-#   # the cursor colour will be the inverse of the cell colour.
-#   # cursor:
-#   #   text: '0x2e2e2d'
-#   #   # text: '0x000000'
-#   #   cursor: '0xffffff'
-
-#   # Normal colors
-#   normal:
-#     black:   '0x000000'
-#     red:     '0xc62828'
-#     green:   '0x558b2f'
-#     yellow:  '0xf9a825'
-#     blue:    '0x1565c0'
-#     magenta: '0x6a1e9a'
-#     cyan:    '0x00838f'
-#     white:   '0xf2f2f2'
-
-#   # Bright colors
-#   bright:
-#     black:   '0x545454'
-#     red:     '0xef5350'
-#     green:   '0x8bc34a'
-#     yellow:  '0xffeb3b'
-#     blue:    '0x64b5f6'
-#     magenta: '0xba68c8'
-#     cyan:    '0x26c6da'
-#     white:   '0xe0e0e0'
-
-#   # Dim colors (Optional)
-#   dim:
-#     black:   '0x333333'
-#     red:     '0xf2777a'
-#     green:   '0x99cc99'
-#     yellow:  '0xffcc66'
-#     blue:    '0x6699cc'
-#     magenta: '0xcc99cc'
-#     cyan:    '0x66cccc'
-#     white:   '0xdddddd'
-
-  # Tomorrow Night Bright
-  primary:
-    background: '0x000000'
-    foreground: '0xeaeaea'
-
-  cursor:
-    text: '0x000000'
-    cursor: '0xffffff'
-
-  normal:
-    black:   '0x000000'
-    red:     '0xd54e53'
-    green:   '0xb9ca4a'
-    yellow:  '0xe6c547'
-    blue:    '0x7aa6da'
-    magenta: '0xc397d8'
-    cyan:    '0x70c0ba'
-    white:   '0xffffff'
-
-  bright:
-    black:   '0x666666'
-    red:     '0xff3334'
-    green:   '0x9ec400'
-    yellow:  '0xe7c547'
-    blue:    '0x7aa6da'
-    magenta: '0xb77ee0'
-    cyan:    '0x54ced6'
-    white:   '0xffffff'
-
-  # Indexed Colors
-  #
-  # The indexed colors include all colors from 16 to 256.
-  # When these are not set, they're filled with sensible defaults.
-  #
-  # Example:
-  #   `- { index: 16, color: '0xff00ff' }`
-  #
-  indexed_colors: []
 
 # Visual Bell
 #
@@ -238,9 +150,6 @@ bell:
   animation: EaseOutExpo
   color: '0xffffff'
   duration: 0
-
-# Background opacity
-background_opacity: 1.0
 
 # Key bindings
 #
@@ -475,7 +384,7 @@ cursor:
 # dynamic_title: false
 
 # Live config reload (changes require restart)
-live_config_reload: true
+live_config_reload: false
 
 # Shell
 #

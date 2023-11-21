@@ -7,7 +7,7 @@
 	cmd = " "
 	trustExitCode = true
 [user]
-	name = Alexey Kramarenko
+	name = Oleksii Kramarenko
 	email = kramar42@gmail.com
 [commit]
 	template = /Users/kramar/.stCommitMsg
@@ -37,5 +37,9 @@
 
     # list aliases
     la = "!git config -l | grep alias | cut -c 7-"
+[init]
+	defaultBranch = master
+[credential]
+	helper = cache --timeout=86400
 [pull]
 	ff = only

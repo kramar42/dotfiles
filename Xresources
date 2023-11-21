@@ -1,3 +1,14 @@
 !Xcursor.theme: default
 Xcursor.size: 32
 Xft.dpi: 144
+Xft.antialias: true
+Xft.rgba: rgb
+Xft.hinting: true
+Xft.hintstyle: hintfull
+Xft.autohint: falase
+!URxvt.font: xft:Inconsolata:pixelsize=20
+!URxvt.font: xft:Liberation Mono:pixelsize=20
+URxvt.font: xft:Fira Code:pixelsize=20
+URxvt.scrollBar: false
+URxvt.transparent: true
+URxvt.shading: 20

@@ -1,30 +1,42 @@
-export EDITOR='vim'
 
-export LESS_TERMCAP_md="${yellow}"
-export MANPAGER='less -X'
+#THIS BREAKS GIT CLONING OVER SSH
+#cat /home/kramar/.cache/wal/sequences
 
-#export JAVA_HOME=$(/usr/libexec/java_home)
-#export _JAVA_AWT_WM_NONREPARENTING=1
-#export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
-#export AWT_TOOLKIT=MToolkit
-#export JDK_JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
-#export _JAVA_OPTIONS='-Dsun.java2d.opengl=true'
+### PATHS
 
+export QHOME="/usr/local/lib/q"
 export GOPATH=$HOME/code/go
+export JAVA_HOME=$(java-config --select-vm=graalvm-11 -O)
+export PATH=$HOME/bin:$HOME/.local/bin:$JAVA_HOME/bin:$GOPATH/bin:$HOME/.cargo/bin:$HOME/.krew/bin:$PATH:/usr/lib64/qt5/bin
 
-export PATH=$HOME/bin:$HOME/.local/bin:$GOPATH/bin:$PATH
 
-export DJEM_HOME=$HOME/code/djem
-export BLUEGLUE_HOME=$HOME/code/blueglue
-
-export MONITOR="DP-0"
+### EXPORTS
 
 export LANG='en_US.UTF-8'
 export LC_ALL='en_US.UTF-8'
 
+export EDITOR='nvim'
+export LESS_TERMCAP_md="${yellow}"
+export MANPAGER='less -X'
+export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
+
+# TODO needed this for xclip
+#export DISPLAY=:0.0
+export MONITOR="DP-0"
+export NO_AT_BRIDGE=1
+export LIBVA_DRIVER_NAME=nvdec
+
 export HISTSIZE='32768'
 export HISTFILESIZE="${HISTSIZE}"
+export HISTFILE=$HOME/.cache/bash.history
 export HISTCONTROL=ignoreboth:erasedups
+export LESSHISTFILE=$HOME/.cache/less.history
+export NODE_REPL_HISTORY=$HOME/.cache/node.history
+export PSQL_HISTORY=$HOME/.cache/psql.history
+export PYTHONHISTORY=$HOME/.cache/python.history
+
+### BASH OPTS
+
 shopt -s histappend
 shopt -s checkwinsize
 shopt -s cdspell
@@ -34,6 +46,8 @@ shopt -s autocd
 for option in autocd globstar; do
     shopt -s "$option" 2> /dev/null;
 done
+
+### FUNCTIONS
 
 c() {
     cd "$@" && ls -GF
@@ -87,18 +101,34 @@ function fs() {
     fi;
 }
 
-export PS1='   \h:\W \$ '
+### PROMPT
+
+export PS1='╟⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻\n║ \h:\w\n╟─╼ '
+export PS1='  \h:\w\n> '
 export SUDO_PS1='   \h:\W \$ '
 
-export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
-export QHOME="/usr/local/lib/q"
+function prompt_right() {
+  echo -e "\033[0;36m\\\t \033[0m"
+}
+
+function prompt_left() {
+  echo -e "\033[0;35m \h:\w\033[0m"
+}
+
+function prompt() {
+    compensate=5
+    PS1=$(printf "%*s\r%s\n > " "$(($(tput cols)+${compensate}))" "$(prompt_right)" "$(prompt_left)")
+}
+PROMPT_COMMAND=prompt
+
+### ALIASES
 
 alias ..='c ..'
 
 alias t='tmux attach'
 
 alias e='emacsclient -n'
-alias v='vim'
+alias v='nvim'
 
 alias q='rlwrap q'
 
@@ -111,10 +141,20 @@ alias du='du -ch'
 
 alias fbg='feh --no-fehbg --bg-center https://thisartworkdoesnotexist.com/'
 
+alias r='ranger'
+alias k='kubectl'
+
+alias pbcopy='xclip -sel clip'
+
+### AUTOCOMPLETE
+
 if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
      complete -o default -o nospace -F _git g;
 fi
 
 tty -s && stty werase ^- 2>/dev/null
+source <(kubectl completion bash)
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f ~/.config/broot/launcher/bash/br ] && source ~/.config/broot/launcher/bash/br
+

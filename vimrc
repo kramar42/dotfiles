@@ -7,7 +7,9 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'qpkorr/vim-bufkill'
 
-Plug 'vim-airline/vim-airline'
+Plug 'pseewald/vim-anyfold'
+
+"Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 "Plug 'powerline/powerline'
 
@@ -17,7 +19,8 @@ Plug 'rking/ag.vim'
 " colorschemes
 "Plug 'tomasr/molokai'
 Plug 'vim-scripts/xoria256.vim'
-"Plug 'altercation/vim-colors-solarized'
+Plug 'altercation/vim-colors-solarized'
+Plug 'dylanaraps/wal.vim'
 
 Plug 'elzr/vim-json'
 
@@ -30,7 +33,7 @@ Plug 'junegunn/fzf.vim'
 " lisp related
 Plug 'kien/rainbow_parentheses.vim'
 "Plug 'vim-scripts/paredit.vim', { 'for': 'clojure' }
-Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
+"Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
 "Plug 'tpope/vim-leiningen', { 'for': 'clojure' }
 "Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 "Plug 'jpalardy/vim-slime', { 'for': 'clojure' }
@@ -50,7 +53,7 @@ Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
 " other stuff
 Plug 'kana/vim-textobj-user'
 "Plug 'tpope/vim-classpath'
-Plug 'airblade/vim-gitgutter'
+"Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tmux-plugins/vim-tmux-focus-events'
@@ -87,6 +90,7 @@ set noeol
 set backupdir=~/.vim/backup
 set directory=~/.vim/swap
 set undodir=~/.vim/undo
+set viminfo+=n~/.vim/viminfo
 
 " Show “invisible” characters
 set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
@@ -109,8 +113,16 @@ set tildeop             " behave tilda like an operator
 "-----folding------------
 set foldenable          " turn on folding
 set foldlevel=1         " don't autofold
-set foldmethod=marker   " fold on markers only
+set foldmethod=syntax
 set foldopen=search,block,hor,mark,percent,quickfix,tag
+
+"autocmd Filetype * AnyFoldActivate
+"let g:anyfold_fold_comments=1
+"set foldlevel=0
+"hi Folded term=NONE cterm=NONE
+"hi Folded term=underline
+"let g:anyfold_fold_display=0
+"set foldclose=all
 
 "-----set-tab-behavior---
 set tabstop=4           " default tab - 4 spaces
@@ -158,18 +170,18 @@ set shortmess=a
 if has('gui_running')
     let g:solarized_termcolors=256
     set background=dark
-    colorscheme solarized
+    colorscheme wal
 else
     "let g:solarized_termcolors=256
     "set background=light
     "colorscheme solarized
-    colorscheme xoria256
+    colorscheme wal
 endif
 set laststatus=2        " last windows always have status line
 set guicursor+=a:blinkon0
 
 "-----ruler--------------
-set ruler               " ruler on
+"set ruler               " ruler on
 "------------------------}}}
 "-----key-mapping--------{{{
 let mapleader="\<space>"
@@ -190,6 +202,7 @@ nnoremap <leader>W  :w !sudo tee % > /dev/null<CR>
 nnoremap <leader>t  :NERDTreeToggle<CR>
 nnoremap <leader>d  :BD<CR>
 
+" poor man's zen mode?
 let s:hidden_all = 0
 function! ToggleHiddenAll()
     if s:hidden_all  == 0
@@ -221,6 +234,10 @@ vnoremap : ;
 "nnoremap <silent> <C-o> :b#<CR>
 "nnoremap <silent> <C-n> :bn<CR>
 "nnoremap <silent> <C-p> :bp<CR>
+
+"-----work with tabs--
+nnoremap <silent> <C-h> :tabprev<CR>
+nnoremap <silent> <C-l> :tabnext<CR>
 
 "-----work with wrapped lines
 nnoremap <silent> j gj

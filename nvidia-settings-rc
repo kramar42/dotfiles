@@ -1,8 +1,8 @@
 #
 # /home/kramar/.nvidia-settings-rc
 #
-# Configuration file for nvidia-settings - the NVIDIA X Server Settings utility
-# Generated on Tue Jun  8 02:08:54 2021
+# Configuration file for nvidia-settings - the NVIDIA Settings utility
+# Generated on Thu Feb 23 21:42:16 2023
 #
 
 # ConfigProperties:
@@ -11,11 +11,10 @@ RcFileLocale = C
 DisplayStatusBar = Yes
 SliderTextEntries = Yes
 IncludeDisplayNameInConfigFile = No
-ShowQuitDialog = Yes
 UpdateRulesOnProfileNameChange = Yes
-Timer = Memory_Used_(GPU_0),Yes,3000
-Timer = Thermal_Monitor_(GPU_0),Yes,1000
 Timer = PowerMizer_Monitor_(GPU_0),Yes,1000
+Timer = Thermal_Monitor_(GPU_0),Yes,1000
+Timer = Memory_Used_(GPU_0),Yes,3000
 
 # Attributes:
 
@@ -82,3 +81,4 @@ Timer = PowerMizer_Monitor_(GPU_0),Yes,1000
 [DPY:DP-5]/ColorSpace=0
 [DPY:DP-5]/ColorRange=0
 [DPY:DP-5]/SynchronousPaletteUpdates=0
+[GPU:0]/GPUPowerMizerMode=2
