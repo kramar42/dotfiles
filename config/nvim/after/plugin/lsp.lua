@@ -49,8 +49,6 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 lsp.setup()
--- require'lspconfig'.clojure_lsp.setup{}
--- require'lspconfig'.jdtls.setup{}
 
 vim.diagnostic.config({
     virtual_text = true

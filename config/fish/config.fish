@@ -12,6 +12,7 @@ set -x JAVA_HOME (/usr/libexec/java_home -v 19)
 set -x GOPATH ~/code/go
 set -x DJEM_HOME ~/code/djem
 set -x BLUEGLUE_HOME ~/code/blueglue
+set -x EDITOR nvim
 set -gx PATH $PATH $HOME/.krew/bin
 
 function sudo

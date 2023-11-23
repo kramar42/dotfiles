@@ -53,6 +53,7 @@ require('lazy').setup({
 		  ts_update()
 	  end,
   },
+  'nvim-treesitter/nvim-treesitter-context',
   -- lsp
   {
 	  'VonHeikemen/lsp-zero.nvim',

@@ -4,6 +4,9 @@ vim.g.mapleader = ' '
 vim.keymap.set({'n', 'v'}, ':', ';')
 vim.keymap.set({'n', 'v'}, ';', ':')
 
+vim.keymap.set('n', '<C-h>', ':bp<CR>')
+vim.keymap.set('n', '<C-l>', ':bn<CR>')
+
 vim.keymap.set('n', '<leader>w', ':w<CR>')
 
 vim.keymap.set('n', '<leader>q',  ':qall!<CR>')
