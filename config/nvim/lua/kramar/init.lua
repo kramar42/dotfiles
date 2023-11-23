@@ -16,20 +16,24 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-  -- example
-  'folke/which-key.nvim',
-  {
-	  'folke/neoconf.nvim', cmd = 'Neoconf'
-  },
+  -- nvim setup for init.lua and plugin development
   'folke/neodev.nvim',
   -- undo
   'mbbill/undotree',
+  -- git
   'tpope/vim-fugitive',
   -- telescope
   {
 	  'nvim-telescope/telescope.nvim',
-	  tag = '0.1.4',
 	  dependencies = { 'nvim-lua/plenary.nvim' }
+  },
+  {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+  },
+  {
+    'nvim-telescope/telescope-file-browser.nvim',
+    dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' }
   },
   -- colorscheme
   {
@@ -59,12 +63,12 @@ require('lazy').setup({
 		  {'williamboman/mason-lspconfig.nvim'},
 
 		  -- Autocompletion
-		  {'hrsh7th/nvim-cmp'},
 		  {'hrsh7th/cmp-buffer'},
-		  {'hrsh7th/cmp-path'},
-		  {'saadparwaiz1/cmp_luasnip'},
 		  {'hrsh7th/cmp-nvim-lsp'},
 		  {'hrsh7th/cmp-nvim-lua'},
+		  {'hrsh7th/cmp-path'},
+		  {'hrsh7th/nvim-cmp'},
+		  {'saadparwaiz1/cmp_luasnip'},
 
 		  -- Snippets
 		  {'L3MON4D3/LuaSnip'},
