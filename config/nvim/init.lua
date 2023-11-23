@@ -20,6 +20,22 @@ vim.opt.tabstop = 2
 vim.opt.termguicolors = true
 vim.opt.updatetime = 50
 vim.opt.wrap = false
+-- vim.opt.smoothscroll = true
+vim.opt.cursorline = true
+-- cursorline highlighting control
+local group = vim.api.nvim_create_augroup("CursorLineControl", { clear = true })
+local set_cursorline = function(event, value, pattern)
+  vim.api.nvim_create_autocmd(event, {
+    group = group,
+    pattern = pattern,
+    callback = function()
+      vim.opt_local.cursorline = value
+    end,
+  })
+end
+set_cursorline("WinLeave", false)
+set_cursorline("WinEnter", true)
+set_cursorline("FileType", false, "TelescopePrompt")
 --
 -- keymap
 --
@@ -28,43 +44,44 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "<C-n>", ":bn<CR>")
-vim.keymap.set("n", "<C-p>", ":bp<CR>")
+vim.keymap.set("n", "<C-n>", "<cmd>bn<CR>")
+vim.keymap.set("n", "<C-p>", "<cmd>bp<CR>")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "<CR>", ":nohl<CR>", { silent = true })
 vim.keymap.set("n", "<leader><leader>", ":so<CR>", { silent = true })
 vim.keymap.set("n", "<leader>=", vim.lsp.buf.format)
 vim.keymap.set("n", "<leader>W", ":w !sudo tee % > /dev/null<CR>")
 vim.keymap.set("n", "<leader>Y", '"+Y')
-vim.keymap.set("n", "<leader>cd", ":cd %:p:h<CR>:pwd<CR>")
-vim.keymap.set("n", "<leader>cn", ":cn<CR>")
-vim.keymap.set("n", "<leader>cp", ":cp<CR>")
-vim.keymap.set("n", "<leader>d", ":bd!<CR>")
-vim.keymap.set("n", "<leader>f", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>cd", "<cmd>cd %:p:h<CR>:pwd<CR>")
+vim.keymap.set("n", "<leader>cn", "<cmd>cn<CR>")
+vim.keymap.set("n", "<leader>cp", "<cmd>cp<CR>")
+vim.keymap.set("n", "<leader>d", "<cmd>bd!<CR>")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
-vim.keymap.set("n", "<leader>k", ":bn<CR>:bd#<CR>")
+vim.keymap.set("n", "<leader>k", "<cmd>bn<CR>:bd#<CR>")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
-vim.keymap.set("n", "<leader>m", ":make<CR>")
-vim.keymap.set("n", "<leader>q", ":qall!<CR>")
+vim.keymap.set("n", "<leader>m", "<cmd>make<CR>")
+vim.keymap.set("n", "<leader>q", "<cmd>qall!<CR>")
+vim.keymap.set("n", "<leader>w", "<cmd>w<CR>")
+vim.keymap.set("n", "<leader>x", "<cmd>xa<CR>")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-vim.keymap.set("n", "<leader>w", ":w<CR>")
-vim.keymap.set("n", "<leader>x", ":xa<CR>")
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
-vim.keymap.set("n", "H", "^")
 vim.keymap.set("n", "J", "mzJ`z")
-vim.keymap.set("n", "L", "$")
 vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "J", "<cmd>m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", "<cmd>m '<-2<CR>gv=gv")
 vim.keymap.set("x", "<leader>p", '"_dP')
 vim.keymap.set({ "n", "v" }, ":", ";")
 vim.keymap.set({ "n", "v" }, ";", ":")
 vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
+vim.keymap.set({ "n", "v" }, "H", "^")
+vim.keymap.set({ "n", "v" }, "L", "$")
+-- vim.keymap.set("n", "<leader>f", vim.cmd.Ex)
 -- FIXME
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+-- TODO do i need this?
+vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 --
 -- load lazy
 --
@@ -84,6 +101,7 @@ vim.opt.rtp:prepend(lazypath)
 -- load plugins
 --
 require("lazy").setup({
+  "folke/neodev.nvim",
   -- undo
   --
   {
@@ -102,7 +120,9 @@ require("lazy").setup({
   {
     "kdheepak/lazygit.nvim",
     keys = {
-      { "<leader>gg", ":LazyGit<CR>" }
+      { "<leader>gg", ":LazyGit<CR>" },
+      { "<leader>gf", ":LazyGitFilterCurrentFile<CR>" },
+      { "<leader>ge", ":LazyGitFilter<CR>" },
     }
   },
   -- telescope
@@ -123,6 +143,7 @@ require("lazy").setup({
             override_file_sorter = true,
           },
           file_browser = {
+            theme = "ivy",
             hijack_netrw = true,
             mappings = {
               ["i"] = {},
@@ -135,23 +156,32 @@ require("lazy").setup({
       require("telescope").load_extension("fzf")
 
       local builtin = require("telescope.builtin")
-      vim.keymap.set("n", "<C-p>", builtin.git_files, {})
-      vim.keymap.set("n", "<leader>g", function()
-        builtin.grep_string({ search = vim.fn.input("Grep> ") })
+      -- vim.keymap.set("n", "<C-p>", builtin.git_files, {})
+      vim.keymap.set("n", "<leader>s", function()
+        builtin.grep_string({ search = vim.fn.input("> ") })
       end)
       vim.keymap.set("n", "<leader>lg", builtin.live_grep, {})
       vim.keymap.set("n", "<leader>e", builtin.find_files, {})
       vim.keymap.set("n", "<leader>fn", function()
         builtin.find_files({ cwd = "~/.dotfiles/config/nvim" })
       end)
+      vim.api.nvim_set_keymap("n", "<space>ff", ":Telescope file_browser path=%:p:h select_buffer=true<CR>",
+        { noremap = true }
+      )
+      vim.keymap.set("n", "<leader>h", builtin.oldfiles, {})
       vim.keymap.set("n", "<leader>b", builtin.buffers, {})
+      vim.keymap.set("n", "<leader>/", function()
+        builtin.current_buffer_fuzzy_find(require("telescope.themes").get_ivy())
+      end)
       vim.keymap.set("n", "<leader>vh", builtin.help_tags, {})
     end,
   },
   {
     "nvim-telescope/telescope-fzf-native.nvim",
     build =
-    "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+        "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && " ..
+        "cmake --build build --config Release && " ..
+        "cmake --install build --prefix build",
   },
   -- colorscheme
   --
@@ -163,6 +193,7 @@ require("lazy").setup({
       vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
     end,
   },
+  "nvim-tree/nvim-web-devicons",
   {
     "folke/zen-mode.nvim",
     config = function()
@@ -252,6 +283,7 @@ require("lazy").setup({
         }
       })
 
+      ---@diagnostic disable-next-line: unused-local
       lsp.on_attach(function(client, bufnr)
         local opts = { buffer = bufnr, remap = false }
 
@@ -263,6 +295,8 @@ require("lazy").setup({
         vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
         vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
         vim.keymap.set("n", "<leader>rr", function() vim.lsp.buf.references() end, opts)
+        vim.keymap.set("n", "<leader>ri", function() vim.lsp.buf.incoming_calls() end, opts)
+        vim.keymap.set("n", "<leader>ro", function() vim.lsp.buf.outgoing_calls() end, opts)
         vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
         vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
       end)
@@ -291,4 +325,3 @@ require("lazy").setup({
     },
   }
 })
-
