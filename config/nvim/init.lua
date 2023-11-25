@@ -19,6 +19,8 @@ vim.opt.softtabstop = 2
 vim.opt.tabstop = 2
 vim.opt.termguicolors = true
 vim.opt.updatetime = 50
+vim.opt.foldenable = false
+vim.opt.foldmethod = "expr"
 vim.opt.wrap = false
 -- vim.opt.smoothscroll = true
 vim.opt.cursorline = true
@@ -40,6 +42,7 @@ set_cursorline("FileType", false, "TelescopePrompt")
 -- keymap
 --
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
@@ -59,7 +62,6 @@ vim.keymap.set("n", "<leader>d", "<cmd>bd!<CR>")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>bn<CR>:bd#<CR>")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
-vim.keymap.set("n", "<leader>m", "<cmd>make<CR>")
 vim.keymap.set("n", "<leader>q", "<cmd>qall!<CR>")
 vim.keymap.set("n", "<leader>w", "<cmd>w<CR>")
 vim.keymap.set("n", "<leader>x", "<cmd>xa<CR>")
@@ -163,7 +165,7 @@ require("lazy").setup({
       vim.keymap.set("n", "<leader>lg", builtin.live_grep, {})
       vim.keymap.set("n", "<leader>e", builtin.find_files, {})
       vim.keymap.set("n", "<leader>fn", function()
-        builtin.find_files({ cwd = "~/.dotfiles/config/nvim" })
+        builtin.find_files({ cwd = "~/code/dotfiles/" })
       end)
       vim.api.nvim_set_keymap("n", "<space>ff", ":Telescope file_browser path=%:p:h select_buffer=true<CR>",
         { noremap = true }
@@ -188,7 +190,7 @@ require("lazy").setup({
   {
     "christianchiarulli/nvcode-color-schemes.vim",
     config = function()
-      vim.cmd.colorscheme("xoria")
+      vim.cmd.colorscheme("onedark")
       vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
       vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
     end,
@@ -232,8 +234,7 @@ require("lazy").setup({
   {
     "nvim-treesitter/nvim-treesitter",
     config = function()
-      local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
-      ts_update()
+      require("nvim-treesitter.install").update({ with_sync = true })()
       require("nvim-treesitter.configs").setup({
         ensure_installed = {},
         sync_install = false,
@@ -242,7 +243,11 @@ require("lazy").setup({
           enable = true,
           additional_vim_regex_highlighting = false,
         },
+        indent = {
+          enable = true,
+        },
       })
+      vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
     end,
   },
   "nvim-treesitter/nvim-treesitter-context",
@@ -291,6 +296,7 @@ require("lazy").setup({
         vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
         vim.keymap.set("n", "<leader>ws", function() vim.lsp.buf.workspace_symbol() end, opts)
         vim.keymap.set("n", "<leader>d", function() vim.diagnostic.open_float() end, opts)
+        vim.keymap.set("n", "<leader>m", "<cmd>Telescope lsp_document_symbols<CR>")
         vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
         vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
         vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
@@ -323,5 +329,42 @@ require("lazy").setup({
       { "L3MON4D3/LuaSnip" },
       { "rafamadriz/friendly-snippets" },
     },
-  }
+  },
+  {
+    "Olical/conjure",
+    ft = { "clojure" },
+    dependencies = {
+        {
+            "PaterJason/cmp-conjure",
+            config = function()
+                local cmp = require("cmp")
+                local config = cmp.get_config()
+                table.insert(config.sources, {
+                    name = "buffer",
+                    option = {
+                        sources = {
+                            { name = "conjure" },
+                        },
+                    },
+                })
+                cmp.setup(config)
+            end,
+        },
+    },
+    config = function()
+        require("conjure.main").main()
+        require("conjure.mapping")["on-filetype"]()
+    end,
+  },
+  {
+    "julienvincent/nvim-paredit",
+    config = function()
+      require("nvim-paredit").setup({
+        indent = {
+          enabled = true,
+        },
+      })
+    end
+  },
+
 })
