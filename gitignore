@@ -1,3 +1,4 @@
+.classpath
 *.pyc
 */.m2/
 .DS_Store
