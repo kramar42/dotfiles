@@ -1,19 +1,23 @@
-set -x PATH /opt/homebrew/bin $PATH /usr/local/bin /users/kramar/code/scripts/sh /users/kramar/.cargo/bin /users/kramar/code/go/bin
 
 set fish_greeting
 function fish_prompt
     echo "("(prompt_pwd)") λ "
 end
 
-#set -x JAVA_HOME (/usr/libexec/java_home -v 1.8.0)
-#set -x JAVA_HOME (/usr/libexec/java_home -v 11)
-#set -x JAVA_HOME '/opt/homebrew/opt/java/libexec/openjdk.jdk/Contents/Home'
-set -x JAVA_HOME (/usr/libexec/java_home -v 19)
 set -x GOPATH ~/code/go
-set -x DJEM_HOME ~/code/djem
-set -x BLUEGLUE_HOME ~/code/blueglue
+set -x JAVA_HOME (/usr/libexec/java_home -v 19)
+
+fish_add_path $GOPATH/bin
+fish_add_path $HOME/.cargo/bin
+fish_add_path $HOME/.tmux/plugins/t-smart-tmux-session-manager/bin
+fish_add_path $HOME/.krew/bin
+
+
+set -x PATH /opt/homebrew/bin /usr/local/bin $PATH
+
+set -g fish_user_paths "/usr/local/sbin" $fish_user_paths
+
 set -x EDITOR nvim
-set -gx PATH $PATH $HOME/.krew/bin
 
 function sudo
     if test "$argv" = !!
@@ -23,19 +27,19 @@ function sudo
     end
 end
 
-function config
-    command nvim ~/.config/fish/config.fish
-end
-
-alias v="nvim"
-alias l="ls"
-alias ll="ls -lh"
-alias t="tmux"
 alias g="git"
 alias k="kubectl"
+alias l="ls"
+alias lg="lazygit"
+alias ll="ls -lh"
+alias r="ranger"
+alias v="nvim"
 
-alias dc="docker container"
-alias di="docker image"
+zoxide init fish | source
+
+function setver --wraps mvn --description 'alias ...'
+    mvn versions:set -DgenerateBackupPoms=false -DnewVersion=$argv
+end
 
 function battery-sleep
     if test "$argv" = "off"
@@ -46,7 +50,6 @@ function battery-sleep
         command sudo pmset -b disablesleep 0
     end
 end
-set -g fish_user_paths "/usr/local/sbin" $fish_user_paths
 
 function upgrade
     command sudo softwareupdate -i -a
@@ -60,17 +63,5 @@ function upgrade
     command sudo gem update --system -n /usr/local/bin
     command sudo gem update -n /usr/local/bin
     command sudo gem cleanup -n /usr/local/bin
-end
-
-function ta
-    command tmux attach
-end
-
-function e
-    command emacsclient -n
-end
-
-function setver --wraps mvn --description 'alias ...'
-    mvn versions:set -DgenerateBackupPoms=false -DnewVersion=$argv
 end
 

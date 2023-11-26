@@ -7,7 +7,7 @@
 export GOPATH=$HOME/code/go
 export JAVA_HOME=$(java-config --select-vm=graalvm-11 -O)
 export KUBECONFIG=$HOME/.kube/config
-export PATH=$HOME/bin:$HOME/.local/bin:$GOPATH/bin:$HOME/.cargo/bin:$HOME/.krew/bin:/usr/lib64/qt5/bin:$JAVA_HOME/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:$GOPATH/bin:$HOME/.cargo/bin:$HOME/.krew/bin:/usr/lib64/qt5/bin:$JAVA_HOME/bin:$HOME/.tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
 
 ### EXPORTS
 
