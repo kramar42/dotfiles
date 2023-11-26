@@ -1,5 +1,5 @@
 [core]
-	excludesfile = $HOME/.gitignore
+	excludesfile = ~/.gitignore
 [difftool "sourcetree"]
 	cmd = vimdiff $LOCAL $REMOTE
     path = 

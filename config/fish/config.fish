@@ -13,6 +13,10 @@ fish_add_path /opt/homebrew/bin
 fish_add_path /usr/local/bin
 fish_add_path /usr/local/sbin
 
+# better cd
+zoxide init fish | source
+
+alias cd="z"
 alias g="git"
 alias k="kubectl"
 alias l="ls"
@@ -20,9 +24,6 @@ alias lg="lazygit"
 alias ll="ls -lh"
 alias r="ranger"
 alias v="nvim"
-
-# better cd
-zoxide init fish | source
 
 # prompt
 set fish_greeting

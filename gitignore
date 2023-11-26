@@ -2,6 +2,8 @@
 *.orig
 *.pyc
 .DS_Store
+.clj-kondo
+.lsp
 ._*
 .classpath
 .cpcache
