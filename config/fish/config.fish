@@ -1,31 +1,17 @@
-
-set fish_greeting
-function fish_prompt
-    echo "("(prompt_pwd)") λ "
-end
+# env variables
+set -x EDITOR nvim
 
 set -x GOPATH ~/code/go
 set -x JAVA_HOME (/usr/libexec/java_home -v 19)
 
+# path
 fish_add_path $GOPATH/bin
 fish_add_path $HOME/.cargo/bin
-fish_add_path $HOME/.tmux/plugins/t-smart-tmux-session-manager/bin
 fish_add_path $HOME/.krew/bin
-
-
-set -x PATH /opt/homebrew/bin /usr/local/bin $PATH
-
-set -g fish_user_paths "/usr/local/sbin" $fish_user_paths
-
-set -x EDITOR nvim
-
-function sudo
-    if test "$argv" = !!
-        eval command sudo $history[1]
-    else
-        command sudo $argv
-    end
-end
+fish_add_path $HOME/.tmux/plugins/t-smart-tmux-session-manager/bin
+fish_add_path /opt/homebrew/bin
+fish_add_path /usr/local/bin
+fish_add_path /usr/local/sbin
 
 alias g="git"
 alias k="kubectl"
@@ -35,7 +21,14 @@ alias ll="ls -lh"
 alias r="ranger"
 alias v="nvim"
 
+# better cd
 zoxide init fish | source
+
+# prompt
+set fish_greeting
+function fish_prompt
+    echo "("(prompt_pwd)") λ "
+end
 
 function setver --wraps mvn --description 'alias ...'
     mvn versions:set -DgenerateBackupPoms=false -DnewVersion=$argv
