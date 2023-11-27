@@ -21,6 +21,7 @@ vim.opt.termguicolors = true
 vim.opt.updatetime = 50
 vim.opt.foldenable = false
 vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.wrap = false
 vim.opt.cursorline = true
 vim.opt.cmdheight = 0
@@ -284,8 +285,13 @@ require("lazy").setup({
   --
   {
     "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter-context",
+      "nvim-treesitter/nvim-treesitter-textobjects",
+    },
     config = function()
-      require("nvim-treesitter.install").update({ with_sync = true })()
+      -- require("nvim-jtreesitter.install").update({ with_sync = true })()
       require("nvim-treesitter.configs").setup({
         ensure_installed = {},
         sync_install = false,
@@ -297,11 +303,18 @@ require("lazy").setup({
         indent = {
           enable = true,
         },
+        incremental_selection = {
+          enable = true,
+          keymaps = {
+            init_selection = "gnn",
+            node_incremental = "grn",
+            scope_incremental = "grc",
+            node_decremental = "grm",
+          },
+        },
       })
-      vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
     end,
   },
-  "nvim-treesitter/nvim-treesitter-context",
   -- lsp
   --
   {
