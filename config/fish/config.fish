@@ -17,6 +17,7 @@ fish_add_path /usr/local/sbin
 zoxide init fish | source
 
 alias cd="z"
+alias p="python"
 alias g="git"
 alias k="kubectl"
 alias l="ls"

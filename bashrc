@@ -57,6 +57,8 @@ PROMPT_COMMAND=prompt
 ### ALIASES
 
 alias ..="cd .."
+alias p="python"
+alias cd="z"
 alias df="df -H"
 alias du="du -ch"
 alias fbg="feh --no-fehbg --bg-center https://thisartworkdoesnotexist.com/"
@@ -67,7 +69,6 @@ alias la="l -la"
 alias lg="lazygit"
 alias pbcopy="xclip -sel clip"
 alias r="ranger"
-alias ta="tmux attach"
 alias v="nvim"
 
 ### AUTOCOMPLETE

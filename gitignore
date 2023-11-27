@@ -6,6 +6,7 @@
 .lsp
 ._*
 .classpath
+.settings
 .cpcache
 .gitignore
 .gradle

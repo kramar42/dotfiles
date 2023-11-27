@@ -24,6 +24,7 @@ vim.opt.foldmethod = "expr"
 vim.opt.wrap = false
 -- vim.opt.smoothscroll = true
 vim.opt.cursorline = true
+vim.opt.cmdheight = 0
 -- cursorline highlighting control
 local group = vim.api.nvim_create_augroup("CursorLineControl", { clear = true })
 local set_cursorline = function(event, value, pattern)
@@ -351,6 +352,7 @@ require("lazy").setup({
         vim.keymap.set("n", "<leader>ws", function() vim.lsp.buf.workspace_symbol() end, opts)
         vim.keymap.set("n", "<leader>d", function() vim.diagnostic.open_float() end, opts)
         vim.keymap.set("n", "<leader>m", "<cmd>Telescope lsp_document_symbols<CR>")
+        vim.keymap.set("n", "<leader>r", "<cmd>Telescope lsp_references<CR>")
         vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
         vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
         vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
