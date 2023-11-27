@@ -22,10 +22,11 @@ vim.opt.updatetime = 50
 vim.opt.foldenable = false
 vim.opt.foldmethod = "expr"
 vim.opt.wrap = false
--- vim.opt.smoothscroll = true
 vim.opt.cursorline = true
 vim.opt.cmdheight = 0
+--
 -- cursorline highlighting control
+--
 local group = vim.api.nvim_create_augroup("CursorLineControl", { clear = true })
 local set_cursorline = function(event, value, pattern)
   vim.api.nvim_create_autocmd(event, {
@@ -46,26 +47,21 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
-vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
+vim.keymap.set("n", "<C-j>", "<cmd>cn<CR>zz")
+vim.keymap.set("n", "<C-k>", "<cmd>cp<CR>zz")
 vim.keymap.set("n", "<C-n>", "<cmd>bn<CR>")
 vim.keymap.set("n", "<C-p>", "<cmd>bp<CR>")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "<CR>", ":nohl<CR>", { silent = true })
-vim.keymap.set("n", "<leader><leader>", ":so<CR>", { silent = true })
 vim.keymap.set("n", "<leader>=", vim.lsp.buf.format)
 vim.keymap.set("n", "<leader>W", ":w !sudo tee % > /dev/null<CR>")
 vim.keymap.set("n", "<leader>Y", '"+Y')
 vim.keymap.set("n", "<leader>cd", "<cmd>cd %:p:h<CR>:pwd<CR>")
-vim.keymap.set("n", "<leader>cn", "<cmd>cn<CR>")
-vim.keymap.set("n", "<leader>cp", "<cmd>cp<CR>")
-vim.keymap.set("n", "<leader>d", "<cmd>bd!<CR>")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
-vim.keymap.set("n", "<leader>k", "<cmd>bn<CR>:bd#<CR>")
+vim.keymap.set("n", "<leader>d", "<cmd>bn<CR>:bd#<CR>")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>q", "<cmd>qall!<CR>")
 vim.keymap.set("n", "<leader>w", "<cmd>w<CR>")
-vim.keymap.set("n", "<leader>x", "<cmd>xa<CR>")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "N", "Nzzzv")
@@ -80,10 +76,8 @@ vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
 vim.keymap.set({ "n", "v" }, "H", "^")
 vim.keymap.set({ "n", "v" }, "L", "$")
--- vim.keymap.set("n", "<leader>f", vim.cmd.Ex)
--- FIXME
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
--- TODO do i need this?
+vim.keymap.set("n", "<leader>f", vim.cmd.Ex)
+vim.keymap.set("n", "<C-f>", "<cmd>silent !t<CR>")
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 --
 -- icons
@@ -250,6 +244,7 @@ require("lazy").setup({
       vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
     end,
   },
+  "HiPhish/rainbow-delimiters.nvim",
   "nvim-tree/nvim-web-devicons",
   {
     "folke/zen-mode.nvim",
@@ -284,6 +279,7 @@ require("lazy").setup({
       end }
     }
   },
+  "yuttie/comfortable-motion.vim",
   -- syntax
   --
   {
@@ -349,10 +345,10 @@ require("lazy").setup({
 
         vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
         vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-        vim.keymap.set("n", "<leader>ws", function() vim.lsp.buf.workspace_symbol() end, opts)
+        -- vim.keymap.set("n", "<leader>ws", function() vim.lsp.buf.workspace_symbol() end, opts)
         vim.keymap.set("n", "<leader>d", function() vim.diagnostic.open_float() end, opts)
         vim.keymap.set("n", "<leader>m", "<cmd>Telescope lsp_document_symbols<CR>")
-        vim.keymap.set("n", "<leader>r", "<cmd>Telescope lsp_references<CR>")
+        vim.keymap.set("n", "<leader>@", "<cmd>Telescope lsp_references<CR>")
         vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
         vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
         vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
@@ -386,7 +382,6 @@ require("lazy").setup({
       { "rafamadriz/friendly-snippets" },
     },
   },
-
   {
     "jay-babu/mason-null-ls.nvim",
     event = { "BufReadPre", "BufNewFile" },
@@ -408,10 +403,10 @@ require("lazy").setup({
           -- Anything not supported by mason.
         }
       })
-
     end,
   },
-
+  -- clojure
+  --
   {
     "Olical/conjure",
     ft = { "clojure" },
