@@ -5,7 +5,10 @@
 ### PATHS
 
 export GOPATH=$HOME/code/go
-export JAVA_HOME=$(java-config --select-vm=graalvm-11 -O)
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  export JAVA_HOME=$(java-config --select-vm=openjdk-bin-21 -O) # lsp requires 21
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+fi
 export KUBECONFIG=$HOME/.kube/config
 export PATH=$HOME/bin:$HOME/.local/bin:$GOPATH/bin:$HOME/.cargo/bin:$HOME/.krew/bin:/usr/lib64/qt5/bin:$JAVA_HOME/bin:$HOME/.tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
 
@@ -57,7 +60,6 @@ PROMPT_COMMAND=prompt
 ### ALIASES
 
 alias ..="cd .."
-alias p="python"
 alias cd="z"
 alias df="df -H"
 alias du="du -ch"
@@ -67,8 +69,10 @@ alias k="kubectl"
 alias l="ls -GFh"
 alias la="l -la"
 alias lg="lazygit"
-alias pbcopy="xclip -sel clip"
+alias p="python"
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then alias pbcopy="xclip -sel clip"; fi
 alias r="ranger"
+alias s="spotify_player"
 alias v="nvim"
 
 ### AUTOCOMPLETE

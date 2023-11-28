@@ -18,6 +18,7 @@ vim.opt.smartindent = true
 vim.opt.softtabstop = 2
 vim.opt.tabstop = 2
 vim.opt.termguicolors = true
+vim.opt.mouse = "nvic"
 vim.opt.updatetime = 50
 vim.opt.foldenable = false
 vim.opt.foldmethod = "expr"
@@ -48,28 +49,28 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-j>", "<cmd>cn<CR>zz")
-vim.keymap.set("n", "<C-k>", "<cmd>cp<CR>zz")
-vim.keymap.set("n", "<C-n>", "<cmd>bn<CR>")
-vim.keymap.set("n", "<C-p>", "<cmd>bp<CR>")
+vim.keymap.set("n", "<C-j>", "<cmd>cn<cr>zz")
+vim.keymap.set("n", "<C-k>", "<cmd>cp<cr>zz")
+vim.keymap.set("n", "<C-n>", "<cmd>bn<cr>")
+vim.keymap.set("n", "<C-p>", "<cmd>bp<cr>")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "<CR>", ":nohl<CR>", { silent = true })
+vim.keymap.set("n", "<cr>", ":nohl<cr>", { silent = true })
 vim.keymap.set("n", "<leader>=", vim.lsp.buf.format)
-vim.keymap.set("n", "<leader>W", ":w !sudo tee % > /dev/null<CR>")
+vim.keymap.set("n", "<leader>W", ":w !sudo tee % > /dev/null<cr>")
 vim.keymap.set("n", "<leader>Y", '"+Y')
-vim.keymap.set("n", "<leader>cd", "<cmd>cd %:p:h<CR>:pwd<CR>")
-vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
-vim.keymap.set("n", "<leader>d", "<cmd>bn<CR>:bd#<CR>")
-vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
-vim.keymap.set("n", "<leader>q", "<cmd>qall!<CR>")
-vim.keymap.set("n", "<leader>w", "<cmd>w<CR>")
+vim.keymap.set("n", "<leader>cd", "<cmd>cd %:p:h<cr>:pwd<cr>")
+vim.keymap.set("n", "<leader>j", "<cmd>lprev<cr>zz")
+vim.keymap.set("n", "<leader>d", "<cmd>bn<cr>:bd#<cr>")
+vim.keymap.set("n", "<leader>k", "<cmd>lnext<cr>zz")
+vim.keymap.set("n", "<leader>q", "<cmd>qall!<cr>")
+vim.keymap.set("n", "<leader>w", "<cmd>w<cr>")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("v", "J", "<cmd>m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", "<cmd>m '<-2<CR>gv=gv")
+vim.keymap.set("v", "J", "<cmd>m '>+1<cr>gv=gv")
+vim.keymap.set("v", "K", "<cmd>m '<-2<cr>gv=gv")
 vim.keymap.set("x", "<leader>p", '"_dP')
 vim.keymap.set({ "n", "v" }, ":", ";")
 vim.keymap.set({ "n", "v" }, ";", ":")
@@ -78,8 +79,8 @@ vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
 vim.keymap.set({ "n", "v" }, "H", "^")
 vim.keymap.set({ "n", "v" }, "L", "$")
 vim.keymap.set("n", "<leader>f", vim.cmd.Ex)
-vim.keymap.set("n", "<C-f>", "<cmd>silent !t<CR>")
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+vim.keymap.set("n", "<C-f>", "<cmd>silent !t<cr>")
+vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<cr>", { silent = true })
 --
 -- icons
 --
@@ -134,9 +135,9 @@ require("lazy").setup({
   {
     "kdheepak/lazygit.nvim",
     keys = {
-      { "<leader>gg", ":LazyGit<CR>" },
-      { "<leader>gf", ":LazyGitFilterCurrentFile<CR>" },
-      { "<leader>ge", ":LazyGitFilter<CR>" },
+      { "<leader>gg", ":LazyGit<cr>" },
+      { "<leader>gf", ":LazyGitFilterCurrentFile<cr>" },
+      { "<leader>ge", ":LazyGitFilter<cr>" },
     }
   },
   {
@@ -162,8 +163,8 @@ require("lazy").setup({
 
           map("n", "]g", gs.next_hunk, "Next Hunk")
           map("n", "[g", gs.prev_hunk, "Prev Hunk")
-          map({ "n", "v" }, "<leader>gs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
-          map({ "n", "v" }, "<leader>gr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
+          map({ "n", "v" }, "<leader>gs", ":Gitsigns stage_hunk<cr>", "Stage Hunk")
+          map({ "n", "v" }, "<leader>gr", ":Gitsigns reset_hunk<cr>", "Reset Hunk")
           map("n", "<leader>gu", gs.undo_stage_hunk, "Undo Stage Hunk")
           map("n", "<leader>gp", gs.preview_hunk, "Preview Hunk")
           map("n", "<leader>gS", gs.stage_buffer, "Stage Buffer")
@@ -171,7 +172,7 @@ require("lazy").setup({
           map("n", "<leader>gb", function()
             gs.blame_line({ full = true })
           end, "Blame Line")
-          map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
+          map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<cr>", "GitSigns Select Hunk")
         end,
       }
       return C
@@ -217,7 +218,7 @@ require("lazy").setup({
       vim.keymap.set("n", "<leader>fn", function()
         builtin.find_files({ cwd = "~/code/dotfiles/" })
       end)
-      vim.api.nvim_set_keymap("n", "<space>ff", ":Telescope file_browser path=%:p:h select_buffer=true<CR>",
+      vim.api.nvim_set_keymap("n", "<space>ff", ":Telescope file_browser path=%:p:h select_buffer=true<cr>",
         { noremap = true }
       )
       vim.keymap.set("n", "<leader>h", builtin.oldfiles, {})
@@ -281,6 +282,17 @@ require("lazy").setup({
     }
   },
   "yuttie/comfortable-motion.vim",
+  {
+    "wfxr/minimap.vim",
+    config = function ()
+      vim.g.minimap_width = 10
+      vim.g.minimap_auto_start = 1
+      vim.g.minimap_auto_start_win_enter = 1
+    end,
+    keys = {
+      { "<leader>\\", "<cmd>MinimapToggle<cr>" },
+    },
+  },
   -- syntax
   --
   {
@@ -360,8 +372,8 @@ require("lazy").setup({
         vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
         -- vim.keymap.set("n", "<leader>ws", function() vim.lsp.buf.workspace_symbol() end, opts)
         vim.keymap.set("n", "<leader>d", function() vim.diagnostic.open_float() end, opts)
-        vim.keymap.set("n", "<leader>m", "<cmd>Telescope lsp_document_symbols<CR>")
-        vim.keymap.set("n", "<leader>@", "<cmd>Telescope lsp_references<CR>")
+        vim.keymap.set("n", "<leader>m", "<cmd>Telescope lsp_document_symbols<cr>")
+        vim.keymap.set("n", "<leader>@", "<cmd>Telescope lsp_references<cr>")
         vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
         vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
         vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
