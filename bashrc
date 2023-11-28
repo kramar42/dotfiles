@@ -8,6 +8,7 @@ export GOPATH=$HOME/code/go
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   export JAVA_HOME=$(java-config --select-vm=openjdk-bin-21 -O) # lsp requires 21
 elif [[ "$OSTYPE" == "darwin"* ]]; then
+  echo Set OSTYPE in bashrc
 fi
 export KUBECONFIG=$HOME/.kube/config
 export PATH=$HOME/bin:$HOME/.local/bin:$GOPATH/bin:$HOME/.cargo/bin:$HOME/.krew/bin:/usr/lib64/qt5/bin:$JAVA_HOME/bin:$HOME/.tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
