@@ -6,7 +6,7 @@
 
 export GOPATH=$HOME/code/go
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-  export JAVA_HOME=$(java-config --select-vm=openjdk-bin-21 -O) # lsp requires 21
+  export JAVA_HOME=$(java-config --select-vm=openjdk-21 -O) # lsp requires 21
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   echo Set OSTYPE in bashrc
 fi

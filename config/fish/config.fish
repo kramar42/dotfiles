@@ -2,7 +2,12 @@
 set -x EDITOR nvim
 
 set -x GOPATH ~/code/go
-set -x JAVA_HOME (/usr/libexec/java_home -v 19)
+if test "$OSTYPE" = "linux-gnu"
+  set -x JAVA_HOME (java-config --select-vm=openjdk-21 -O) # lsp requires 21
+end
+if test "$OSTYPE" = "darwin"
+  set -x JAVA_HOME (/usr/libexec/java_home -v 19)
+end
 
 # path
 fish_add_path $GOPATH/bin
