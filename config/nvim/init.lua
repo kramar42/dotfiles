@@ -49,6 +49,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-f>", "<cmd>!t<cr>", { silent = true })
 vim.keymap.set("n", "<C-j>", "<cmd>cn<cr>zz")
 vim.keymap.set("n", "<C-k>", "<cmd>cp<cr>zz")
 vim.keymap.set("n", "<C-n>", "<cmd>bn<cr>")
@@ -59,12 +60,14 @@ vim.keymap.set("n", "<leader>=", vim.lsp.buf.format)
 vim.keymap.set("n", "<leader>W", ":w !sudo tee % > /dev/null<cr>")
 vim.keymap.set("n", "<leader>Y", '"+Y')
 vim.keymap.set("n", "<leader>cd", "<cmd>cd %:p:h<cr>:pwd<cr>")
-vim.keymap.set("n", "<leader>j", "<cmd>lprev<cr>zz")
 vim.keymap.set("n", "<leader>d", "<cmd>bn<cr>:bd#<cr>")
+vim.keymap.set("n", "<leader>f", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>j", "<cmd>lprev<cr>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<cr>zz")
-vim.keymap.set("n", "<leader>q", "<cmd>qall!<cr>")
-vim.keymap.set("n", "<leader>w", "<cmd>w<cr>")
+vim.keymap.set("n", "<leader>q", "<cmd>bp<bar>sp<bar>bn<bar>bd<cr>")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>w", "<cmd>w<cr>")
+vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<cr>", { silent = true })
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "Q", "<nop>")
@@ -78,9 +81,6 @@ vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
 vim.keymap.set({ "n", "v" }, "H", "^")
 vim.keymap.set({ "n", "v" }, "L", "$")
-vim.keymap.set("n", "<leader>f", vim.cmd.Ex)
-vim.keymap.set("n", "<C-f>", "<cmd>silent !t<cr>")
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<cr>", { silent = true })
 --
 -- icons
 --
@@ -284,7 +284,7 @@ require("lazy").setup({
   "yuttie/comfortable-motion.vim",
   {
     "wfxr/minimap.vim",
-    config = function ()
+    config = function()
       vim.g.minimap_width = 10
       vim.g.minimap_auto_start = 1
       vim.g.minimap_auto_start_win_enter = 1
@@ -327,6 +327,13 @@ require("lazy").setup({
       })
     end,
   },
+  -- commenting
+  --
+  {
+    "numToStr/Comment.nvim",
+    opts = {},
+    lazy = false,
+  },
   -- lsp
   --
   {
@@ -357,10 +364,11 @@ require("lazy").setup({
       lsp.set_preferences({
         suggest_lsp_servers = false,
         sign_icons = {
-          error = "E",
-          warn  = "W",
-          hint  = "H",
-          info  = "I"
+          -- TODO this does not work?
+          error = icons.diagnostics.error,
+          warn  = icons.diagnostics.warn,
+          hint  = icons.diagnostics.hint,
+          info  = icons.diagnostics.info,
         }
       })
 
