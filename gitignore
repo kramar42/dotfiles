@@ -12,6 +12,7 @@
 .idea
 .lsp
 .m2
+.nrepl-port
 .obsidian
 .project
 .settings
