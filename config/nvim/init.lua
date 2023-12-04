@@ -26,6 +26,14 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.wrap = false
 vim.opt.cursorline = true
 vim.opt.cmdheight = 0
+vim.opt.list = true
+vim.opt.listchars = {
+  tab = "→ ",
+  -- eol = "¬",
+  trail = "⋅",
+  extends = "❯",
+  precedes = "❮",
+}
 --
 -- cursorline highlighting control
 --
