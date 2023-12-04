@@ -2,6 +2,8 @@
 *.orig
 *.pyc
 .DS_Store
+.Spotlight-V100
+.Trashes
 ._*
 .classpath
 .clj-kondo
@@ -16,4 +18,6 @@
 .obsidian
 .project
 .settings
+Desktop.ini
+Thumbs.db
 target
