@@ -36,6 +36,7 @@ export LESSHISTFILE=$HOME/.cache/less.history
 export NODE_REPL_HISTORY=$HOME/.cache/node.history
 export PSQL_HISTORY=$HOME/.cache/psql.history
 export PYTHONHISTORY=$HOME/.cache/python.history
+export JSII_SILENCE_WARNING_UNTESTED_NODE_VERSION=1
 
 ### BASH OPTS
 

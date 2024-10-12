@@ -17,24 +17,24 @@ network-vpn = " "
 alpha = #0000
 red = #FF5250
 
-gen1  = ${xrdb:color0}
-gen2  = ${xrdb:color1}
-gen3  = ${xrdb:color2}
-gen4  = ${xrdb:color3}
-gen5  = ${xrdb:color4}
-gen6  = ${xrdb:color5}
-gen7  = ${xrdb:color6}
-gen8  = ${xrdb:color7}
-gen9  = ${xrdb:color8}
-gen10 = ${xrdb:color9}
-gen11 = ${xrdb:color10}
-gen12 = ${xrdb:color11}
-gen13 = ${xrdb:color12}
-gen14 = ${xrdb:color13}
-gen15 = ${xrdb:color14}
-gen16 = ${xrdb:color15}
+gen1  = ${xrdb:color0:#8e461f}
+gen2  = ${xrdb:color1:#6c8c74}
+gen3  = ${xrdb:color2:#6c8c74}
+gen4  = ${xrdb:color3:#999d89}
+gen5  = ${xrdb:color4:#df932e}
+gen6  = ${xrdb:color5:#df932e}
+gen7  = ${xrdb:color6:#c69f5d}
+gen8  = ${xrdb:color7:#b3b8af}
+gen9  = ${xrdb:color8:#67715f}
+gen10 = ${xrdb:color9:#8e461f}
+gen11 = ${xrdb:color10:#847e5f}
+gen12 = ${xrdb:color11:#6c8c74}
+gen13 = ${xrdb:color12:#999d89}
+gen14 = ${xrdb:color13:#df932e}
+gen15 = ${xrdb:color14:#c69f5d}
+gen16 = ${xrdb:color15:#b3b8af}
 
-background = ${xrdb:color0:#89a}
+background = ${xrdb:color0:#0c0f0b}
 foreground = ${xrdb:color15:#fff}
 foreground-alt = ${xrdb:color7:#8f8f8f}
 
@@ -52,8 +52,8 @@ width = 100%
 height = 50
 offset-y = 0
 
-fill = 
-empty = 
+fill = ─
+empty = ─
 indicator = 
 
 space-margin = 0
@@ -114,7 +114,7 @@ label-focused = %icon%
 label-focused-icon = 1
 label-focused-padding = ${bar.space-padding}
 label-focused-margin-right = ${bar.space-margin}
-label-focused-background = ${color.gen4}
+label-focused-background = ${color.gen1}
 
 label-occupied = %icon%
 label-occupied-icon = 1
@@ -134,7 +134,7 @@ label-empty-icon = 1
 label-empty-font = 1
 label-empty-padding = ${bar.space-padding}
 label-empty-margin-right = ${bar.space-margin}
-label-empty-background = ${color.gen1}
+label-empty-background = ${color.alpha}
 
 [module/title]
 type = internal/xwindow
