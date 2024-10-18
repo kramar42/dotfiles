@@ -6,10 +6,6 @@
 
 # gtk cursor & scaling
 xrdb -merge ~/.Xresources
-# compositor
-picom &
-# notifications
-dunst &
 # gets rid of X cursor
 xsetroot -cursor_name left_ptr
 # layout
@@ -19,14 +15,24 @@ xset r rate 250 50
 # screen saver
 #xset s `echo "60*30" | bc`
 #xautolock -exit && xautolock -time 15 -locker xtrlock &
+
+# notifications
+# dunst &
+
 # hotkeys
 pidof sxhkd || { sxhkd & }
+
 # menu
-killall -q polybar
+pkill polybar
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 polybar main &
 
-. "${HOME}/.cache/wal/colors.sh"
+pkill feh
+~/.fehbg
+
+# feh --bg-scale ~/.background &
+
+# . "${HOME}/.cache/wal/colors.sh"
 
 ##########
 # CONFIG #
@@ -43,7 +49,7 @@ bspc config presel_feedback_color "$color2"
 # cyan
 # '#00BCD4'
 bspc config window_gap           20
-bspc config top_padding          0
+bspc config top_padding          50
 bspc config bottom_padding       0
 
 bspc config split_ratio          0.5
@@ -57,5 +63,5 @@ bspc config gapless_monocle      true
 bspc rule -a Pcmanfm "state=floating"
 bspc rule -a "I.C.A.R.U.S." "state=floating"
 
-bspc config external_rules_command ~/.config/bspwm/floating_desktop.sh
+#bspc config external_rules_command ~/.config/bspwm/floating_desktop.sh
 

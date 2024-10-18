@@ -1,8 +1,8 @@
 {
-  description = "Example Darwin system flake";
+  description = "system flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "nixpkgs/nixos-unstable";;
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -97,5 +97,12 @@
 
     # Expose the package set, including overlays, for convenience.
     # darwinPackages = self.darwinConfigurations."simple".pkgs;
+
+    nixosConfigurations = {
+      miller = lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [ ./configuration.nix ];
+      }
+    }
   };
 }

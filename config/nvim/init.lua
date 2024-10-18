@@ -210,7 +210,7 @@ require("lazy").setup({
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-file-browser.nvim",
-      "nvim-telescope/telescope-fzf-native.nvim",
+      -- "nvim-telescope/telescope-fzf-native.nvim",
     },
     config = function()
       require("telescope").setup {
@@ -231,7 +231,7 @@ require("lazy").setup({
         }
       }
       require("telescope").load_extension("file_browser")
-      require("telescope").load_extension("fzf")
+      -- require("telescope").load_extension("fzf")
 
       local builtin = require("telescope.builtin")
       -- vim.keymap.set("n", "<C-p>", builtin.git_files, {})
@@ -361,12 +361,12 @@ require("lazy").setup({
     lazy = false,
   },
   -- lsp
-  --
+  --[[
   {
     "VonHeikemen/lsp-zero.nvim",
     config = function()
       local lsp = require("lsp-zero")
-      lsp.preset("recommended")
+      -- lsp.preset("recommended")
 
       require("mason").setup({})
       require("mason-lspconfig").setup({
@@ -464,6 +464,7 @@ require("lazy").setup({
       })
     end,
   },
+  ]]
   -- clojure
   --
   {

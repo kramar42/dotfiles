@@ -4,6 +4,9 @@
 [user]
   name = Oleksii Kramarenko
   email = kramar42@gmail.com
+[includeIf "gitdir:~/code/work/"]
+  path = ~/.gitconfig-work
+
 [alias]
   l = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
 

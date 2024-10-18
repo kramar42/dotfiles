@@ -81,12 +81,13 @@ font-0 = Fira Code Nerd Font Mono:pixelsize=30;6
 font-1 = Fira Code Nerd Font Mono:pixelsize=26;2
 font-2 = Fira Code:pixelsize=15;-1
 font-3 = Terminus:pixelsize=18;3
-font-4 = waffle:size=13;3
+font-4 = Terminus:pixelsize=23;3
+; font-4 = waffle:size=13;3
 
-background-0  = ${color.background}
-background-1  = ${color.background}
-background-2  = ${color.background}
-background-3  = ${color.background}
+background-0  = ${color.alpha}
+background-1  = ${color.alpha}
+background-2  = ${color.alpha}
+background-3  = ${color.alpha}
 background-4  = ${color.alpha}
 
 [module/sep]
@@ -217,6 +218,27 @@ bar-volume-empty-foreground = ${color.background}
 
 label-muted = " "
 label-muted-font = 3
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
+; If not, uses default sink
+; sink = alsa_output.pci-0000_12_00.3.analog-stereo
+
+; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
+; Default: true
+use-ui-max = true
+
+; Interval for volume increase/decrease (in percent points)
+; Default: 5
+interval = 5
+
+; Reverses the increment/decrement on scroll event. Set this to true if you are
+; using natural scrolling option on your touchpad.
+; New in version 3.7.0
+; Default: false
+reverse-scroll = false
 
 ;-----------------------------------------------------------
 [module/mounts]

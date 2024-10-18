@@ -8,7 +8,7 @@ super + Return
 
 # program launcher
 alt + @space
-    rofi -show run
+    rofi -show run -show-icons
 #dmenu_run
 
 #
