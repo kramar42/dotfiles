@@ -3,7 +3,9 @@
 {
   imports = [ ./hardware-configuration.nix ];
 
-  # Bootloader.
+  system.stateVersion = "24.05"; # Did you read the comment?
+
+  boot.kernelParams = [ "nvidia-drm.modeset=1" ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -11,18 +13,27 @@
   networking.networkmanager.enable = false;
   networking.wireless.enable = false;
 
+  services.openssh = {
+    enable = true;
+    ports = [ 42 ];
+    settings = {
+      PermitRootLogin = "no";
+      PasswordAuthentication = false;
+    };
+  };
+
   time.timeZone = "Europe/Amsterdam";
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = "nl_NL.UTF-8";
-    LC_IDENTIFICATION = "nl_NL.UTF-8";
-    LC_MEASUREMENT = "nl_NL.UTF-8";
-    LC_MONETARY = "nl_NL.UTF-8";
-    LC_NAME = "nl_NL.UTF-8";
-    LC_NUMERIC = "nl_NL.UTF-8";
-    LC_PAPER = "nl_NL.UTF-8";
-    LC_TELEPHONE = "nl_NL.UTF-8";
-    LC_TIME = "nl_NL.UTF-8";
+    LC_ADDRESS = "en_GB.UTF-8";
+    LC_IDENTIFICATION = "en_GB.UTF-8";
+    LC_MEASUREMENT = "en_GB.UTF-8";
+    LC_MONETARY = "en_GB.UTF-8";
+    LC_NAME = "en_GB.UTF-8";
+    LC_NUMERIC = "en_GB.UTF-8";
+    LC_PAPER = "en_GB.UTF-8";
+    LC_TELEPHONE = "en_GB.UTF-8";
+    LC_TIME = "en_GB.UTF-8";
   };
 
   # Configure console keymap
@@ -53,40 +64,27 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    alacritty
-    awscli
-    babashka
-    baobab
-    bitwarden-cli bitwarden-menu
-    bspwm sxhkd
-    capitaine-cursors
-    cocogitto
-    dbt
-    fastfetch
-    feh
-    fzf
-    git
-    htop
-    httpie
+    alacritty sublime-merge pcmanfm
+    scrot (polybar.override { pulseSupport = true; }) rofi
+    awscli nodePackages.aws-cdk
+    babashka cocogitto dbt fzf git htop httpie lazygit
+    baobab fastfetch
+    bspwm sxhkd capitaine-cursors feh
     jdk jetbrains.idea-community maven
-    jq yq
-    k6
-    k9s krew kubectl kubeseal
-    lazygit
-    neovim
+    jq yq-go
+    k6 k9s krew kubectl kubeseal
+    neovim obsidian
     nodejs_22 yarn
-    pcmanfm
-    polybar
-    ranger
     rcm
-    rofi
-    silver-searcher
+    tree
+    silver-searcher ripgrep
     slack telegram-desktop
-    sublime-merge
     tmux
     ungoogled-chromium
     unzip
+    yazi
     zoxide
+    zig
   ];
 
   ### DISPLAY
@@ -102,6 +100,20 @@
       enable = true;
     };
     videoDrivers = [ "nvidia" ];
+
+    config = ''
+      Section "Device"
+          Identifier "nvidia"
+          Driver "nvidia"
+          BusID "PCI:1:0:0"
+          Option "AllowEmptyInitialConfiguration"
+      EndSection
+    '';
+    screenSection = ''
+      Option         "metamodes" "nvidia-auto-select +0+0 {ForceFullCompositionPipeline=On}"
+      Option         "AllowIndirectGLXProtocol" "off"
+      Option         "TripleBuffer" "on"
+    '';
   };
 
   hardware.nvidia = {
@@ -110,15 +122,7 @@
     modesetting.enable = true;
   };
 
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
-  };
-
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-  };
+  services.xserver.displayManager.startx.enable = true;
 
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
@@ -130,35 +134,11 @@
   };
 
   ### SOUND
-
-  sound.enable = false;
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = false;
-  services.pipewire = {
-    enable = true;
-    # systemWide = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  system.stateVersion = "24.05"; # Did you read the comment?
-
-  ### TODO trying to fix login hang-up
-  # systemd.services."getty@tty1".enable = false;
-  # systemd.services."autovt@tty1".enable = false;
+  hardware.pulseaudio.enable = true;
 
   systemd.oomd.enable = false;
+  hardware.bluetooth.enable = false;
 
   security.tpm2.enable = true;
-
+  services.dbus.implementation = "broker";
 }
