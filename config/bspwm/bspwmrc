@@ -24,13 +24,11 @@ pidof sxhkd || { sxhkd & }
 
 # menu
 pkill polybar
-while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
+# while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 polybar main &
 
 pkill feh
 /run/current-system/sw/bin/feh --no-fehbg --bg-scale '.background' &
-
-# feh --bg-scale ~/.background &
 
 # . "${HOME}/.cache/wal/colors.sh"
 

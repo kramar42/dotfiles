@@ -13,6 +13,11 @@
   networking.networkmanager.enable = false;
   networking.wireless.enable = false;
 
+  fileSystems."/home/kramar/mnt/gentoo" =
+    { device = "/dev/nvme0n1p2";
+      fsType = "ext4";
+    };
+
   services.openssh = {
     enable = true;
     ports = [ 42 ];
@@ -67,7 +72,9 @@
     alacritty sublime-merge pcmanfm
     scrot (polybar.override { pulseSupport = true; }) rofi
     awscli nodePackages.aws-cdk
-    babashka cocogitto dbt fzf git htop httpie lazygit
+    babashka cocogitto
+    # dbt
+    fzf git htop httpie lazygit
     baobab fastfetch
     bspwm sxhkd capitaine-cursors feh
     jdk jetbrains.idea-community maven
@@ -135,6 +142,7 @@
 
   ### SOUND
   hardware.pulseaudio.enable = true;
+  services.pipewire.enable = false;
 
   systemd.oomd.enable = false;
   hardware.bluetooth.enable = false;
