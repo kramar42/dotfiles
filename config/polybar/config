@@ -46,11 +46,11 @@ alternate = ${xrdb:color4:#7cb342}
 
 ;-----------------------------------------------------------
 [bar]
-width = 100%
-;offset-x = 10%
+width = 90%
 
 height = 50
-offset-y = 0
+offset-x = 30
+offset-y = 30
 
 fill = ─
 empty = ─
@@ -62,24 +62,19 @@ space-padding = 1
 ;-----------------------------------------------------------
 [bar/main]
 modules-left = workspaces title
-modules-right = mounts memory cpu-temp cpu volume date
-
-tray-position = none
-tray-maxsize = 32
-tray-padding = 10
-tray-background = ${color.alpha}
+modules-right = mounts memory cpu-temp cpu volume date tray
 
 wm-restack = bspwm
 
 width = ${bar.width}
 height = ${bar.height}
 offset-y = ${bar.offset-y}
-offset-x =${bar.offset-x}
+offset-x = ${bar.offset-x}
 module-margin-left = 1
 
 font-0 = Fira Code Nerd Font Mono:pixelsize=30;6
-font-1 = Fira Code Nerd Font Mono:pixelsize=26;2
-font-2 = Fira Code:pixelsize=15;-1
+font-1 = Fira Code Nerd Font Mono:pixelsize=26;0
+font-2 = Fira Code:pixelsize=15;5
 font-3 = Terminus:pixelsize=18;3
 font-4 = Terminus:pixelsize=23;3
 ; font-4 = waffle:size=13;3
@@ -90,6 +85,9 @@ background-2  = ${color.alpha}
 background-3  = ${color.alpha}
 background-4  = ${color.alpha}
 
+[module/tray]
+type = internal/tray
+
 [module/sep]
 type = custom/text
 content = " "
@@ -99,7 +97,6 @@ type = internal/bspwm
 
 ; text 
 ; clj 
-; term 
 ; floating 
 ; circle 
 
