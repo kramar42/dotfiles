@@ -1,59 +1,16 @@
 #ctrl + shift - - : openssl rand -base64 32 | tr -d /=+ | cut -c -5 | xclip -sel clip
 
 # goto app
-ctrl + cmd - g : open -a /Applications/Google\ Chrome.app
-ctrl + shift - g : open -a /Applications/Google\ Chrome.app
-
-ctrl + cmd - c : open -a /Applications/Obsidian.app
-ctrl + shift - c : open -a /Applications/Obsidian.app
-
-#ctrl + cmd - c : open -a /Applications/Firefox.app
-#ctrl + shift - c : open -a /Applications/Firefox.app
-
-ctrl + cmd - r : open -a /Applications/Brave\ Browser.app
-ctrl + shift - r : open -a /Applications/Brave\ Browser.app
-
-ctrl + cmd - t : open -a /Applications/iTerm.app
-ctrl + shift - t : open -a /Applications/iTerm.app
-
-#ctrl + cmd - t : yabai -m window --focus (bb ~/.yabai.clj "Alacritty") || /Applications/Alacritty.app/Contents/MacOS/alacritty --position 1050 750 -d 80 20
-#ctrl + shift - t : yabai -m window --focus (bb ~/.yabai.clj "Alacritty") || /Applications/Alacritty.app/Contents/MacOS/alacritty --position 1050 750 -d 80 20
-
-ctrl + cmd - return : /Applications/Alacritty.app/Contents/MacOS/alacritty --position 1050 750 -d 80 20
-ctrl + shift - return : /Applications/Alacritty.app/Contents/MacOS/alacritty --position 1050 750 -d 80 20
-
+ctrl + cmd - g : open -a /Applications/Nix\ Apps/Google\ Chrome.app
+ctrl + cmd - c : open -a /Applications/Nix\ Apps/Obsidian.app
+ctrl + cmd - t : open -a /Applications/Nix\ Apps/Alacritty.app
 ctrl + cmd - h : open -a /Applications/IntelliJ\ IDEA\ CE.app
-ctrl + shift - h : open -a /Applications/IntelliJ\ IDEA\ CE.app
-
-#ctrl + cmd - h : open -a /Applications/PyCharm\  CE.app
-#ctrl + shift - h : open -a /Applications/PyCharm\ CE.app
-
 ctrl + cmd - d : open -a /Applications/Sublime\ Merge.app
-ctrl + shift - d : open -a /Applications/Sublime\ Merge.app
-
-ctrl + cmd - s : open -a /Applications/Slack.app
-ctrl + shift - s : open -a /Applications/Slack.app
-
-ctrl + cmd - l : open -a /Applications/Telegram.app
-ctrl + shift - l : open -a /Applications/Telegram.app
-
-#ctrl + cmd - n : open -a /Applications/Sublime\ Text.app
-#ctrl + shift - n : open -a /Applications/Sublime\ Text.app
-
+ctrl + cmd - s : open -a /Applications/Nix\ Apps/Slack.app
+ctrl + cmd - l : open -a /Applications/Nix\ Apps/Telegram.app
 ctrl + cmd - n : open -a /Applications/Visual\ Studio\ Code.app
-ctrl + shift - n : open -a /Applications/Visual\ Studio\ Code.app
-
 ctrl + cmd - f : open -a /Applications/Spotify.app
-ctrl + shift - f : open -a /Applications/Spotify.app
-
 ctrl + cmd - v : open -a /System/Library/CoreServices/Finder.app
-ctrl + shift - v : open -a /System/Library/CoreServices/Finder.app
-
-ctrl + cmd - 0x1B : open -a /Applications/OBS.app
-ctrl + shift - 0x1B : open -a /Applications/OBS.app
-
-ctrl + cmd - b : open -a /Applications/Emacs.app || yabai -m window --focus `yabai -m query --windows | jq '.[] | select(.app=="Emacs") | .id'`
-ctrl + shift - b : yabai -m window --focus `yabai -m query --windows | jq '.[] | select(.app=="Emacs") | .id'`
 
 # focus
 cmd - h : yabai -m window --focus west
