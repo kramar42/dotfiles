@@ -18,6 +18,11 @@
       fsType = "ext4";
     };
 
+  fileSystems."/home/kramar/code" =
+    { device = "/dev/nvme0n1p5";
+      fsType = "f2fs";
+    };
+
   services.openssh = {
     enable = true;
     ports = [ 42 ];

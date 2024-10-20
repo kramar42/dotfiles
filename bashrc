@@ -11,7 +11,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   export JAVA_HOME=$(/usr/libexec/java_home -v 19)
 fi
 export KUBECONFIG=$HOME/.kube/config
-export PATH=/run/current-system/sw/bin:$HOME/bin:$HOME/.local/bin:$GOPATH/bin:$HOME/.krew/bin:/usr/lib64/qt5/bin:$JAVA_HOME/bin:$HOME/.tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
+export PATH=/run/current-system/sw/bin:$HOME/.nix-profile/bin:$HOME/bin:$HOME/.local/bin:$GOPATH/bin:$HOME/.krew/bin:/usr/lib64/qt5/bin:$JAVA_HOME/bin:$HOME/.tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
 
 #$HOME/.cargo/bin
 
