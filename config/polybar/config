@@ -245,8 +245,9 @@ type = internal/fs
 interval = 60
 
 mount-0 = /
-mount-1 = /boot
-;mount-1 = /mnt/data
+mount-1 = /mnt
+;mount-3 = /mnt/data
+;mount-4 = /boot
 spacing = 0
 
 ;format-mounted = <label-mounted>
