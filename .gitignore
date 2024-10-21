@@ -1,2 +1,5 @@
 *.elc
+aws/
+kube/
 openvpn/
+ssh/
