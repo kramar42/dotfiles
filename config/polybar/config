@@ -139,7 +139,7 @@ label-empty-background = ${color.alpha}
 [module/title]
 type = internal/xwindow
 
-label-maxlen = 130
+label-maxlen = 110
 label-font = 3
 
 ;-----------------------------------------------------------
