@@ -13,7 +13,7 @@
   networking.networkmanager.enable = false;
   networking.wireless.enable = false;
 
-  fileSystems."/home/kramar/mnt/gentoo" =
+  fileSystems."/mnt" =
     { device = "/dev/nvme0n1p2";
       fsType = "ext4";
     };
@@ -76,12 +76,13 @@
   environment.systemPackages = with pkgs; [
     alacritty sublime-merge pcmanfm
     scrot (polybar.override { pulseSupport = true; }) rofi
+    bspwm sxhkd capitaine-cursors feh picom lxappearance
     awscli nodePackages.aws-cdk
     babashka cocogitto
+    cloudflare-warp desktop-file-utils
     # dbt
     fzf git htop httpie lazygit
     baobab fastfetch
-    bspwm sxhkd capitaine-cursors feh
     jdk jetbrains.idea-community maven
     jq yq-go
     k6 k9s krew kubectl kubeseal

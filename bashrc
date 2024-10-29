@@ -7,11 +7,15 @@
 export GOPATH=$HOME/code/go
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   : #export JAVA_HOME=$(java-config --select-vm=openjdk-21 -O) # lsp requires 21
+  unset JAVA_HOME
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   export JAVA_HOME=$(/usr/libexec/java_home -v 19)
 fi
 export KUBECONFIG=$HOME/.kube/config
-export PATH=/run/current-system/sw/bin:$HOME/.nix-profile/bin:$HOME/bin:$HOME/.local/bin:$GOPATH/bin:$HOME/.krew/bin:/usr/lib64/qt5/bin:$JAVA_HOME/bin:$HOME/.tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
+export PATH="/run/current-system/sw/bin:$HOME/.nix-profile/bin:$PATH"
+export PATH="$HOME/.local/bin:$GOPATH/bin:$HOME/.krew/bin:$PATH"
+export PATH="$HOME/.tmux/plugins/t-smart-tmux-session-manager/bin:$PATH"
+export PATH="$JAVA_HOME/bin:$HOME/.local/share/JetBrains/Toolbox/scripts:$PATH"
 
 #$HOME/.cargo/bin
 

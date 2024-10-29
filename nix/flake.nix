@@ -7,7 +7,7 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs }:
+  outputs = inputs@{ self, nixpkgs, nix-darwin, ... }:
   let
     configuration = { pkgs, ... }: {
       # List packages installed in system profile. To search by name, run:
@@ -98,11 +98,9 @@
     # Expose the package set, including overlays, for convenience.
     # darwinPackages = self.darwinConfigurations."simple".pkgs;
 
-    nixosConfigurations = {
-      miller = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [ ./configuration.nix ];
-      };
+    nixosConfigurations.miller = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [ ./configuration.nix ];
     };
   };
 }
