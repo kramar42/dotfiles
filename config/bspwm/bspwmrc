@@ -8,15 +8,9 @@ xsetroot -cursor_name left_ptr
 setxkbmap us,ua -variant dvorak, -option grp:win_space_toggle
 # key repeat
 xset r rate 250 50
-# screen saver
-#xset s `echo "60*30" | bc`
-#xautolock -exit && xautolock -time 15 -locker xtrlock &
 
 # transparency
 pidof picom || { picom & }
-
-# notifications
-# dunst &
 
 # hotkeys (reload themselves)
 pidof sxhkd || { sxhkd & }
@@ -25,8 +19,9 @@ pidof sxhkd || { sxhkd & }
 pkill polybar
 polybar main &
 
+# wallpaper
 pkill feh
-feh --no-fehbg --bg-scale '.background' &
+feh --no-fehbg --bg-scale ".background" &
 
 # . "${HOME}/.cache/wal/colors.sh"
 
@@ -58,7 +53,4 @@ bspc config gapless_monocle       true
 #########
 
 bspc rule -a Pcmanfm "state=floating"
-bspc rule -a "I.C.A.R.U.S." "state=floating"
-
-#bspc config external_rules_command ~/.config/bspwm/floating_desktop.sh
 
