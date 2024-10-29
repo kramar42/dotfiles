@@ -1,5 +1,7 @@
 #! /bin/sh
 
+# dbus fix
+# systemctl --user import-environment DISPLAY
 # gtk cursor & scaling
 xrdb -merge ~/.Xresources
 # gets rid of X cursor

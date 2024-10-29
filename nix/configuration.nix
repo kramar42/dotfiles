@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [ ./hardware-configuration.nix ];
@@ -9,7 +9,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "miller"; # Define your hostname.
+  networking.hostName = "miller";
   networking.networkmanager.enable = false;
   networking.wireless.enable = false;
 
@@ -52,6 +52,8 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   security.sudo.wheelNeedsPassword = false;
+  # security.rtkit.enable = false;
+  security.tpm2.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.kramar = {
@@ -74,29 +76,23 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    alacritty sublime-merge pcmanfm
-    scrot (polybar.override { pulseSupport = true; }) rofi
+    alacritty st tmux
+    sublime-merge baobab obsidian ungoogled-chromium
+    slack telegram-desktop
+    scrot (polybar.override { pulseSupport = true; }) rofi pcmanfm
     bspwm sxhkd capitaine-cursors feh picom lxappearance
     awscli nodePackages.aws-cdk
-    babashka cocogitto
+    babashka
     cloudflare-warp desktop-file-utils
-    # dbt
-    fzf git htop httpie lazygit
-    baobab fastfetch
+    fzf zoxide cocogitto
+    git htop httpie lazygit rcm tree fastfetch
     jdk jetbrains.idea-community maven
     jq yq-go
-    k6 k9s krew kubectl kubeseal
-    neovim obsidian
+    k6 k9s kubectl krew kubeseal
+    neovim
     nodejs_22 yarn
-    rcm
-    tree
     silver-searcher ripgrep
-    slack telegram-desktop
-    tmux
-    ungoogled-chromium
-    unzip
     yazi
-    zoxide
     zig
   ];
 
@@ -105,6 +101,7 @@
   services.xserver = {
     enable = true;
     # layout = "us;ua";
+    # also set in bspwmrc
     xkb = {
       layout = "us";
       variant = "dvorak";
@@ -137,9 +134,14 @@
 
   services.xserver.displayManager.startx.enable = true;
 
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  xdg.portal.config.common.default = "*";
+  programs.dconf.enable = true;
+
+  xdg.portal = {
+    enable = true;
+    xdgOpenUsePortal = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    config.common.default = "gtk";
+  };
 
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
@@ -150,9 +152,8 @@
   hardware.pulseaudio.enable = true;
   services.pipewire.enable = false;
 
-  systemd.oomd.enable = false;
   hardware.bluetooth.enable = false;
 
-  security.tpm2.enable = true;
   services.dbus.implementation = "broker";
+  systemd.oomd.enable = false;
 }
