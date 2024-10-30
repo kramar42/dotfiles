@@ -80,7 +80,7 @@
     sublime-merge baobab obsidian ungoogled-chromium
     slack telegram-desktop
     scrot (polybar.override { pulseSupport = true; }) rofi pcmanfm
-    bspwm sxhkd capitaine-cursors feh picom lxappearance
+    bspwm sxhkd capitaine-cursors feh picom lxappearance # xdg-utils
     awscli nodePackages.aws-cdk
     babashka
     cloudflare-warp desktop-file-utils
@@ -106,11 +106,12 @@
       layout = "us";
       variant = "dvorak";
     };
-    windowManager.bspwm = {
-      enable = true;
-    };
-    videoDrivers = [ "nvidia" ];
 
+    windowManager.bspwm.enable = true;
+    displayManager.startx.enable = true;
+    updateDbusEnvironment = true;
+
+    videoDrivers = [ "nvidia" ];
     config = ''
       Section "Device"
           Identifier "nvidia"
@@ -128,24 +129,23 @@
 
   hardware.nvidia = {
     open = false;
-    # package = config.boot.kernelPackages.stable;
     modesetting.enable = true;
   };
 
-  services.xserver.displayManager.startx.enable = true;
-
-  programs.dconf.enable = true;
+  programs.dconf.enable = false;
 
   xdg.portal = {
     enable = true;
     xdgOpenUsePortal = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-    config.common.default = "gtk";
+    config.common.default = [ "*" ];
   };
 
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
+    # XDG_CURRENT_DESKTOP = "bspwm";
+    # XDG_SESSION_TYPE = "x11";
   };
 
   ### SOUND
@@ -153,7 +153,7 @@
   services.pipewire.enable = false;
 
   hardware.bluetooth.enable = false;
+  systemd.oomd.enable = false;
 
   services.dbus.implementation = "broker";
-  systemd.oomd.enable = false;
 }

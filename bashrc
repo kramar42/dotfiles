@@ -12,10 +12,12 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   export JAVA_HOME=$(/usr/libexec/java_home -v 19)
 fi
 export KUBECONFIG=$HOME/.kube/config
-export PATH="/run/current-system/sw/bin:$HOME/.nix-profile/bin:$PATH"
-export PATH="$HOME/.local/bin:$GOPATH/bin:$HOME/.krew/bin:$PATH"
-export PATH="$HOME/.tmux/plugins/t-smart-tmux-session-manager/bin:$PATH"
-export PATH="$JAVA_HOME/bin:$HOME/.local/share/JetBrains/Toolbox/scripts:$PATH"
+#export PATH="/run/current-system/sw/bin:$HOME/.nix-profile/bin:$PATH"
+#export PATH="$HOME/.local/bin:$HOME/.krew/bin:$PATH"
+#export PATH="$HOME/.tmux/plugins/t-smart-tmux-session-manager/bin:$PATH"
+# export PATH="$JAVA_HOME/bin:$HOME/.local/share/JetBrains/Toolbox/scripts:$PATH"
+
+#export LOCALE_ARCHIVE="$(nix profile list --json | jq '.elements[] | select(.attrPath == "legacyPackages.x86_64-linux.glibcLocales") | .storePaths[0]' -r)/lib/locale/locale-archive"
 
 #$HOME/.cargo/bin
 
