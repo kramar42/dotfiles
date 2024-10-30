@@ -16,21 +16,27 @@
         argocd
         awscli
         alacritty
-        telegram-desktop
         google-chrome
         obsidian
         slack
         spotify
         # vlc
         babashka
+        go
+        postgresql
+        qbittorrent
+        spotify
+        unnaturalscrollwheels
+        python3
         broot
         cloc
         yazi
         clojure
+        jdk maven
         # qv
         # visidata
         cocogitto
-        dbt
+        # dbt
         delta
         fastfetch
         fzf
@@ -47,7 +53,6 @@
         lazygit
         neovim
         qemu
-        ranger
         rcm
         silver-searcher ripgrep
         tmux
@@ -57,6 +62,8 @@
         yq-go
         yt-dlp
         zoxide
+        # broken?
+        # telegram-desktop
       ];
 
       # Auto upgrade nix package and the daemon service.

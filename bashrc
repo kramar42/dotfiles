@@ -94,6 +94,7 @@ tty -s && stty werase ^- 2>/dev/null
 source <(kubectl completion bash)
 source <(zoxide init bash)
 
+[ -f /opt/homebrew/bin/brew ] && source <(/opt/homebrew/bin/brew shellenv)
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f ~/.config/broot/launcher/bash/br ] && source ~/.config/broot/launcher/bash/br
 
