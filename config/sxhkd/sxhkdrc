@@ -60,10 +60,10 @@ super + g
 	bspc node -s biggest.window
 
 super + alt + n
-    /home/kramar/bin/new-bg
+    /home/kramar/code/bin/new-bg
 
 super + alt + s
-    /home/kramar/bin/rand-bg
+    /home/kramar/code/bin/rand-bg
 
 #
 # state/flags

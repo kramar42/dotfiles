@@ -1,6 +1,6 @@
 #! /bin/sh
 
-# dbus fix
+# dbus fix for nixos
 systemctl --user import-environment DISPLAY PATH
 # gtk cursor & scaling
 xrdb -merge ~/.Xresources

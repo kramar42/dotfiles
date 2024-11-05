@@ -11,20 +11,25 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   export JAVA_HOME=$(/usr/libexec/java_home -v 19)
 fi
-export KUBECONFIG=$HOME/.kube/config
+#export KUBECONFIG=$HOME/.kube/config
 #export PATH="/run/current-system/sw/bin:$HOME/.nix-profile/bin:$PATH"
 #export PATH="$HOME/.local/bin:$HOME/.krew/bin:$PATH"
 #export PATH="$HOME/.tmux/plugins/t-smart-tmux-session-manager/bin:$PATH"
 # export PATH="$JAVA_HOME/bin:$HOME/.local/share/JetBrains/Toolbox/scripts:$PATH"
 
+export PATH="$HOME/.krew/bin:$PATH"
+
+#. $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+
+# TODO how to enable this only for gentoo? -A: home-manager
 #export LOCALE_ARCHIVE="$(nix profile list --json | jq '.elements[] | select(.attrPath == "legacyPackages.x86_64-linux.glibcLocales") | .storePaths[0]' -r)/lib/locale/locale-archive"
 
 #$HOME/.cargo/bin
 
 ### EXPORTS
 
-export LANG="en_US.UTF-8"
-export LC_ALL="en_US.UTF-8"
+#export LANG="en_US.UTF-8"
+#export LC_ALL="en_US.UTF-8"
 
 export EDITOR="nvim"
 export MANPAGER="less -X"
@@ -81,17 +86,17 @@ alias la="l -la"
 alias lg="lazygit"
 alias p="python"
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then alias pbcopy="xclip -sel clip"; fi
-alias r="ranger"
+alias y="yazi"
 alias s="spotify_player"
 alias v="nvim"
 
 ### AUTOCOMPLETE
 
-if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
-  complete -o default -o nospace -F _git g;
-fi
+# if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
+#   complete -o default -o nospace -F _git g;
+# fi
 
-tty -s && stty werase ^- 2>/dev/null
+# tty -s && stty werase ^- 2>/dev/null
 
 source <(kubectl completion bash)
 source <(zoxide init bash)

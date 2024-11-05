@@ -46,10 +46,10 @@ alternate = ${xrdb:color4:#7cb342}
 
 ;-----------------------------------------------------------
 [bar]
-width = 90%
+width = 96%
 
 height = 50
-offset-x = 30
+offset-x = 2%
 offset-y = 30
 
 fill = ─
@@ -139,7 +139,7 @@ label-empty-background = ${color.alpha}
 [module/title]
 type = internal/xwindow
 
-label-maxlen = 110
+label-maxlen = 100
 label-font = 3
 
 ;-----------------------------------------------------------

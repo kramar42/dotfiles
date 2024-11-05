@@ -32,19 +32,29 @@
     };
   };
 
+  services.openvpn.servers = {
+    bluerock = { config = '' config /home/kramar/code/dotfiles/openvpn/bluerock.conf ''; };
+  };
+
   time.timeZone = "Europe/Amsterdam";
   i18n.defaultLocale = "en_US.UTF-8";
+  /*
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_GB.UTF-8";
-    LC_IDENTIFICATION = "en_GB.UTF-8";
-    LC_MEASUREMENT = "en_GB.UTF-8";
-    LC_MONETARY = "en_GB.UTF-8";
-    LC_NAME = "en_GB.UTF-8";
-    LC_NUMERIC = "en_GB.UTF-8";
-    LC_PAPER = "en_GB.UTF-8";
-    LC_TELEPHONE = "en_GB.UTF-8";
-    LC_TIME = "en_GB.UTF-8";
+    LC_ADDRESS = "en_US.UTF-8";
+    LC_ALL = "en_US.UTF-8";
+    LC_COLLATE = "en_US.UTF-8";
+    LC_CTYPE = "en_US.UTF-8";
+    LC_IDENTIFICATION = "en_US.UTF-8";
+    LC_MEASUREMENT = "en_US.UTF-8";
+    LC_MESSAGES = "en_US.UTF-8";
+    LC_MONETARY = "en_US.UTF-8";
+    LC_NAME = "en_US.UTF-8";
+    LC_NUMERIC = "en_US.UTF-8";
+    LC_PAPER = "en_US.UTF-8";
+    LC_TELEPHONE = "en_US.UTF-8";
+    LC_TIME = "en_US.UTF-8";
   };
+  */
 
   # Configure console keymap
   console.keyMap = "dvorak";
@@ -76,23 +86,21 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    alacritty st tmux
+    bspwm sxhkd capitaine-cursors feh picom lxappearance # xdg-utils
+    scrot (polybar.override { pulseSupport = true; }) rofi pcmanfm
+    alacritty st tmux yazi neovim
+    fzf zoxide cocogitto jq yq-go
+    silver-searcher ripgrep
+    git htop httpie lazygit rcm tree fastfetch
     sublime-merge baobab obsidian ungoogled-chromium
     slack telegram-desktop
-    scrot (polybar.override { pulseSupport = true; }) rofi pcmanfm
-    bspwm sxhkd capitaine-cursors feh picom lxappearance # xdg-utils
-    awscli nodePackages.aws-cdk
-    babashka
     cloudflare-warp desktop-file-utils
-    fzf zoxide cocogitto
-    git htop httpie lazygit rcm tree fastfetch
+
+    awscli nodePackages.aws-cdk
     jdk jetbrains.idea-community maven
-    jq yq-go
-    k6 k9s kubectl krew kubeseal
-    neovim
+    babashka python3
     nodejs_22 yarn
-    silver-searcher ripgrep
-    yazi
+    k6 k9s kubectl krew kubeseal
     zig
   ];
 
@@ -144,8 +152,6 @@
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
-    # XDG_CURRENT_DESKTOP = "bspwm";
-    # XDG_SESSION_TYPE = "x11";
   };
 
   ### SOUND
